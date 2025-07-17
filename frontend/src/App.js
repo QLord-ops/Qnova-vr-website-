@@ -605,7 +605,8 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold">Opening Hours</h3>
                   <p className="text-gray-600">
-                    Daily: 12:00 PM - 10:00 PM
+                    Monday - Saturday: 12:00 PM - 10:00 PM<br />
+                    Sunday: Tournament Days
                   </p>
                 </div>
               </div>
