@@ -275,14 +275,17 @@ const Navigation = () => {
 
         {isOpen && (
           <div className="md:hidden mt-4 space-y-2">
-            <Link to="/" className="block py-2 hover:text-gray-300">{t('home')}</Link>
-            <Link to="/about" className="block py-2 hover:text-gray-300">{t('about')}</Link>
-            <Link to="/services" className="block py-2 hover:text-gray-300">{t('services')}</Link>
-            <Link to="/games" className="block py-2 hover:text-gray-300">{t('games')}</Link>
-            <Link to="/booking" className="block py-2 hover:text-gray-300">{t('bookNow')}</Link>
-            <Link to="/contact" className="block py-2 hover:text-gray-300">{t('contact')}</Link>
+            <Link to="/" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('home')}</Link>
+            <Link to="/about" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('about')}</Link>
+            <Link to="/services" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('services')}</Link>
+            <Link to="/games" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('games')}</Link>
+            <Link to="/booking" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('bookNow')}</Link>
+            <Link to="/contact" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('contact')}</Link>
             <button
-              onClick={toggleLanguage}
+              onClick={() => {
+                toggleLanguage();
+                setIsOpen(false);
+              }}
               className="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded text-sm transition-colors"
             >
               {language === 'en' ? '🇩🇪 DE' : '🇬🇧 EN'}
