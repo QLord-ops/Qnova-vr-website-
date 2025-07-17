@@ -594,7 +594,7 @@ const Contact = () => {
                 </svg>
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">info@qnovavr.de</p>
+                  <p className="text-gray-600">qnovavr.de@gmail.com</p>
                 </div>
               </div>
 
