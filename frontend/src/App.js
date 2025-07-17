@@ -951,7 +951,7 @@ const Contact = () => {
 
 // Footer Component
 const Footer = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   
   return (
     <footer className="bg-black text-white py-12">
@@ -961,7 +961,7 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-bold mb-4">QNOVA VR</h3>
             <p className="text-gray-300 mb-4">
-              {t('language') === 'de' 
+              {language === 'de' 
                 ? 'Ihr VR-Studio im Herzen von Göttingen. Erleben Sie die Zukunft des Gamings mit modernster Technologie.'
                 : 'Your VR studio in the heart of Göttingen. Experience the future of gaming with cutting-edge technology.'
               }
@@ -1018,16 +1018,16 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-gray-300">
-                  {t('language') === 'de' ? 'Mo - Sa:' : 'Mon - Sat:'}
+                  {language === 'de' ? 'Mo - Sa:' : 'Mon - Sat:'}
                 </span>
                 <span className="text-white">12:00 - 22:00</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-300">
-                  {t('language') === 'de' ? 'Sonntag:' : 'Sunday:'}
+                  {language === 'de' ? 'Sonntag:' : 'Sunday:'}
                 </span>
                 <span className="text-white">
-                  {t('language') === 'de' ? 'Turniertage' : 'Tournaments'}
+                  {language === 'de' ? 'Turniertage' : 'Tournaments'}
                 </span>
               </div>
             </div>
@@ -1035,7 +1035,7 @@ const Footer = () => {
             {/* Quick Links */}
             <div className="mt-8">
               <h4 className="text-lg font-semibold mb-4">
-                {t('language') === 'de' ? 'Schnellzugriff' : 'Quick Links'}
+                {language === 'de' ? 'Schnellzugriff' : 'Quick Links'}
               </h4>
               <div className="space-y-2">
                 <Link to="/booking" className="block text-gray-300 hover:text-white transition-colors">
@@ -1055,7 +1055,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 QNOVA VR Studio. {t('language') === 'de' ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}
+            © 2024 QNOVA VR Studio. {language === 'de' ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}
           </p>
         </div>
       </div>
