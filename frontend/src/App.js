@@ -574,7 +574,7 @@ const Contact = () => {
                 </svg>
                 <div>
                   <h3 className="font-semibold">Address</h3>
-                  <p className="text-gray-600">Musterstraße 123<br />37073 Göttingen, Germany</p>
+                  <p className="text-gray-600">Stumpfebiel 4<br />37073 Göttingen, Germany</p>
                 </div>
               </div>
 
