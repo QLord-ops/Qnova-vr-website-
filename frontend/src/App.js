@@ -1078,6 +1078,7 @@ function App() {
             <Route path="/booking" element={<Booking />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
       </LanguageProvider>
     </div>
