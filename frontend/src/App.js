@@ -616,7 +616,7 @@ const Contact = () => {
                 </svg>
                 <div>
                   <h3 className="font-semibold">Instagram</h3>
-                  <p className="text-gray-600">@qnovavr</p>
+                  <p className="text-gray-600">@qnova_vr</p>
                 </div>
               </div>
             </div>
