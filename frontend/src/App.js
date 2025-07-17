@@ -246,7 +246,7 @@ const Navigation = () => {
             QNOVA VR
           </Link>
           
-          <div className="hidden lg:flex space-x-8 items-center">
+          <div className="hidden xl:flex space-x-8 items-center">
             <Link to="/" className="hover:text-gray-300 transition-colors">{t('home')}</Link>
             <Link to="/about" className="hover:text-gray-300 transition-colors">{t('about')}</Link>
             <Link to="/services" className="hover:text-gray-300 transition-colors">{t('services')}</Link>
@@ -265,7 +265,7 @@ const Navigation = () => {
 
           <button 
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden flex items-center justify-center"
+            className="xl:hidden flex items-center justify-center"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -274,7 +274,7 @@ const Navigation = () => {
         </div>
 
         {isOpen && (
-          <div className="lg:hidden mt-4 space-y-2">
+          <div className="xl:hidden mt-4 space-y-2">
             <Link to="/" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('home')}</Link>
             <Link to="/about" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('about')}</Link>
             <Link to="/services" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('services')}</Link>
