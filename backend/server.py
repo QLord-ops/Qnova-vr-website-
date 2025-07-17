@@ -100,8 +100,9 @@ def run_sync(func):
 
 @run_sync
 def send_booking_notification_email(booking_data: dict):
-    """Send real email notification to studio owner about new booking"""
+    """Send booking notification with multiple fallback methods"""
     try:
+        # Try Gmail SMTP first
         # Create message
         msg = MIMEMultipart('alternative')
         msg['Subject'] = f"🎮 New VR Booking: {booking_data['name']}"
@@ -196,7 +197,29 @@ def send_booking_notification_email(booking_data: dict):
         return True
         
     except Exception as e:
-        logger.error(f"❌ Failed to send booking notification email: {str(e)}")
+        logger.error(f"❌ Gmail SMTP failed: {str(e)}")
+        
+        # FALLBACK: Log detailed booking notification for manual checking
+        logger.info("=" * 80)
+        logger.info("🎮 NEW VR BOOKING NOTIFICATION (EMAIL FAILED - CHECK MANUALLY)")
+        logger.info("=" * 80)
+        logger.info(f"📧 NOTIFICATION FOR: {GMAIL_USER}")
+        logger.info(f"👤 CUSTOMER: {booking_data['name']}")
+        logger.info(f"📞 PHONE: {booking_data['phone']}")
+        logger.info(f"📧 EMAIL: {booking_data['email']}")
+        logger.info(f"🎮 SERVICE: {booking_data['service']}")
+        logger.info(f"📅 DATE: {booking_data['date']}")
+        logger.info(f"🕐 TIME: {booking_data['time']}")
+        logger.info(f"👥 PARTICIPANTS: {booking_data['participants']}")
+        logger.info(f"🆔 BOOKING ID: {booking_data['id']}")
+        logger.info(f"📝 STATUS: {booking_data['status']}")
+        if booking_data.get('message'):
+            logger.info(f"💬 MESSAGE: {booking_data['message']}")
+        logger.info("=" * 80)
+        logger.info("⚠️  EMAIL FAILED - BOOKING DETAILS LOGGED ABOVE")
+        logger.info("⚠️  CHECK BACKEND LOGS FOR ALL BOOKING NOTIFICATIONS")
+        logger.info("=" * 80)
+        
         return False
 
 @run_sync
