@@ -12,6 +12,8 @@ from datetime import datetime, timedelta
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import asyncio
+from functools import wraps
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -20,6 +22,12 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+
+# Email configuration
+GMAIL_USER = os.environ.get('GMAIL_USER')
+GMAIL_APP_PASSWORD = os.environ.get('GMAIL_APP_PASSWORD')
+SMTP_SERVER = 'smtp.gmail.com'
+SMTP_PORT = 587
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -82,20 +90,231 @@ class ContactMessageCreate(BaseModel):
     subject: str
     message: str
 
-# Email simulation function (replace with real SMTP later)
-async def send_confirmation_email(booking_data: dict):
-    """Simulate sending confirmation email"""
+def run_sync(func):
+    """Decorator to run sync function in thread pool"""
+    @wraps(func)
+    async def wrapper(*args, **kwargs):
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(None, func, *args, **kwargs)
+    return wrapper
+
+@run_sync
+def send_booking_notification_email(booking_data: dict):
+    """Send real email notification to studio owner about new booking"""
     try:
-        # For now, just log the email (in production, use real SMTP)
-        logger.info(f"📧 EMAIL SENT TO: {booking_data['email']}")
-        logger.info(f"📧 SUBJECT: VR Booking Confirmation - {booking_data['name']}")
-        logger.info(f"📧 BOOKING ID: {booking_data['id']}")
-        logger.info(f"📧 SERVICE: {booking_data['service']}")
-        logger.info(f"📧 DATE: {booking_data['date']} at {booking_data['time']}")
-        logger.info(f"📧 PARTICIPANTS: {booking_data['participants']}")
+        # Create message
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = f"🎮 New VR Booking: {booking_data['name']}"
+        msg['From'] = GMAIL_USER
+        msg['To'] = GMAIL_USER
+        
+        # Create HTML content
+        html_content = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">
+                    🎮 New VR Session Booking
+                </h2>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #000; margin-top: 0;">Customer Details:</h3>
+                    <p><strong>Name:</strong> {booking_data['name']}</p>
+                    <p><strong>Email:</strong> {booking_data['email']}</p>
+                    <p><strong>Phone:</strong> {booking_data['phone']}</p>
+                </div>
+                
+                <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #000; margin-top: 0;">Booking Details:</h3>
+                    <p><strong>Service:</strong> {booking_data['service']}</p>
+                    <p><strong>Date:</strong> {booking_data['date']}</p>
+                    <p><strong>Time:</strong> {booking_data['time']}</p>
+                    <p><strong>Participants:</strong> {booking_data['participants']}</p>
+                    <p><strong>Booking ID:</strong> {booking_data['id']}</p>
+                    <p><strong>Status:</strong> {booking_data['status']}</p>
+                </div>
+                
+                {f'''
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #000; margin-top: 0;">Customer Message:</h4>
+                    <p style="font-style: italic;">"{booking_data['message']}"</p>
+                </div>
+                ''' if booking_data.get('message') else ''}
+                
+                <div style="background: #000; color: #fff; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;">
+                    <p style="margin: 0;"><strong>QNOVA VR Studio</strong></p>
+                    <p style="margin: 5px 0;">Stumpfebiel 4, 37073 Göttingen</p>
+                    <p style="margin: 5px 0;">+49 160 96286290</p>
+                </div>
+                
+                <p style="color: #666; font-size: 12px; text-align: center;">
+                    This email was sent automatically when a customer booked a session through your website.
+                </p>
+            </div>
+        </body>
+        </html>
+        """
+        
+        # Create plain text version
+        text_content = f"""
+        🎮 NEW VR SESSION BOOKING
+
+        CUSTOMER DETAILS:
+        Name: {booking_data['name']}
+        Email: {booking_data['email']}
+        Phone: {booking_data['phone']}
+
+        BOOKING DETAILS:
+        Service: {booking_data['service']}
+        Date: {booking_data['date']}
+        Time: {booking_data['time']}
+        Participants: {booking_data['participants']}
+        Booking ID: {booking_data['id']}
+        Status: {booking_data['status']}
+
+        {f"Customer Message: {booking_data['message']}" if booking_data.get('message') else ''}
+
+        QNOVA VR Studio
+        Stumpfebiel 4, 37073 Göttingen
+        +49 160 96286290
+        """
+        
+        # Attach parts
+        part1 = MIMEText(text_content, 'plain')
+        part2 = MIMEText(html_content, 'html')
+        
+        msg.attach(part1)
+        msg.attach(part2)
+        
+        # Send email
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+            server.send_message(msg)
+        
+        logger.info(f"✅ Booking notification email sent successfully to {GMAIL_USER}")
         return True
+        
     except Exception as e:
-        logger.error(f"Failed to send email: {str(e)}")
+        logger.error(f"❌ Failed to send booking notification email: {str(e)}")
+        return False
+
+@run_sync
+def send_customer_confirmation_email(booking_data: dict):
+    """Send confirmation email to customer"""
+    try:
+        # Create message
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = f"🎮 Your VR Session Booking Confirmed - QNOVA VR"
+        msg['From'] = GMAIL_USER
+        msg['To'] = booking_data['email']
+        
+        # Create HTML content
+        html_content = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">
+                    🎮 Booking Confirmed - QNOVA VR
+                </h2>
+                
+                <p>Dear {booking_data['name']},</p>
+                
+                <p>Thank you for booking your VR session with QNOVA VR! Your booking has been confirmed.</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #000; margin-top: 0;">Your Booking Details:</h3>
+                    <p><strong>Service:</strong> {booking_data['service']}</p>
+                    <p><strong>Date:</strong> {booking_data['date']}</p>
+                    <p><strong>Time:</strong> {booking_data['time']}</p>
+                    <p><strong>Participants:</strong> {booking_data['participants']}</p>
+                    <p><strong>Booking ID:</strong> {booking_data['id']}</p>
+                </div>
+                
+                <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #000; margin-top: 0;">Visit Us:</h3>
+                    <p><strong>Address:</strong> Stumpfebiel 4, 37073 Göttingen, Germany</p>
+                    <p><strong>Phone:</strong> +49 160 96286290</p>
+                    <p><strong>Email:</strong> qnovavr.de@gmail.com</p>
+                </div>
+                
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #000; margin-top: 0;">What to Expect:</h4>
+                    <ul>
+                        <li>Arrive 10 minutes before your session</li>
+                        <li>Comfortable clothing recommended</li>
+                        <li>All VR equipment provided</li>
+                        <li>Expert guidance throughout your session</li>
+                    </ul>
+                </div>
+                
+                <div style="background: #000; color: #fff; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;">
+                    <p style="margin: 0;"><strong>QNOVA VR Studio</strong></p>
+                    <p style="margin: 5px 0;">Experience the Future of Gaming</p>
+                    <p style="margin: 5px 0;">Instagram: @qnova_vr</p>
+                </div>
+                
+                <p>We look forward to seeing you soon!</p>
+                
+                <p style="color: #666; font-size: 12px;">
+                    If you need to change or cancel your booking, please contact us as soon as possible.
+                </p>
+            </div>
+        </body>
+        </html>
+        """
+        
+        # Create plain text version
+        text_content = f"""
+        🎮 BOOKING CONFIRMED - QNOVA VR
+
+        Dear {booking_data['name']},
+
+        Thank you for booking your VR session with QNOVA VR! Your booking has been confirmed.
+
+        YOUR BOOKING DETAILS:
+        Service: {booking_data['service']}
+        Date: {booking_data['date']}
+        Time: {booking_data['time']}
+        Participants: {booking_data['participants']}
+        Booking ID: {booking_data['id']}
+
+        VISIT US:
+        Address: Stumpfebiel 4, 37073 Göttingen, Germany
+        Phone: +49 160 96286290
+        Email: qnovavr.de@gmail.com
+
+        WHAT TO EXPECT:
+        - Arrive 10 minutes before your session
+        - Comfortable clothing recommended
+        - All VR equipment provided
+        - Expert guidance throughout your session
+
+        We look forward to seeing you soon!
+
+        QNOVA VR Studio
+        Experience the Future of Gaming
+        Instagram: @qnova_vr
+        """
+        
+        # Attach parts
+        part1 = MIMEText(text_content, 'plain')
+        part2 = MIMEText(html_content, 'html')
+        
+        msg.attach(part1)
+        msg.attach(part2)
+        
+        # Send email
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+            server.send_message(msg)
+        
+        logger.info(f"✅ Customer confirmation email sent successfully to {booking_data['email']}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to send customer confirmation email: {str(e)}")
         return False
 
 # Sample games data
@@ -171,8 +390,11 @@ async def create_booking(booking_data: BookingCreate, background_tasks: Backgrou
     # Save to MongoDB
     await db.bookings.insert_one(booking_obj.dict())
     
-    # Send confirmation email in background
-    background_tasks.add_task(send_confirmation_email, booking_obj.dict())
+    # Send notification email to studio owner in background
+    background_tasks.add_task(send_booking_notification_email, booking_obj.dict())
+    
+    # Send confirmation email to customer in background
+    background_tasks.add_task(send_customer_confirmation_email, booking_obj.dict())
     
     return booking_obj
 
