@@ -224,99 +224,99 @@ def send_booking_notification_email(booking_data: dict):
 
 @run_sync
 def send_customer_confirmation_email(booking_data: dict):
-    """Send confirmation email to customer"""
+    """Send confirmation email to customer in German"""
     try:
         # Create message
         msg = MIMEMultipart('alternative')
-        msg['Subject'] = f"🎮 Your VR Session Booking Confirmed - QNOVA VR"
+        msg['Subject'] = f"🎮 Ihre VR-Session Buchung bestätigt - QNOVA VR"
         msg['From'] = GMAIL_USER
         msg['To'] = booking_data['email']
         
-        # Create HTML content
+        # Create HTML content in German
         html_content = f"""
         <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
                 <h2 style="color: #000; border-bottom: 2px solid #000; padding-bottom: 10px;">
-                    🎮 Booking Confirmed - QNOVA VR
+                    🎮 Buchung bestätigt - QNOVA VR
                 </h2>
                 
-                <p>Dear {booking_data['name']},</p>
+                <p>Liebe/r {booking_data['name']},</p>
                 
-                <p>Thank you for booking your VR session with QNOVA VR! Your booking has been confirmed.</p>
+                <p>vielen Dank für Ihre VR-Session Buchung bei QNOVA VR! Ihre Buchung wurde bestätigt.</p>
                 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #000; margin-top: 0;">Your Booking Details:</h3>
+                    <h3 style="color: #000; margin-top: 0;">Ihre Buchungsdetails:</h3>
                     <p><strong>Service:</strong> {booking_data['service']}</p>
-                    <p><strong>Date:</strong> {booking_data['date']}</p>
-                    <p><strong>Time:</strong> {booking_data['time']}</p>
-                    <p><strong>Participants:</strong> {booking_data['participants']}</p>
-                    <p><strong>Booking ID:</strong> {booking_data['id']}</p>
+                    <p><strong>Datum:</strong> {booking_data['date']}</p>
+                    <p><strong>Uhrzeit:</strong> {booking_data['time']}</p>
+                    <p><strong>Teilnehmer:</strong> {booking_data['participants']}</p>
+                    <p><strong>Buchungs-ID:</strong> {booking_data['id']}</p>
                 </div>
                 
                 <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #000; margin-top: 0;">Visit Us:</h3>
-                    <p><strong>Address:</strong> Stumpfebiel 4, 37073 Göttingen, Germany</p>
-                    <p><strong>Phone:</strong> +49 160 96286290</p>
-                    <p><strong>Email:</strong> qnovavr.de@gmail.com</p>
+                    <h3 style="color: #000; margin-top: 0;">Besuchen Sie uns:</h3>
+                    <p><strong>Adresse:</strong> Stumpfebiel 4, 37073 Göttingen, Deutschland</p>
+                    <p><strong>Telefon:</strong> +49 160 96286290</p>
+                    <p><strong>E-Mail:</strong> qnovavr.de@gmail.com</p>
                 </div>
                 
                 <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 20px 0;">
-                    <h4 style="color: #000; margin-top: 0;">What to Expect:</h4>
+                    <h4 style="color: #000; margin-top: 0;">Was Sie erwartet:</h4>
                     <ul>
-                        <li>Arrive 10 minutes before your session</li>
-                        <li>Comfortable clothing recommended</li>
-                        <li>All VR equipment provided</li>
-                        <li>Expert guidance throughout your session</li>
+                        <li>Kommen Sie 10 Minuten vor Ihrer Session</li>
+                        <li>Bequeme Kleidung empfohlen</li>
+                        <li>Alle VR-Ausrüstung wird gestellt</li>
+                        <li>Expertenbetreuung während der gesamten Session</li>
                     </ul>
                 </div>
                 
                 <div style="background: #000; color: #fff; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;">
                     <p style="margin: 0;"><strong>QNOVA VR Studio</strong></p>
-                    <p style="margin: 5px 0;">Experience the Future of Gaming</p>
+                    <p style="margin: 5px 0;">Erleben Sie die Zukunft des Gamings</p>
                     <p style="margin: 5px 0;">Instagram: @qnova_vr</p>
                 </div>
                 
-                <p>We look forward to seeing you soon!</p>
+                <p>Wir freuen uns darauf, Sie bald zu sehen!</p>
                 
                 <p style="color: #666; font-size: 12px;">
-                    If you need to change or cancel your booking, please contact us as soon as possible.
+                    Falls Sie Ihre Buchung ändern oder stornieren möchten, kontaktieren Sie uns bitte so schnell wie möglich.
                 </p>
             </div>
         </body>
         </html>
         """
         
-        # Create plain text version
+        # Create plain text version in German
         text_content = f"""
-        🎮 BOOKING CONFIRMED - QNOVA VR
+        🎮 BUCHUNG BESTÄTIGT - QNOVA VR
 
-        Dear {booking_data['name']},
+        Liebe/r {booking_data['name']},
 
-        Thank you for booking your VR session with QNOVA VR! Your booking has been confirmed.
+        vielen Dank für Ihre VR-Session Buchung bei QNOVA VR! Ihre Buchung wurde bestätigt.
 
-        YOUR BOOKING DETAILS:
+        IHRE BUCHUNGSDETAILS:
         Service: {booking_data['service']}
-        Date: {booking_data['date']}
-        Time: {booking_data['time']}
-        Participants: {booking_data['participants']}
-        Booking ID: {booking_data['id']}
+        Datum: {booking_data['date']}
+        Uhrzeit: {booking_data['time']}
+        Teilnehmer: {booking_data['participants']}
+        Buchungs-ID: {booking_data['id']}
 
-        VISIT US:
-        Address: Stumpfebiel 4, 37073 Göttingen, Germany
-        Phone: +49 160 96286290
-        Email: qnovavr.de@gmail.com
+        BESUCHEN SIE UNS:
+        Adresse: Stumpfebiel 4, 37073 Göttingen, Deutschland
+        Telefon: +49 160 96286290
+        E-Mail: qnovavr.de@gmail.com
 
-        WHAT TO EXPECT:
-        - Arrive 10 minutes before your session
-        - Comfortable clothing recommended
-        - All VR equipment provided
-        - Expert guidance throughout your session
+        WAS SIE ERWARTET:
+        - Kommen Sie 10 Minuten vor Ihrer Session
+        - Bequeme Kleidung empfohlen
+        - Alle VR-Ausrüstung wird gestellt
+        - Expertenbetreuung während der gesamten Session
 
-        We look forward to seeing you soon!
+        Wir freuen uns darauf, Sie bald zu sehen!
 
         QNOVA VR Studio
-        Experience the Future of Gaming
+        Erleben Sie die Zukunft des Gamings
         Instagram: @qnova_vr
         """
         
