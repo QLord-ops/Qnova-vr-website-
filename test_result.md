@@ -234,10 +234,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "API endpoint for booking creation"
-    - "Game catalog API"
     - "Booking form functionality"
     - "Game catalog with filtering"
+    - "Home page with hero section"
+    - "Navigation and routing"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
