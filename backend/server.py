@@ -18,19 +18,33 @@ from functools import wraps
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+# MongoDB connection with production fallback
+mongo_url = os.environ.get('MONGO_URL', os.environ.get('MONGODB_URL', 'mongodb://localhost:27017'))
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db_name = os.environ.get('DB_NAME', 'qnova_vr')
+db = client[db_name]
 
 # Email configuration
-GMAIL_USER = os.environ.get('GMAIL_USER')
+GMAIL_USER = os.environ.get('GMAIL_USER', 'qnovavr.de@gmail.com')
 GMAIL_APP_PASSWORD = os.environ.get('GMAIL_APP_PASSWORD')
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(
+    title="QNOVA VR API",
+    description="API for QNOVA VR booking and management system",
+    version="1.0.0"
+)
+
+# CORS configuration for production
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Configure with your frontend URL in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
