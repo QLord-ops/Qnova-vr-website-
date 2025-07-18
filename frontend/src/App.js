@@ -360,7 +360,7 @@ const Navigation = () => {
               onClick={toggleLanguage}
               className="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded text-sm transition-colors"
             >
-              {language === 'en' ? '🇩🇪 DE' : '🇬🇧 EN'}
+              {language === 'de' ? '🇬🇧 EN' : language === 'en' ? '🇷🇺 RU' : '🇩🇪 DE'}
             </button>
           </div>
 
