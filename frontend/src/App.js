@@ -284,6 +284,7 @@ const Navigation = () => {
             <Link to="/about" className="hover:text-gray-300 transition-colors">{t('about')}</Link>
             <Link to="/services" className="hover:text-gray-300 transition-colors">{t('services')}</Link>
             <Link to="/games" className="hover:text-gray-300 transition-colors">{t('games')}</Link>
+            <Link to="/pricing" className="hover:text-gray-300 transition-colors">{t('pricing')}</Link>
             <Link to="/booking" className="hover:text-gray-300 transition-colors">{t('bookNow')}</Link>
             <Link to="/contact" className="hover:text-gray-300 transition-colors">{t('contact')}</Link>
             
