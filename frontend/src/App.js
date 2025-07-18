@@ -1158,7 +1158,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 QNOVA VR Studio. {language === 'de' ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}
+            © 2024 QNOVA VR Studio. {language === 'de' ? 'Alle Rechte vorbehalten.' : language === 'en' ? 'All rights reserved.' : 'Все права защищены.'}
           </p>
         </div>
       </div>
