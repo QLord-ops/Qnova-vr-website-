@@ -204,6 +204,103 @@ const translations = {
     customPackages: "Individuelle Pakete",
     professionalSetup: "Professionelle Einrichtung",
     cateringOptions: "Catering-Optionen"
+  },
+  ru: {
+    // Navigation
+    home: "Главная",
+    about: "О нас",
+    services: "Услуги",
+    games: "Игры",
+    bookNow: "Забронировать",
+    contact: "Контакты",
+    
+    // Home Page
+    heroTitle: "Почувствуйте будущее игр",
+    heroSubtitle: "Погрузитесь в передовую виртуальную реальность и PlayStation-игры в QNOVA VR Studio в Гёттингене.",
+    bookYourSession: "Забронировать сеанс",
+    whyChooseUs: "Почему QNOVA VR?",
+    latestTechnology: "Новейшие технологии",
+    latestTechDesc: "Современные VR-гарнитуры и PlayStation 5 для максимального игрового опыта.",
+    groupExperiences: "Групповые мероприятия",
+    groupExpDesc: "Идеально для вечеринок, корпоративных мероприятий и тимбилдинга.",
+    primeLocation: "Отличное расположение",
+    primeLocationDesc: "Удобно расположен в центре Гёттингена с легким доступом.",
+    readyToStep: "Готовы к виртуальной реальности?",
+    readySubtitle: "Забронируйте сеанс сегодня и испытайте игры, как никогда раньше.",
+    
+    // About Page
+    aboutTitle: "О QNOVA VR Studio",
+    aboutDesc1: "Расположенная в сердце Гёттингена, QNOVA VR Studio - ваш путь к захватывающим VR-впечатлениям. Мы сочетаем передовые технологии с исключительным сервисом для создания незабываемых игровых приключений.",
+    aboutDesc2: "Наша современная студия оснащена новейшими VR-гарнитурами, PlayStation 5 консолями и инновационной платформой Kat Walk VR для полного отслеживания движений тела.",
+    gamesAvailable: "VR-игры доступны",
+    established: "Основана",
+    
+    // Services Page
+    servicesTitle: "Наши услуги",
+    vrGamingSessions: "VR-игровые сеансы",
+    vrGamingDesc: "Индивидуальные или групповые VR-впечатления с новейшими играми",
+    playstationGaming: "PlayStation-игры",
+    playstationDesc: "Игры на PlayStation 5 с премиальными титулами",
+    groupParties: "Групповые вечеринки",
+    groupPartiesDesc: "Идеально для дней рождения, праздников и командных мероприятий",
+    corporateEvents: "Корпоративные мероприятия",
+    corporateDesc: "Тимбилдинг и корпоративные развлечения",
+    fromPrice: "От €",
+    contactForPricing: "Цена по запросу",
+    
+    // Games Page
+    gameCatalog: "Каталог игр",
+    allGames: "Все игры",
+    vrGames: "VR-игры",
+    playstation: "PlayStation",
+    
+    // Booking Page
+    bookingTitle: "Забронировать сеанс",
+    name: "Имя",
+    email: "Электронная почта",
+    phone: "Телефон",
+    service: "Услуга",
+    date: "Дата",
+    time: "Время",
+    participants: "Количество участников",
+    additionalMessage: "Дополнительное сообщение",
+    selectService: "Выберите услугу",
+    selectTime: "Выберите время",
+    messagePlaceholder: "Особые пожелания или вопросы?",
+    bookSession: "Забронировать сеанс",
+    booking: "Бронирование...",
+    bookingConfirmed: "Бронирование подтверждено!",
+    confirmationEmail: "Мы отправим вам подтверждение по электронной почте.",
+    redirecting: "Перенаправление на главную страницу...",
+    
+    // Contact Page
+    contactUs: "Связаться с нами",
+    getInTouch: "Свяжитесь с нами",
+    sendMessage: "Отправить сообщение",
+    address: "Адрес",
+    openingHours: "Время работы",
+    mondayToSaturday: "Понедельник - Суббота: 12:00 - 22:00",
+    sundayTournaments: "Воскресенье: Турнирные дни",
+    instagram: "Instagram",
+    subject: "Тема",
+    message: "Сообщение",
+    sendMessageBtn: "Отправить сообщение",
+    sending: "Отправка...",
+    messageSent: "Сообщение успешно отправлено! Мы скоро свяжемся с вами.",
+    
+    // Services Details
+    vrHeadsets: "Новейшие VR-гарнитуры",
+    wideGameSelection: "Широкий выбор игр",
+    expertGuidance: "Экспертное руководство",
+    ps5Console: "PlayStation 5 консоль",
+    latestGames: "Новейшие игры",
+    comfortableSeating: "Удобные сидения",
+    upToPlayers: "До 8 игроков",
+    twoHourSessions: "2-часовые сеансы",
+    refreshmentsIncluded: "Прохладительные напитки включены",
+    customPackages: "Индивидуальные пакеты",
+    professionalSetup: "Профессиональная настройка",
+    cateringOptions: "Варианты кейтеринга"
   }
 };
 
