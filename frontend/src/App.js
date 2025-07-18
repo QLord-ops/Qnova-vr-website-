@@ -185,7 +185,7 @@ const translations = {
     customPackages: "Individuelle Pakete", professionalSetup: "Professionelle Einrichtung", cateringOptions: "Catering-Optionen"
   },
   ru: {
-    home: "Главная", about: "О нас", services: "Услуги", games: "Игры", bookNow: "Забронировать", contact: "Контакты",
+    home: "Главная", about: "О нас", services: "Услуги", games: "Игры", pricing: "Цены", bookNow: "Забронировать", contact: "Контакты",
     heroTitle: "Почувствуйте будущее игр", heroSubtitle: "Погрузитесь в передовую виртуальную реальность и PlayStation-игры в QNOVA VR Studio в Гёттингене.",
     bookYourSession: "Забронировать сеанс", whyChooseUs: "Почему QNOVA VR?", latestTechnology: "Новейшие технологии",
     latestTechDesc: "Современные VR-гарнитуры и PlayStation 5 для максимального игрового опыта.",
