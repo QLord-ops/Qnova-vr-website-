@@ -339,37 +339,39 @@ const About = () => {
   const { t } = useLanguage();
   
   return (
-    <div className="min-h-screen bg-white pt-20">
-      <div className="container mx-auto px-4 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+    <div className="min-h-screen bg-white">
+      <section className="pt-20 py-16">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp" className="text-center mb-16">
             <h1 className="text-5xl font-bold mb-6">{t('aboutTitle')}</h1>
-            <p className="text-lg mb-6 text-gray-600">
-              {t('aboutDesc1')}
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t('aboutDescription')}
             </p>
-            <p className="text-lg mb-6 text-gray-600">
-              {t('aboutDesc2')}
-            </p>
-            <div className="grid grid-cols-2 gap-6 mt-8">
+          </AnimatedSection>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <AnimatedSection animation="slideInLeft">
+              <img 
+                src="https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="VR Studio"
+                className="w-full h-96 object-cover rounded-lg shadow-lg"
+              />
+            </AnimatedSection>
+            
+            <AnimatedSection animation="slideInRight">
               <div>
-                <h3 className="text-2xl font-bold mb-2">50+</h3>
-                <p className="text-gray-600">{t('gamesAvailable')}</p>
+                <h2 className="text-3xl font-bold mb-6">{t('ourStory')}</h2>
+                <p className="text-gray-600 mb-4">
+                  {t('ourStoryText')}
+                </p>
+                <p className="text-gray-600">
+                  {t('ourStoryText2')}
+                </p>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-2">2023</h3>
-                <p className="text-gray-600">{t('established')}</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <img 
-              src="https://images.unsplash.com/photo-1493496553793-56c1aa2cfcea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwzfHx2aXJ0dWFsJTIwcmVhbGl0eXxlbnwwfHx8YmxhY2tfYW5kX3doaXRlfDE3NTI3NDkyNTd8MA&ixlib=rb-4.1.0&q=85"
-              alt="VR Studio"
-              className="w-full h-96 object-cover rounded-lg"
-            />
+            </AnimatedSection>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
