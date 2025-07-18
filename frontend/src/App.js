@@ -140,7 +140,191 @@ const translations = {
   }
 };
 
-// Language Hook
+// Language Provider
+const LanguageProvider = ({ children }) => {
+  const [language, setLanguage] = useState('de');
+  
+  const toggleLanguage = () => {
+    setLanguage(prev => {
+      if (prev === 'de') return 'en';
+      if (prev === 'en') return 'ru';
+      return 'de';
+    });
+  };
+  
+  const t = (key) => translations[language][key] || key;
+  
+  return (
+    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+// Navigation Component
+const Navigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
+
+  return (
+    <nav className="bg-black text-white fixed w-full top-0 z-50 border-b border-gray-800">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          <Link to="/" className="text-2xl font-bold">
+            QNOVA VR
+          </Link>
+          
+          <div className="hidden xl:flex space-x-8 items-center">
+            <Link to="/" className="hover:text-gray-300 transition-colors">{t('home')}</Link>
+            <Link to="/about" className="hover:text-gray-300 transition-colors">{t('about')}</Link>
+            <Link to="/services" className="hover:text-gray-300 transition-colors">{t('services')}</Link>
+            <Link to="/games" className="hover:text-gray-300 transition-colors">{t('games')}</Link>
+            <Link to="/booking" className="hover:text-gray-300 transition-colors">{t('bookNow')}</Link>
+            <Link to="/contact" className="hover:text-gray-300 transition-colors">{t('contact')}</Link>
+            
+            <button
+              onClick={toggleLanguage}
+              className="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded text-sm transition-colors"
+            >
+              {language === 'de' ? '🇬🇧 EN' : language === 'en' ? '🇷🇺 RU' : '🇩🇪 DE'}
+            </button>
+          </div>
+
+          <button 
+            onClick={() => setIsOpen(!isOpen)}
+            className="xl:hidden flex items-center justify-center"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+
+        {isOpen && (
+          <div className="xl:hidden mt-4 space-y-2">
+            <Link to="/" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('home')}</Link>
+            <Link to="/about" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('about')}</Link>
+            <Link to="/services" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('services')}</Link>
+            <Link to="/games" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('games')}</Link>
+            <Link to="/booking" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('bookNow')}</Link>
+            <Link to="/contact" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('contact')}</Link>
+            <button
+              onClick={() => {
+                toggleLanguage();
+                setIsOpen(false);
+              }}
+              className="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded text-sm transition-colors"
+            >
+              {language === 'de' ? '🇬🇧 EN' : language === 'en' ? '🇷🇺 RU' : '🇩🇪 DE'}
+            </button>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+// Home Component with Animations
+const Home = () => {
+  const { t } = useLanguage();
+  
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="pt-20 bg-black text-white">
+        <div className="container mx-auto px-4 py-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-6xl font-bold mb-6 hero-title">
+                {t('heroTitle')}
+              </h1>
+              <p className="text-xl mb-8 text-gray-300 hero-subtitle">
+                {t('heroSubtitle')}
+              </p>
+              <Link 
+                to="/booking" 
+                className="bg-white text-black px-8 py-4 text-lg font-semibold hover:bg-gray-100 transition-colors inline-block hero-button"
+              >
+                {t('bookYourSession')}
+              </Link>
+            </div>
+            <div className="hero-image">
+              <img 
+                src="https://images.unsplash.com/photo-1493497029755-f49c8e9a8bbe?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHx2aXJ0dWFsJTIwcmVhbGl0eXxlbnwwfHx8YmxhY2tfYW5kX3doaXRlfDE3NTI3NDkyNTd8MA&ixlib=rb-4.1.0&q=85"
+                alt="VR Experience"
+                className="w-full h-96 object-cover rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp">
+            <h2 className="text-4xl font-bold text-center mb-16">{t('whyChooseUs')}</h2>
+          </AnimatedSection>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <AnimatedSection animation="slideInLeft" delay={200}>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4">{t('latestTechnology')}</h3>
+                <p className="text-gray-600">{t('latestTechDesc')}</p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fadeInUp" delay={400}>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4">{t('groupExperiences')}</h3>
+                <p className="text-gray-600">{t('groupExpDesc')}</p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="slideInRight" delay={600}>
+              <div className="text-center">
+                <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-4">{t('primeLocation')}</h3>
+                <p className="text-gray-600">{t('primeLocationDesc')}</p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <AnimatedSection animation="fadeInUp" className="py-20 bg-black text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6">{t('readyToStep')}</h2>
+          <p className="text-xl mb-8 text-gray-300">
+            {t('readySubtitle')}
+          </p>
+          <Link 
+            to="/booking" 
+            className="bg-white text-black px-8 py-4 text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
+          >
+            {t('bookNow')}
+          </Link>
+        </div>
+      </AnimatedSection>
+    </div>
+  );
+};
 const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {
