@@ -429,90 +429,115 @@ const Services = () => {
 const Games = () => {
   const { t } = useLanguage();
   const [games, setGames] = useState([]);
-  const [filter, setFilter] = useState('all');
+  const [filteredGames, setFilteredGames] = useState([]);
+  const [selectedPlatform, setSelectedPlatform] = useState('all');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchGames();
-  }, [filter]);
+  }, []);
 
   const fetchGames = async () => {
     try {
-      const params = filter !== 'all' ? { platform: filter } : {};
-      const response = await axios.get(`${API}/games`, { params });
+      const response = await axios.get(`${API}/games`);
       setGames(response.data);
+      setFilteredGames(response.data);
       setLoading(false);
     } catch (error) {
-      console.error('Failed to fetch games:', error);
+      console.error('Error fetching games:', error);
       setLoading(false);
+    }
+  };
+
+  const filterGames = (platform) => {
+    setSelectedPlatform(platform);
+    if (platform === 'all') {
+      setFilteredGames(games);
+    } else {
+      setFilteredGames(games.filter(game => game.platform === platform));
     }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white pt-20 flex items-center justify-center">
-        <div className="text-2xl">Loading games...</div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-2xl font-bold">{t('loading')}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white pt-20">
-      <div className="container mx-auto px-4 py-20">
-        <h1 className="text-5xl font-bold text-center mb-16">{t('gameCatalog')}</h1>
-        
-        {/* Filter Buttons */}
-        <div className="flex justify-center space-x-4 mb-12">
-          <button
-            onClick={() => setFilter('all')}
-            className={`px-6 py-3 rounded-full font-semibold transition-colors ${
-              filter === 'all' ? 'bg-black text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            {t('allGames')}
-          </button>
-          <button
-            onClick={() => setFilter('VR')}
-            className={`px-6 py-3 rounded-full font-semibold transition-colors ${
-              filter === 'VR' ? 'bg-black text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            {t('vrGames')}
-          </button>
-          <button
-            onClick={() => setFilter('PlayStation')}
-            className={`px-6 py-3 rounded-full font-semibold transition-colors ${
-              filter === 'PlayStation' ? 'bg-black text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            {t('playstation')}
-          </button>
-        </div>
-
-        {/* Games Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {games.map((game) => (
-            <div key={game.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img 
-                src={game.image_url} 
-                alt={game.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold">{game.name}</h3>
-                  <span className="bg-gray-100 px-2 py-1 rounded text-sm">{game.platform}</span>
-                </div>
-                <p className="text-gray-600 mb-4">{game.description}</p>
-                <div className="flex justify-between text-sm text-gray-500">
-                  <span>{game.duration} min</span>
-                  <span>Max {game.max_players} player{game.max_players > 1 ? 's' : ''}</span>
-                </div>
-              </div>
+    <div className="min-h-screen bg-white">
+      <section className="pt-20 py-16">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp" className="text-center mb-16">
+            <h1 className="text-5xl font-bold mb-6">{t('gamesTitle')}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t('gamesDescription')}
+            </p>
+          </AnimatedSection>
+          
+          <div className="text-center mb-12">
+            <div className="inline-flex bg-gray-100 rounded-lg p-1">
+              <button
+                onClick={() => filterGames('all')}
+                className={`px-6 py-3 rounded-md font-medium transition-colors ${
+                  selectedPlatform === 'all'
+                    ? 'bg-white text-black shadow-sm'
+                    : 'text-gray-600 hover:text-black'
+                }`}
+              >
+                {t('allGames')}
+              </button>
+              <button
+                onClick={() => filterGames('VR')}
+                className={`px-6 py-3 rounded-md font-medium transition-colors ${
+                  selectedPlatform === 'VR'
+                    ? 'bg-white text-black shadow-sm'
+                    : 'text-gray-600 hover:text-black'
+                }`}
+              >
+                {t('vrGames')}
+              </button>
+              <button
+                onClick={() => filterGames('PlayStation')}
+                className={`px-6 py-3 rounded-md font-medium transition-colors ${
+                  selectedPlatform === 'PlayStation'
+                    ? 'bg-white text-black shadow-sm'
+                    : 'text-gray-600 hover:text-black'
+                }`}
+              >
+                {t('psGames')}
+              </button>
             </div>
-          ))}
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredGames.map((game) => (
+              <AnimatedSection key={game.id} animation="fadeInUp">
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                  <img 
+                    src={game.image_url} 
+                    alt={game.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-xl font-bold">{game.name}</h3>
+                      <span className="bg-gray-100 px-2 py-1 rounded text-sm">{game.platform}</span>
+                    </div>
+                    <p className="text-gray-600 mb-4">{game.description}</p>
+                    <div className="flex justify-between text-sm text-gray-500">
+                      <span>{game.duration} min</span>
+                      <span>Max {game.max_players} player{game.max_players > 1 ? 's' : ''}</span>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
