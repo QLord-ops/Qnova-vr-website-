@@ -1064,7 +1064,9 @@ const Footer = () => {
             <p className="text-gray-300 mb-4">
               {language === 'de' 
                 ? 'Ihr VR-Studio im Herzen von Göttingen. Erleben Sie die Zukunft des Gamings mit modernster Technologie.'
-                : 'Your VR studio in the heart of Göttingen. Experience the future of gaming with cutting-edge technology.'
+                : language === 'en'
+                ? 'Your VR studio in the heart of Göttingen. Experience the future of gaming with cutting-edge technology.'
+                : 'Ваша VR-студия в сердце Гёттингена. Испытайте будущее игр с передовыми технологиями.'
               }
             </p>
           </div>
