@@ -55,7 +55,7 @@ const LanguageContext = createContext();
 // Translations
 const translations = {
   en: {
-    home: "Home", about: "About", services: "Services", games: "Games", bookNow: "Book Now", contact: "Contact",
+    home: "Home", about: "About", services: "Services", games: "Games", pricing: "Pricing", bookNow: "Book Now", contact: "Contact",
     heroTitle: "Experience the Future of Gaming", heroSubtitle: "Immerse yourself in cutting-edge virtual reality and PlayStation gaming at QNOVA VR Studio in Göttingen.",
     bookYourSession: "Book Your Session", whyChooseUs: "Why Choose QNOVA VR?", latestTechnology: "Latest Technology",
     latestTechDesc: "State-of-the-art VR headsets and PlayStation 5 for the ultimate gaming experience.",
