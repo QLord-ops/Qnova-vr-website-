@@ -333,27 +333,6 @@ const useLanguage = () => {
   return context;
 };
 
-// Language Provider
-const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('de'); // Default to German
-  
-  const toggleLanguage = () => {
-    setLanguage(prev => {
-      if (prev === 'de') return 'en';
-      if (prev === 'en') return 'ru';
-      return 'de'; // ru -> de
-    });
-  };
-  
-  const t = (key) => translations[language][key] || key;
-  
-  return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
-
 // Navigation Component
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
