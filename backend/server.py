@@ -461,6 +461,16 @@ async def get_contact_messages():
 # Include the router in the main app
 app.include_router(api_router)
 
+# Add a simple root route for testing
+@app.get("/")
+async def root():
+    return {"message": "QNOVA VR API is running!", "status": "healthy"}
+
+# Add a health check endpoint
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "service": "QNOVA VR API"}
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
