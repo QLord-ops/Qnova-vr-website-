@@ -1121,16 +1121,16 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-gray-300">
-                  {language === 'de' ? 'Mo - Sa:' : 'Mon - Sat:'}
+                  {language === 'de' ? 'Mo - Sa:' : language === 'en' ? 'Mon - Sat:' : 'Пн - Сб:'}
                 </span>
                 <span className="text-white">12:00 - 22:00</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-300">
-                  {language === 'de' ? 'Sonntag:' : 'Sunday:'}
+                  {language === 'de' ? 'Sonntag:' : language === 'en' ? 'Sunday:' : 'Воскресенье:'}
                 </span>
                 <span className="text-white">
-                  {language === 'de' ? 'Turniertage' : 'Tournaments'}
+                  {language === 'de' ? 'Turniertage' : language === 'en' ? 'Tournaments' : 'Турниры'}
                 </span>
               </div>
             </div>
