@@ -126,7 +126,7 @@ const translations = {
     customPackages: "Custom packages", professionalSetup: "Professional setup", cateringOptions: "Catering options"
   },
   de: {
-    home: "Startseite", about: "Über uns", services: "Services", games: "Spiele", bookNow: "Jetzt buchen", contact: "Kontakt",
+    home: "Startseite", about: "Über uns", services: "Services", games: "Spiele", pricing: "Preise", bookNow: "Jetzt buchen", contact: "Kontakt",
     heroTitle: "Erleben Sie die Zukunft des Gamings", heroSubtitle: "Tauchen Sie ein in modernste Virtual Reality und PlayStation Gaming im QNOVA VR Studio in Göttingen.",
     bookYourSession: "Session buchen", whyChooseUs: "Warum QNOVA VR wählen?", latestTechnology: "Neueste Technologie",
     latestTechDesc: "Modernste VR-Headsets und PlayStation 5 für das ultimative Gaming-Erlebnis.", 
