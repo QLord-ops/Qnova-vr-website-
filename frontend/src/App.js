@@ -221,7 +221,11 @@ const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState('de'); // Default to German
   
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'en' ? 'de' : 'en');
+    setLanguage(prev => {
+      if (prev === 'de') return 'en';
+      if (prev === 'en') return 'ru';
+      return 'de'; // ru -> de
+    });
   };
   
   const t = (key) => translations[language][key] || key;
