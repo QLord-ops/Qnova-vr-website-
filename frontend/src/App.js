@@ -1063,6 +1063,161 @@ const Contact = () => {
   );
 };
 
+// Pricing Component
+const Pricing = () => {
+  const { t } = useLanguage();
+  
+  const pricingPackages = [
+    {
+      name: t('individualVR'),
+      description: t('individualVRDesc'),
+      price: t('individualVRPrice'),
+      duration: t('individualVRDuration'),
+      features: [
+        t('vrHeadsets'),
+        t('wideGameSelection'), 
+        t('expertGuidance')
+      ],
+      popular: false,
+      bookingUrl: '/booking'
+    },
+    {
+      name: t('groupVR'),
+      description: t('groupVRDesc'),
+      price: t('groupVRPrice'),
+      duration: t('groupVRDuration'),
+      subtext: t('perPerson'),
+      features: [
+        t('upToPlayers').replace('8', '4'),
+        'Multiplayer games',
+        'Group discounts'
+      ],
+      popular: true,
+      bookingUrl: '/booking'
+    },
+    {
+      name: t('playstationSession'),
+      description: t('playstationSessionDesc'),
+      price: t('playstationPrice'),
+      duration: t('playstationDuration'),
+      features: [
+        t('ps5Console'),
+        t('latestGames'),
+        t('comfortableSeating')
+      ],
+      popular: false,
+      bookingUrl: '/booking'
+    },
+    {
+      name: t('vrPartyPackage'),
+      description: t('vrPartyPackageDesc'),
+      price: t('vrPartyPrice'),
+      duration: t('vrPartyDuration'),
+      features: [
+        t('upToPlayers'),
+        t('twoHourSessions'),
+        t('refreshmentsIncluded')
+      ],
+      popular: false,
+      bookingUrl: '/booking'
+    },
+    {
+      name: t('corporatePackage'),
+      description: t('corporatePackageDesc'),
+      price: t('corporatePrice'),
+      duration: t('corporateDuration'),
+      features: [
+        t('customPackages'),
+        t('professionalSetup'),
+        t('cateringOptions')
+      ],
+      popular: false,
+      bookingUrl: '/contact'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white">
+      <section className="pt-20 py-16">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp" className="text-center mb-16">
+            <h1 className="text-5xl font-bold mb-6">{t('pricingTitle')}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t('pricingDescription')}
+            </p>
+          </AnimatedSection>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {pricingPackages.map((pkg, index) => (
+              <AnimatedSection key={index} animation="fadeInUp" delay={index * 100}>
+                <div className={`bg-white rounded-lg shadow-lg border-2 p-8 relative ${
+                  pkg.popular ? 'border-black' : 'border-gray-200'
+                }`}>
+                  {pkg.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-black text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
+                  
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
+                    <p className="text-gray-600 mb-4">{pkg.description}</p>
+                    <div className="mb-2">
+                      <span className="text-4xl font-bold">{pkg.price}</span>
+                      {pkg.subtext && <span className="text-gray-500 ml-2">{pkg.subtext}</span>}
+                    </div>
+                    <p className="text-gray-500">{pkg.duration}</p>
+                  </div>
+                  
+                  <ul className="space-y-3 mb-8">
+                    {pkg.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Link
+                    to={pkg.bookingUrl}
+                    className={`block w-full text-center py-3 px-4 rounded-lg font-semibold transition-colors ${
+                      pkg.popular
+                        ? 'bg-black text-white hover:bg-gray-800'
+                        : 'bg-gray-100 text-black hover:bg-gray-200'
+                    }`}
+                  >
+                    {pkg.bookingUrl === '/contact' ? t('contactForDetails') : t('bookThisPackage')}
+                  </Link>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+          
+          <AnimatedSection animation="fadeInUp" className="text-center mt-16">
+            <div className="bg-gray-50 rounded-lg p-8">
+              <h3 className="text-2xl font-bold mb-4">Special Offers</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="text-center">
+                  <h4 className="font-semibold mb-2">Weekend Special</h4>
+                  <p className="text-gray-600">Book 2 sessions, get 20% off the second one!</p>
+                </div>
+                <div className="text-center">
+                  <h4 className="font-semibold mb-2">Student Discount</h4>
+                  <p className="text-gray-600">Show your student ID and get 15% off any session.</p>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 // Footer Component
 const Footer = () => {
   const { language, t } = useLanguage();
