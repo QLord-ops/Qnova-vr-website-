@@ -129,18 +129,6 @@ const translations = {
     upToPlayers: "Bis zu 8 Spieler", twoHourSessions: "2-Stunden-Sessions", refreshmentsIncluded: "Erfrischungen inklusive",
     customPackages: "Individuelle Pakete", professionalSetup: "Professionelle Einrichtung", cateringOptions: "Catering-Optionen"
   },
-    service: "Service", date: "Datum", time: "Uhrzeit", participants: "Anzahl Teilnehmer", additionalMessage: "Zusätzliche Nachricht",
-    selectService: "Service auswählen", selectTime: "Uhrzeit auswählen", messagePlaceholder: "Besondere Wünsche oder Fragen?",
-    bookSession: "Session buchen", booking: "Buche...", bookingConfirmed: "Buchung bestätigt!", confirmationEmail: "Wir senden Ihnen in Kürze eine Bestätigungs-E-Mail.",
-    redirecting: "Weiterleitung zur Startseite...", contactUs: "Kontakt", getInTouch: "Kontaktieren Sie uns", sendMessage: "Nachricht senden",
-    address: "Adresse", openingHours: "Öffnungszeiten", mondayToSaturday: "Montag - Samstag: 12:00 - 22:00",
-    sundayTournaments: "Sonntag: Turniertage", instagram: "Instagram", subject: "Betreff", message: "Nachricht",
-    sendMessageBtn: "Nachricht senden", sending: "Sende...", messageSent: "Nachricht erfolgreich gesendet! Wir melden uns bald bei Ihnen.",
-    vrHeadsets: "Neueste VR-Headsets", wideGameSelection: "Große Spieleauswahl", expertGuidance: "Expertenbetreuung",
-    ps5Console: "PlayStation 5-Konsole", latestGames: "Neueste Spiele", comfortableSeating: "Bequeme Sitzgelegenheiten",
-    upToPlayers: "Bis zu 8 Spieler", twoHourSessions: "2-Stunden-Sessions", refreshmentsIncluded: "Erfrischungen inklusive",
-    customPackages: "Individuelle Pakete", professionalSetup: "Professionelle Einrichtung", cateringOptions: "Catering-Optionen"
-  },
   ru: {
     home: "Главная", about: "О нас", services: "Услуги", games: "Игры", bookNow: "Забронировать", contact: "Контакты",
     heroTitle: "Почувствуйте будущее игр", heroSubtitle: "Погрузитесь в передовую виртуальную реальность и PlayStation-игры в QNOVA VR Studio в Гёттингене.",
