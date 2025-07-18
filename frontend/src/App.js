@@ -1138,7 +1138,7 @@ const Footer = () => {
             {/* Quick Links */}
             <div className="mt-8">
               <h4 className="text-lg font-semibold mb-4">
-                {language === 'de' ? 'Schnellzugriff' : 'Quick Links'}
+                {language === 'de' ? 'Schnellzugriff' : language === 'en' ? 'Quick Links' : 'Быстрые ссылки'}
               </h4>
               <div className="space-y-2">
                 <Link to="/booking" className="block text-gray-300 hover:text-white transition-colors">
