@@ -380,57 +380,47 @@ const About = () => {
 const Services = () => {
   const { t } = useLanguage();
   
-  const services = [
-    {
-      title: t('vrGamingSessions'),
-      description: t('vrGamingDesc'),
-      price: t('fromPrice') + "25/hour",
-      features: [t('vrHeadsets'), t('wideGameSelection'), t('expertGuidance')]
-    },
-    {
-      title: t('playstationGaming'),
-      description: t('playstationDesc'),
-      price: t('fromPrice') + "20/hour",
-      features: [t('ps5Console'), t('latestGames'), t('comfortableSeating')]
-    },
-    {
-      title: t('groupParties'),
-      description: t('groupPartiesDesc'),
-      price: t('fromPrice') + "150/group",
-      features: [t('upToPlayers'), t('twoHourSessions'), t('refreshmentsIncluded')]
-    },
-    {
-      title: t('corporateEvents'),
-      description: t('corporateDesc'),
-      price: t('contactForPricing'),
-      features: [t('customPackages'), t('professionalSetup'), t('cateringOptions')]
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-white pt-20">
-      <div className="container mx-auto px-4 py-20">
-        <h1 className="text-5xl font-bold text-center mb-16">{t('servicesTitle')}</h1>
-        <div className="grid md:grid-cols-2 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className="bg-gray-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-              <p className="text-gray-600 mb-4">{service.description}</p>
-              <div className="text-2xl font-bold mb-4">{service.price}</div>
-              <ul className="space-y-2">
-                {service.features.map((feature, i) => (
-                  <li key={i} className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <div className="min-h-screen bg-white">
+      <section className="pt-20 py-16">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp" className="text-center mb-16">
+            <h1 className="text-5xl font-bold mb-6">{t('servicesTitle')}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t('servicesDescription')}
+            </p>
+          </AnimatedSection>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <AnimatedSection animation="fadeInUp" delay={200}>
+              <div className="bg-gray-50 p-8 rounded-lg text-center">
+                <h3 className="text-2xl font-bold mb-4">{t('vrGaming')}</h3>
+                <p className="text-gray-600">
+                  {t('vrGamingDesc')}
+                </p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fadeInUp" delay={400}>
+              <div className="bg-gray-50 p-8 rounded-lg text-center">
+                <h3 className="text-2xl font-bold mb-4">{t('psVR')}</h3>
+                <p className="text-gray-600">
+                  {t('psVRDesc')}
+                </p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fadeInUp" delay={600}>
+              <div className="bg-gray-50 p-8 rounded-lg text-center">
+                <h3 className="text-2xl font-bold mb-4">{t('groupEvents')}</h3>
+                <p className="text-gray-600">
+                  {t('groupEventsDesc')}
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
