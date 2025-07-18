@@ -119,7 +119,7 @@ const translations = {
     vrPartyPrice: "€180", vrPartyDuration: "2 hours", vrPartyFeatures: ["Up to 8 players", "2-hour session", "Refreshments included"],
     corporatePackage: "Corporate Package", corporatePackageDesc: "Team building and corporate entertainment experiences.",
     corporatePrice: "Contact for pricing", corporateDuration: "Custom duration", corporateFeatures: ["Custom packages", "Professional setup", "Catering options"],
-    perPerson: "per person", bookThisPackage: "Book This Package", contactForDetails: "Contact for Details"
+    perPerson: "per person", bookThisPackage: "Book This Package", contactForDetails: "Contact for Details",
     vrHeadsets: "Latest VR headsets", wideGameSelection: "Wide game selection", expertGuidance: "Expert guidance",
     ps5Console: "PlayStation 5 console", latestGames: "Latest games", comfortableSeating: "Comfortable seating",
     upToPlayers: "Up to 8 players", twoHourSessions: "2-hour sessions", refreshmentsIncluded: "Refreshments included",
