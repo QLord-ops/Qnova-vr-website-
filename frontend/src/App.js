@@ -107,7 +107,7 @@ const translations = {
     contactForPricing: "Contact for pricing", gameCatalog: "Game Catalog", allGames: "All Games", vrGames: "VR Games",
     name: "Name", email: "Email", phone: "Phone", service: "Service", date: "Date", time: "Time", 
     participants: "Number of Participants", message: "Message", additionalMessage: "Additional Message",
-    selectService: "Select a service", selectTime: "Select time", messagePlaceholder: "Any special requests or questions?",
+    selectService: "Select a service", selectTime: "Select time", first: "first", messagePlaceholder: "Any special requests or questions?",
     vrGamingSession: "KAT VR Gaming Session (30 minutes)", psVRExperience: "PlayStation 5 VR Experience (1 hour)", groupVRParty: "Group KAT VR Party (30 minutes)",
     bookSession: "Book Session", submitting: "Booking...", bookNow: "Book Now",
     bookingConfirmed: "Booking Confirmed!", bookingConfirmationText: "We've received your booking and will send you a confirmation email.",
