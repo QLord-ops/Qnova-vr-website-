@@ -254,7 +254,7 @@ const translations = {
     // Technology specs
     techSpecs: "Наши технологии",
     katWalkC: "Платформа KAT Walk C+", katWalkCDesc: "Всенаправленная беговая дорожка с тактильной обратной связью",
-    metaQuest: "VR-гарнитуры Meta Quest Pro", metaQuestDesc: "4K разрешение с отслеживанием глаз и смешанной реальностью",
+    metaQuest: "VR-гарнитуры Meta Quest 3", metaQuestDesc: "Улучшенное разрешение 4K+ с продвинутыми возможностями смешанной реальности",
     playstation5: "Консоли PlayStation 5", playstation5Desc: "Новейшие игры в 4K с поддержкой VR",
     
     readyToStep: "Готовы к максимальному VR-опыту?", 
