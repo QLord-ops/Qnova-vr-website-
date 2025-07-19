@@ -498,7 +498,7 @@ const Home = () => {
                 ></iframe>
               </div>
               <p className="text-center text-gray-400 mt-4 text-sm md:text-base">
-                Erleben Sie die KAT VR Technologie in Aktion
+                {t('katVRVideoCaption')}
               </p>
             </div>
           </AnimatedSection>
