@@ -1800,6 +1800,7 @@ function App() {
     <div className="App">
       <LanguageProvider>
         <BrowserRouter>
+          <LanguageSelector />
           <Navigation />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -1816,5 +1817,14 @@ function App() {
     </div>
   );
 }
+
+// Language Selector Component that shows modal when needed
+const LanguageSelector = () => {
+  const { showLanguageModal } = useLanguage();
+  
+  if (!showLanguageModal) return null;
+  
+  return <LanguageSelectionModal />;
+};
 
 export default App;
