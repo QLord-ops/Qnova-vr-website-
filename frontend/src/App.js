@@ -173,7 +173,7 @@ const translations = {
     // Technology specs
     techSpecs: "Unsere Technologie", 
     katWalkC: "KAT Walk C+ Plattform", katWalkCDesc: "Omnidirektionales Laufband mit Haptik-Feedback",
-    metaQuest: "Meta Quest Pro VR-Headsets", metaQuestDesc: "4K-Auflösung mit Eye-Tracking und Mixed Reality",
+    metaQuest: "Meta Quest 3 VR-Headsets", metaQuestDesc: "Erweiterte 4K+ Auflösung mit fortschrittlichen Mixed-Reality-Funktionen",
     playstation5: "PlayStation 5 Konsolen", playstation5Desc: "Neueste Spiele in 4K mit VR-Unterstützung",
     
     readyToStep: "Bereit für das ultimative VR-Erlebnis?", 
