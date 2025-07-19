@@ -644,6 +644,13 @@ async def get_games(platform: Optional[str] = None):
 async def create_contact_message(message_data: ContactMessageCreate):
     message_obj = ContactMessage(**message_data.dict())
     await db.contact_messages.insert_one(message_obj.dict())
+    
+    # Send email notification to studio owner
+    try:
+        await send_contact_notification_email(message_obj.dict())
+    except Exception as e:
+        print(f"Failed to send contact notification email: {str(e)}")
+    
     return message_obj
 
 @api_router.get("/contact", response_model=List[ContactMessage])
