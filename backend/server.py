@@ -653,6 +653,29 @@ async def create_contact_message(message_data: ContactMessageCreate):
     
     return message_obj
 
+@api_router.get("/health")
+async def health_check():
+    """Health check endpoint for monitoring services"""
+    try:
+        # Test database connection
+        await db.admin.command('ismaster')
+        
+        return {
+            "status": "healthy",
+            "service": "QNOVA VR Backend API",
+            "timestamp": datetime.now().isoformat(),
+            "database": "connected",
+            "version": "1.0.0"
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "service": "QNOVA VR Backend API", 
+            "timestamp": datetime.now().isoformat(),
+            "database": "disconnected",
+            "error": str(e)
+        }
+
 @api_router.get("/contact", response_model=List[ContactMessage])
 async def get_contact_messages():
     messages = await db.contact_messages.find().to_list(1000)
