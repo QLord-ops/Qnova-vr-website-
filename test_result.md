@@ -345,6 +345,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "✅ FIXED: Time slot generation issue resolved. Problem was that when games were selected from games page (URL parameter), service was auto-selected but time slots weren't generated. Added generateTimeSlots() call in useEffect when default service is set. Tested with FIFA 25 booking - shows correct PlayStation 5 hourly slots (12:00-22:00). Both manual service selection and game pre-selection now work correctly."
+      - working: true
+        agent: "main"
+        comment: "✅ VERIFIED: Enhanced game detection logic to handle all PlayStation games correctly. Added 'Modern Warfare' detection for 'Call of Duty: Modern Warfare III'. Tested game pre-selection flow with multiple games: FIFA 25 (PlayStation service + hourly slots), Call of Duty: Modern Warfare III (PlayStation service + hourly slots), Beat Saber (KAT VR service + 30-min slots). All game pre-selection scenarios working perfectly. Users can now successfully book sessions from games page with automatic service selection and time slot population."
 
 metadata:
   created_by: "main_agent"
