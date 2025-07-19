@@ -96,7 +96,7 @@ const translations = {
     groupEvents: "Group Events", groupEventsDesc: "Perfect for birthdays, corporate events, and team building activities for up to 8 players.",
     gamesTitle: "Our Game Catalog", gamesDescription: "Explore our extensive collection of VR and PlayStation games.",
     loading: "Loading...", allGames: "All Games", vrGames: "VR Games", psGames: "PlayStation Games",
-    bookingTitle: "Book Your Session", bookingDescription: "Book your 30-minute VR or PlayStation gaming session. Choose your preferred date, time, and service.",
+    bookingTitle: "Book Your Session", bookingDescription: "Book your session on our KAT VR platform (30 minutes) or PlayStation 5 console (1 hour). Choose your preferred date, time, and service.",
     contactTitle: "Contact Us", contactDescription: "Get in touch with us for inquiries, bookings, or more information about our VR studio.",
     getInTouch: "Get in Touch",
     aboutDesc2: "Our state-of-the-art facility features the latest VR headsets, PlayStation 5 consoles, and the innovative Kat Walk VR platform for full-body movement tracking.",
