@@ -1157,13 +1157,17 @@ const Booking = () => {
                     value={formData.time}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    disabled={!formData.service}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black disabled:bg-gray-100 disabled:cursor-not-allowed"
                   >
-                    <option value="">{t('selectTime')}</option>
-                    <option value="12:00">12:00</option>
-                    <option value="12:30">12:30</option>
-                    <option value="13:00">13:00</option>
-                    <option value="13:30">13:30</option>
+                    <option value="">
+                      {formData.service ? t('selectTime') : t('selectService') + ' ' + t('first')}
+                    </option>
+                    {availableTimeSlots.map((timeSlot) => (
+                      <option key={timeSlot} value={timeSlot}>
+                        {timeSlot}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 
