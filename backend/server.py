@@ -137,6 +137,13 @@ def run_sync(func):
         return await loop.run_in_executor(None, func, *args, **kwargs)
     return wrapper
 
+def get_service_duration(service_name: str) -> tuple:
+    """Get service duration based on service type - returns (english_duration, german_duration)"""
+    if "PlayStation" in service_name or "PS" in service_name:
+        return ("1 hour", "1 Stunde")
+    else:  # KAT VR services
+        return ("30 minutes", "30 Minuten")
+
 @run_sync
 def send_booking_notification_email(booking_data: dict):
     """Send booking notification with multiple fallback methods"""
