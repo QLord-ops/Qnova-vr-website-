@@ -191,7 +191,7 @@ const translations = {
     groupEvents: "Gruppenevents", groupEventsDesc: "Perfekt für Geburtstage, Firmenfeiern und Team-Events mit bis zu 8 Spielern.",
     gamesTitle: "Unser Spielekatalog", gamesDescription: "Entdecken Sie unsere umfangreiche Sammlung von VR- und PlayStation-Spielen.",
     loading: "Lade...", allGames: "Alle Spiele", vrGames: "VR-Spiele", psGames: "PlayStation-Spiele",
-    bookingTitle: "Session buchen", bookingDescription: "Buchen Sie Ihre VR- oder PlayStation-Gaming-Session. Wählen Sie Datum, Uhrzeit und Service nach Ihren Wünschen.",
+    bookingTitle: "Session buchen", bookingDescription: "Buchen Sie Ihre 30-minütige VR- oder PlayStation-Gaming-Session. Wählen Sie Datum, Uhrzeit und Service nach Ihren Wünschen.",
     contactTitle: "Kontakt", contactDescription: "Kontaktieren Sie uns für Fragen, Buchungen oder weitere Informationen über unser VR-Studio.",
     getInTouch: "Kontaktieren Sie uns",
     gamesAvailable: "VR-Spiele verfügbar", established: "Gegründet", vrGamingSessions: "VR Gaming Sessions",
