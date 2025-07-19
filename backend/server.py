@@ -348,7 +348,7 @@ def send_customer_confirmation_email(booking_data: dict):
         vielen Dank für Ihre VR-Session Buchung bei QNOVA VR! Ihre Buchung wurde bestätigt.
 
         IHRE BUCHUNGSDETAILS:
-        Service: {booking_data['service']} (30 Minuten)
+        Service: {booking_data['service']} ({german_duration})
         Datum: {booking_data['date']}
         Uhrzeit: {booking_data['time']}
         Teilnehmer: {booking_data['participants']}
