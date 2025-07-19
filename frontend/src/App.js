@@ -508,39 +508,39 @@ const Home = () => {
           
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12">
             <AnimatedSection animation="fadeInUp" delay={200}>
-              <div className="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm hover:bg-opacity-20 transition-all duration-300 hover-lift">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <div className="text-center p-6 bg-white bg-opacity-20 rounded-xl backdrop-blur-sm hover:bg-opacity-30 transition-all duration-300 hover-lift border border-white border-opacity-20">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
                   <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                   </svg>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('fullBodyMovement')}</h3>
-                <p className="text-gray-300 text-sm md:text-base mobile-text">{t('fullBodyMovementDesc')}</p>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title text-white">{t('fullBodyMovement')}</h3>
+                <p className="text-gray-100 text-sm md:text-base mobile-text">{t('fullBodyMovementDesc')}</p>
               </div>
             </AnimatedSection>
             
             <AnimatedSection animation="fadeInUp" delay={400}>
-              <div className="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm hover:bg-opacity-20 transition-all duration-300 hover-lift">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <div className="text-center p-6 bg-white bg-opacity-20 rounded-xl backdrop-blur-sm hover:bg-opacity-30 transition-all duration-300 hover-lift border border-white border-opacity-20">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
                   <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('immersiveExperience')}</h3>
-                <p className="text-gray-300 text-sm md:text-base mobile-text">{t('immersiveExperienceDesc')}</p>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title text-white">{t('immersiveExperience')}</h3>
+                <p className="text-gray-100 text-sm md:text-base mobile-text">{t('immersiveExperienceDesc')}</p>
               </div>
             </AnimatedSection>
             
             <AnimatedSection animation="fadeInUp" delay={600}>
-              <div className="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm hover:bg-opacity-20 transition-all duration-300 hover-lift">
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-red-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+              <div className="text-center p-6 bg-white bg-opacity-20 rounded-xl backdrop-blur-sm hover:bg-opacity-30 transition-all duration-300 hover-lift border border-white border-opacity-20">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
                   <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('safetyFirst')}</h3>
-                <p className="text-gray-300 text-sm md:text-base mobile-text">{t('safetyFirstDesc')}</p>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title text-white">{t('safetyFirst')}</h3>
+                <p className="text-gray-100 text-sm md:text-base mobile-text">{t('safetyFirstDesc')}</p>
               </div>
             </AnimatedSection>
           </div>
