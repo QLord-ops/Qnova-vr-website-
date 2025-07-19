@@ -1056,6 +1056,10 @@ const Booking = () => {
         defaultService = 'KAT VR Gaming Session';
       }
       
+      // Generate time slots for the selected service
+      const newTimeSlots = generateTimeSlots(defaultService);
+      setAvailableTimeSlots(newTimeSlots);
+      
       setFormData(prev => ({
         ...prev,
         service: defaultService
