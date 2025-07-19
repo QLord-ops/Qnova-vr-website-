@@ -94,6 +94,7 @@ class BookingCreate(BaseModel):
     time: str
     participants: int
     message: Optional[str] = ""
+    selectedGame: Optional[str] = ""
 
 class Booking(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
