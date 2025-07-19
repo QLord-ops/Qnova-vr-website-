@@ -1052,9 +1052,20 @@ const Games = () => {
                       <span className="bg-gray-100 px-2 py-1 rounded text-sm">{game.platform}</span>
                     </div>
                     <p className="text-gray-600 mb-4">{game.description}</p>
-                    <div className="flex justify-between text-sm text-gray-500">
+                    <div className="flex justify-between text-sm text-gray-500 mb-4">
                       <span>{game.duration} min</span>
                       <span>Max {game.max_players} player{game.max_players > 1 ? 's' : ''}</span>
+                    </div>
+                    <div className="flex space-x-2">
+                      <button 
+                        onClick={() => openVideoModal(game.video_url, game.name)}
+                        className="flex-1 bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm flex items-center justify-center"
+                      >
+                        ▶️ Watch Gameplay
+                      </button>
+                      <button className="flex-1 bg-black text-white px-3 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm">
+                        Book Now
+                      </button>
                     </div>
                   </div>
                 </div>
