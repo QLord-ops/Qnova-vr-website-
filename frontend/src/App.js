@@ -1666,13 +1666,25 @@ const Footer = () => {
                 {language === 'de' ? 'Schnellzugriff' : language === 'en' ? 'Quick Links' : 'Быстрые ссылки'}
               </h4>
               <div className="space-y-2">
-                <Link to="/booking" className="block text-gray-300 hover:text-white transition-colors">
+                <Link 
+                  to="/booking" 
+                  className="block text-gray-300 hover:text-white transition-colors"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
                   {t('bookNow')}
                 </Link>
-                <Link to="/games" className="block text-gray-300 hover:text-white transition-colors">
+                <Link 
+                  to="/games" 
+                  className="block text-gray-300 hover:text-white transition-colors"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
                   {t('games')}
                 </Link>
-                <Link to="/services" className="block text-gray-300 hover:text-white transition-colors">
+                <Link 
+                  to="/services" 
+                  className="block text-gray-300 hover:text-white transition-colors"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
                   {t('services')}
                 </Link>
               </div>
