@@ -658,14 +658,15 @@ async def health_check():
     """Health check endpoint for monitoring services"""
     try:
         # Test database connection
-        server_info = await db.admin.command("ismaster")
+        server_info = await client.admin.command("ismaster")
         
         return {
             "status": "healthy",
             "service": "QNOVA VR Backend API",
             "timestamp": datetime.now().isoformat(),
             "database": "connected",
-            "version": "1.0.0"
+            "version": "1.0.0",
+            "database_status": "ok"
         }
     except Exception as e:
         return {
@@ -673,7 +674,8 @@ async def health_check():
             "service": "QNOVA VR Backend API", 
             "timestamp": datetime.now().isoformat(),
             "database": "disconnected",
-            "error": str(e)
+            "error": str(e),
+            "version": "1.0.0"
         }
 
 @api_router.get("/contact", response_model=List[ContactMessage])
