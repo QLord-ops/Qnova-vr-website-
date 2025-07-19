@@ -148,6 +148,9 @@ def get_service_duration(service_name: str) -> tuple:
 def send_booking_notification_email(booking_data: dict):
     """Send booking notification with multiple fallback methods"""
     try:
+        # Get service duration
+        english_duration, german_duration = get_service_duration(booking_data['service'])
+        
         # Try Gmail SMTP first
         # Create message
         msg = MIMEMultipart('alternative')
@@ -173,7 +176,7 @@ def send_booking_notification_email(booking_data: dict):
                 
                 <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0;">
                     <h3 style="color: #000; margin-top: 0;">Booking Details:</h3>
-                    <p><strong>Service:</strong> {booking_data['service']} (30 minutes)</p>
+                    <p><strong>Service:</strong> {booking_data['service']} ({english_duration})</p>
                     <p><strong>Date:</strong> {booking_data['date']}</p>
                     <p><strong>Time:</strong> {booking_data['time']}</p>
                     <p><strong>Participants:</strong> {booking_data['participants']}</p>
