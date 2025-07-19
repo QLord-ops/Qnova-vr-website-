@@ -469,13 +469,13 @@ SAMPLE_GAMES = [
         "duration": 30,
         "max_players": 2
     },
-    # PlayStation Games with your specific covers (using high-quality alternatives until we upload your images)
+    # PlayStation Games with your REAL game covers
     {
         "id": "9",
         "name": "Call of Duty: Modern Warfare III", 
         "description": "Latest installment in the popular FPS franchise with campaign and multiplayer",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Tactical shooter placeholder
+        "image_url": "https://i.imgur.com/4bEFjBb.jpeg",  # Your real COD MW3 cover
         "duration": 60,
         "max_players": 4
     },
@@ -484,7 +484,7 @@ SAMPLE_GAMES = [
         "name": "FIFA 25",
         "description": "Latest football simulation with realistic gameplay and updated rosters",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Football sports placeholder
+        "image_url": "https://i.imgur.com/qkrEXep.png",  # Your real FIFA 25 cover
         "duration": 60,
         "max_players": 2
     },
@@ -493,7 +493,7 @@ SAMPLE_GAMES = [
         "name": "UFC 5",
         "description": "Ultimate fighting experience with realistic combat mechanics",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1544717684-fa7eb6716e87?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Fighting sports placeholder
+        "image_url": "https://i.imgur.com/mRP0p1M.jpeg",  # Your real UFC 5 cover
         "duration": 60,
         "max_players": 2
     },
@@ -502,7 +502,7 @@ SAMPLE_GAMES = [
         "name": "Gran Turismo 7",
         "description": "Premium racing simulation with stunning graphics and realistic physics",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Racing car placeholder
+        "image_url": "https://i.imgur.com/KYvktmc.png",  # Your real Gran Turismo 7 cover
         "duration": 60,
         "max_players": 2
     },
@@ -511,7 +511,7 @@ SAMPLE_GAMES = [
         "name": "Grand Theft Auto V",
         "description": "Open-world action adventure game with online multiplayer modes",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1587731121640-27683876ef68?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Urban action placeholder
+        "image_url": "https://i.imgur.com/9ZbaSE2.jpeg",  # Your real GTA V cover
         "duration": 60,
         "max_players": 4
     }
