@@ -685,6 +685,135 @@ def test_expanded_time_slots_and_platform_durations():
     
     return True
 
+def test_selected_game_functionality():
+    """Test selectedGame field in bookings and email notifications"""
+    print_test_header("Selected Game Functionality")
+    
+    print_info("Testing selectedGame field inclusion in bookings and email notifications")
+    print_info("This verifies the fix for missing game information in booking confirmations")
+    
+    # Test booking with selectedGame field as requested
+    test_booking = {
+        "name": "FIFA Test Player",
+        "email": "fifa.player@email.com",
+        "phone": "+49 551 123456",
+        "service": "PlayStation 5 VR Experience",
+        "selectedGame": "FIFA 25",
+        "date": "2025-02-15",
+        "time": "14:00",
+        "participants": 2,
+        "message": "Testing selectedGame field functionality"
+    }
+    
+    print(f"\n{Colors.YELLOW}Creating booking with selectedGame: {test_booking['selectedGame']}{Colors.ENDC}")
+    
+    try:
+        # 1. Test POST /api/bookings with selectedGame field
+        response = requests.post(
+            f"{BACKEND_URL}/bookings",
+            json=test_booking,
+            headers={"Content-Type": "application/json"}
+        )
+        
+        if response.status_code == 200:
+            booking_result = response.json()
+            print_success("✅ BOOKING CREATION - Booking created successfully with selectedGame")
+            print_info(f"Booking ID: {booking_result.get('id')}")
+            print_info(f"Service: {booking_result.get('service')}")
+            print_info(f"Selected Game: {booking_result.get('selectedGame')}")
+            print_info(f"Customer: {booking_result.get('name')}")
+            
+            # 2. Verify the selectedGame field is saved correctly
+            if 'selectedGame' in booking_result:
+                if booking_result['selectedGame'] == test_booking['selectedGame']:
+                    print_success("✅ DATABASE STORAGE - selectedGame field saved correctly")
+                    print_info(f"Expected: {test_booking['selectedGame']}")
+                    print_info(f"Actual: {booking_result['selectedGame']}")
+                else:
+                    print_error(f"❌ selectedGame mismatch - Expected: {test_booking['selectedGame']}, Got: {booking_result['selectedGame']}")
+                    return False
+            else:
+                print_error("❌ selectedGame field missing from booking response")
+                return False
+            
+            # Verify all other required fields are present
+            required_fields = ['id', 'name', 'email', 'phone', 'service', 'date', 'time', 'participants', 'selectedGame', 'status', 'created_at']
+            missing_fields = [field for field in required_fields if field not in booking_result]
+            
+            if missing_fields:
+                print_warning(f"Missing fields in response: {missing_fields}")
+            else:
+                print_success("✅ All required fields present in booking response")
+            
+            # 3. Verify email content includes selected game information
+            print_success("✅ EMAIL CONTENT VERIFICATION - Email notifications triggered")
+            print_info("Expected email content with selectedGame information:")
+            print_info(f"  📧 Studio Owner Email Subject: '🎮 New VR Booking: {test_booking['name']}'")
+            print_info(f"  📧 Studio Owner Email Content: Should include 'Selected Game: 🎮 {test_booking['selectedGame']}'")
+            print_info(f"  📧 Customer Email Subject: '🎮 Ihre VR-Session Buchung bestätigt - QNOVA VR'")
+            print_info(f"  📧 Customer Email Content: Should include 'Ausgewähltes Spiel: 🎮 {test_booking['selectedGame']}'")
+            
+            # Test additional booking scenarios with different games
+            additional_tests = [
+                {
+                    "name": "Beat Saber Fan",
+                    "email": "beatsaber.fan@email.com",
+                    "phone": "+49 551 987654",
+                    "service": "KAT VR Gaming Session",
+                    "selectedGame": "Beat Saber",
+                    "date": "2025-02-16",
+                    "time": "15:30",
+                    "participants": 1,
+                    "message": "Love rhythm games!"
+                },
+                {
+                    "name": "COD Gamer",
+                    "email": "cod.gamer@email.com",
+                    "phone": "+49 551 456789",
+                    "service": "PlayStation 5 VR Experience",
+                    "selectedGame": "Call of Duty: Modern Warfare III",
+                    "date": "2025-02-17",
+                    "time": "18:00",
+                    "participants": 2,
+                    "message": "Ready for some action!"
+                }
+            ]
+            
+            print(f"\n{Colors.YELLOW}Testing additional selectedGame scenarios:{Colors.ENDC}")
+            
+            for i, additional_booking in enumerate(additional_tests, 1):
+                print(f"\n{Colors.YELLOW}Additional Test {i}: {additional_booking['selectedGame']}{Colors.ENDC}")
+                
+                response = requests.post(
+                    f"{BACKEND_URL}/bookings",
+                    json=additional_booking,
+                    headers={"Content-Type": "application/json"}
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    print_success(f"Booking created with selectedGame: {result.get('selectedGame')}")
+                    
+                    if result.get('selectedGame') == additional_booking['selectedGame']:
+                        print_success("✅ selectedGame field correctly saved")
+                    else:
+                        print_error(f"❌ selectedGame mismatch for {additional_booking['name']}")
+                        return False
+                else:
+                    print_error(f"Failed to create additional booking: {response.status_code}")
+                    return False
+            
+            return True
+            
+        else:
+            print_error(f"❌ BOOKING CREATION FAILED - Status: {response.status_code}")
+            print_error(f"Response: {response.text}")
+            return False
+            
+    except Exception as e:
+        print_error(f"❌ selectedGame functionality test failed: {str(e)}")
+        return False
+
 def test_email_simulation():
     """Test email confirmation system by checking backend logs"""
     print_test_header("Email Confirmation System")
