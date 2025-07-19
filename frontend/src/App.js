@@ -283,7 +283,7 @@ const translations = {
     name: "Имя", email: "Электронная почта", phone: "Телефон", service: "Услуга", date: "Дата", time: "Время", 
     participants: "Количество участников", message: "Сообщение", additionalMessage: "Дополнительное сообщение",
     selectService: "Выберите услугу", selectTime: "Выберите время", messagePlaceholder: "Особые пожелания или вопросы?",
-    vrGamingSession: "VR игровая сессия (30 минут)", psVRExperience: "PlayStation VR опыт (30 минут)", groupVRParty: "Групповая VR вечеринка (30 минут)",
+    vrGamingSession: "KAT VR игровая сессия (30 минут)", psVRExperience: "PlayStation 5 VR опыт (1 час)", groupVRParty: "Групповая KAT VR вечеринка (30 минут)",
     bookSession: "Забронировать сеанс", submitting: "Бронирование...", bookNow: "Забронировать сейчас",
     bookingConfirmed: "Бронирование подтверждено!", bookingConfirmationText: "Мы получили ваше бронирование и отправим подтверждение по электронной почте.",
     bookAnother: "Забронировать еще", confirmationEmail: "Мы отправим вам подтверждение по электронной почте.",
