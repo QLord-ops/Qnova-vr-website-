@@ -485,30 +485,30 @@ const Navigation = () => {
 const Home = () => {
   const { t } = useLanguage();
   
-  // Featured games data with real popular games
+  // Featured games data with thematic images
   const featuredGames = [
     {
       name: "Half-Life: Alyx",
       platform: "KAT VR",
-      image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+      image: "https://images.pexels.com/photos/2007647/pexels-photo-2007647.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       description: "Premium VR experience with stunning graphics and immersive gameplay"
     },
     {
       name: "Beat Saber",
-      platform: "KAT VR",
-      image: "https://images.unsplash.com/photo-1639174326326-6e2ef8d8ae39?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+      platform: "KAT VR", 
+      image: "https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       description: "Rhythm game perfect for all ages - slice beats with lightsabers"
     },
     {
       name: "FIFA 25",
       platform: "PlayStation 5",
-      image: "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+      image: "https://images.pexels.com/photos/1174746/pexels-photo-1174746.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       description: "Latest football simulation with realistic gameplay and updated rosters"
     },
     {
       name: "Call of Duty: Modern Warfare III",
       platform: "PlayStation 5",
-      image: "https://images.unsplash.com/photo-1617864064479-f203fc7897c0?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+      image: "https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       description: "Latest installment in the popular FPS franchise with campaign and multiplayer"
     }
   ];
