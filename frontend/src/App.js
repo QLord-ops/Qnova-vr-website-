@@ -964,12 +964,50 @@ const Booking = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
+
+  // Generate time slots based on service type
+  const generateTimeSlots = (serviceType) => {
+    const slots = [];
+    if (serviceType.includes('PlayStation')) {
+      // PlayStation: Every hour from 12:00 to 22:00
+      for (let hour = 12; hour <= 22; hour++) {
+        const timeString = `${hour.toString().padStart(2, '0')}:00`;
+        slots.push(timeString);
+      }
+    } else if (serviceType.includes('KAT VR') || serviceType.includes('Group')) {
+      // KAT VR: Every 30 minutes from 12:00 to 22:00
+      for (let hour = 12; hour <= 22; hour++) {
+        const hourString = hour.toString().padStart(2, '0');
+        slots.push(`${hourString}:00`);
+        if (hour < 22) { // Don't add 22:30
+          slots.push(`${hourString}:30`);
+        }
+      }
+    }
+    return slots;
+  };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    
+    // Update form data
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Update available time slots when service changes
+    if (name === 'service' && value) {
+      const newTimeSlots = generateTimeSlots(value);
+      setAvailableTimeSlots(newTimeSlots);
+      // Reset time selection when service changes
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+        time: '' // Reset time when service changes
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
