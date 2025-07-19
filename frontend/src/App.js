@@ -404,31 +404,31 @@ const Navigation = () => {
 const Home = () => {
   const { t } = useLanguage();
   
-  // Featured games data
+  // Featured games data with real popular games
   const featuredGames = [
     {
       name: "Half-Life: Alyx",
       platform: "KAT VR",
-      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      description: "Legendary VR adventure with full-body movement on KAT VR platform"
+      image: "https://images.unsplash.com/photo-1588590560438-5e27fe3f6b71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+      description: "Premium VR experience with stunning graphics and immersive gameplay"
     },
     {
       name: "Beat Saber",
-      platform: "VR",
-      image: "https://images.unsplash.com/photo-1614294148960-9aa740632a1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      description: "Rhythm VR game that gets your whole body moving"
-    },
-    {
-      name: "Skyrim VR",
       platform: "KAT VR",
-      image: "https://images.unsplash.com/photo-1538481199464-7160b8c83ca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      description: "Explore vast fantasy worlds with natural walking on KAT VR"
+      image: "https://images.unsplash.com/photo-1612066518884-2eda70eb3100?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+      description: "Rhythm game perfect for all ages - slice beats with lightsabers"
     },
     {
-      name: "Gran Turismo 7",
+      name: "FIFA 25",
       platform: "PlayStation 5",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      description: "Ultimate racing experience with 4K graphics and VR support"
+      image: "https://images.unsplash.com/photo-1571025443281-281bff33aa3a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+      description: "Latest football simulation with realistic gameplay and updated rosters"
+    },
+    {
+      name: "Call of Duty: Modern Warfare III",
+      platform: "PlayStation 5",
+      image: "https://images.unsplash.com/photo-1593118247619-e2d6f056869e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+      description: "Latest installment in the popular FPS franchise with campaign and multiplayer"
     }
   ];
   
