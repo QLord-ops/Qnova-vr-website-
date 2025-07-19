@@ -304,6 +304,7 @@ def send_customer_confirmation_email(booking_data: dict):
                 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
                     <h3 style="color: #000; margin-top: 0;">Ihre Buchungsdetails:</h3>
+                    {f'<p><strong>Ausgewähltes Spiel:</strong> 🎮 {booking_data["selectedGame"]}</p>' if booking_data.get('selectedGame') else ''}
                     <p><strong>Service:</strong> {booking_data['service']} ({german_duration})</p>
                     <p><strong>Datum:</strong> {booking_data['date']}</p>
                     <p><strong>Uhrzeit:</strong> {booking_data['time']}</p>
