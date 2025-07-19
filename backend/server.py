@@ -18,11 +18,36 @@ from functools import wraps
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection with production fallback
-mongo_url = os.environ.get('MONGO_URL', os.environ.get('MONGODB_URL', 'mongodb+srv://qnovavrde:jQDX7dRPJPINVhFs@qnova.nhw7ruz.mongodb.net/?retryWrites=true&w=majority&appName=Qnova'))
+# MongoDB connection with production fallback and error handling
+def get_mongo_connection():
+    # Try environment variable first
+    mongo_url = os.environ.get('MONGO_URL', os.environ.get('MONGODB_URL'))
+    
+    # Fix common MongoDB URL issues
+    if mongo_url:
+        # Fix broken cluster names
+        if 'cluster.mongodb' in mongo_url and 'mongodb.net' not in mongo_url:
+            mongo_url = mongo_url.replace('cluster.mongodb', 'qnova.nhw7ruz.mongodb.net')
+        
+        # Ensure proper format
+        if mongo_url.startswith('mongodb+srv://') and not mongo_url.endswith('.mongodb.net'):
+            if 'qnova' in mongo_url:
+                mongo_url = 'mongodb+srv://qnovavrde:jQDX7dRPJPINVhFs@qnova.nhw7ruz.mongodb.net/?retryWrites=true&w=majority&appName=Qnova'
+    
+    # Fallback to working connection
+    if not mongo_url or 'cluster.mongodb' in mongo_url:
+        mongo_url = 'mongodb+srv://qnovavrde:jQDX7dRPJPINVhFs@qnova.nhw7ruz.mongodb.net/?retryWrites=true&w=majority&appName=Qnova'
+    
+    return mongo_url
+
+mongo_url = get_mongo_connection()
 client = AsyncIOMotorClient(mongo_url)
 db_name = os.environ.get('DB_NAME', 'qnova_vr')
 db = client[db_name]
+
+# Log the connection for debugging
+import logging
+logging.info(f"Connecting to MongoDB with URL: {mongo_url[:50]}...")
 
 # Email configuration
 GMAIL_USER = os.environ.get('GMAIL_USER', 'qnovavr.de@gmail.com')
