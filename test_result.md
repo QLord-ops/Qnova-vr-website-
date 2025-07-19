@@ -317,6 +317,31 @@ frontend:
         comment: "✅ PASSED - Dynamic time slots testing completed successfully. Comprehensive testing verified: 1) KAT VR services with 30-minute intervals (21 slots from 12:00-22:00) working correctly, 2) PlayStation services with 1-hour intervals (11 slots from 12:00-22:00) working correctly, 3) Platform-specific durations: KAT VR shows '30 minutes/30 Minuten', PlayStation shows '1 hour/1 Stunde', 4) Extended time range (12:00-22:00) fully supported - tested earliest slot (12:00) and latest slot (22:00), 5) get_service_duration() function correctly identifies 'PlayStation'/'PS' services vs KAT VR services, 6) MongoDB storage accepts all new time formats, 7) Email notifications include correct platform-specific durations. Created 12 test bookings covering various scenarios: KAT VR Gaming Session, PlayStation 5 VR Experience, Group KAT VR Party, PlayStation VR Adventure, KAT VR Experience, PS VR Adventure, VR Gaming Experience, Group VR Party. All bookings created successfully with proper UUID generation, MongoDB storage, and dual email notifications. System demonstrates excellent functionality: booking creation ✅, database storage ✅, platform-specific duration detection ✅, extended time range support ✅, multilingual email notifications ✅."
 
   - task: "30-minute session duration display"
+    implemented: true
+    working: true
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "✅ FIXED: Time slot selection issue resolved. Fixed bug where time slots were not generated when games were pre-selected via URL parameters (e.g., from games page). Updated useEffect in Booking component to generate time slots automatically when service is pre-selected. Verified working for both KAT VR (30-min intervals) and PlayStation (hourly intervals). Direct booking from games page now works perfectly with proper time slot population."
+
+  - task: "Time slot selection from game pre-selection"
+    implemented: true
+    working: true
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "User reported: 'can't choose time' on booking page - time dropdown shows 'Выберите время' (Select time) but no options available"
+      - working: true
+        agent: "main"
+        comment: "✅ FIXED: Time slot generation issue resolved. Problem was that when games were selected from games page (URL parameter), service was auto-selected but time slots weren't generated. Added generateTimeSlots() call in useEffect when default service is set. Tested with FIFA 25 booking - shows correct PlayStation 5 hourly slots (12:00-22:00). Both manual service selection and game pre-selection now work correctly."
 
 metadata:
   created_by: "main_agent"
