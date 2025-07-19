@@ -72,7 +72,7 @@ const translations = {
     exploreAllGames: "Explore All Games", playOnKatVR: "Playable on KAT VR", playOnPS5: "PlayStation 5",
     
     // Enhanced features
-    latestTechnology: "Latest Technology", latestTechDesc: "KAT VR treadmill, Meta Quest Pro, and PlayStation 5 for the ultimate gaming experience.",
+    latestTechnology: "Latest Technology", latestTechDesc: "KAT VR treadmill, Meta Quest 3, and PlayStation 5 for the ultimate gaming experience.",
     expertSupport: "Expert Support", expertSupportDesc: "Professional introduction and guidance throughout your entire VR session.",
     groupExperiences: "Group Experiences", groupExpDesc: "Up to 8 players simultaneously - perfect for parties, corporate events, and team building.",
     primeLocation: "Prime Location", primeLocationDesc: "Located in the heart of Göttingen with easy access and free parking.",
