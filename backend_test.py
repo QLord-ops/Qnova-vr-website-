@@ -876,6 +876,7 @@ def run_all_tests():
     # Run all tests
     tests = [
         ("API Root Endpoint", test_api_root),
+        ("Selected Game Functionality", test_selected_game_functionality),
         ("Expanded Time Slots & Platform Durations", test_expanded_time_slots_and_platform_durations),
         ("30-Minute Session Duration", test_30_minute_session_duration),
         ("Booking Creation", test_booking_creation),
