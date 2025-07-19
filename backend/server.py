@@ -469,13 +469,13 @@ SAMPLE_GAMES = [
         "duration": 30,
         "max_players": 2
     },
-    # PlayStation Games with your specific game covers
+    # PlayStation Games with your specific covers (using high-quality alternatives until we upload your images)
     {
         "id": "9",
-        "name": "Call of Duty: Modern Warfare III",
+        "name": "Call of Duty: Modern Warfare III", 
         "description": "Latest installment in the popular FPS franchise with campaign and multiplayer",
         "platform": "PlayStation",
-        "image_url": "/api/assets/call_of_duty_mw3_cover.jpg",  # Your uploaded COD MW3 cover
+        "image_url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Tactical shooter placeholder
         "duration": 60,
         "max_players": 4
     },
@@ -483,8 +483,8 @@ SAMPLE_GAMES = [
         "id": "10",
         "name": "FIFA 25",
         "description": "Latest football simulation with realistic gameplay and updated rosters",
-        "platform": "PlayStation", 
-        "image_url": "/api/assets/fifa_25_fc25_cover.jpg",  # Your uploaded FIFA 25/FC25 cover
+        "platform": "PlayStation",
+        "image_url": "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Football sports placeholder
         "duration": 60,
         "max_players": 2
     },
@@ -493,7 +493,7 @@ SAMPLE_GAMES = [
         "name": "UFC 5",
         "description": "Ultimate fighting experience with realistic combat mechanics",
         "platform": "PlayStation",
-        "image_url": "/api/assets/ufc_5_ultimate_cover.jpg",  # Your uploaded UFC 5 Ultimate Edition cover
+        "image_url": "https://images.unsplash.com/photo-1544717684-fa7eb6716e87?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Fighting sports placeholder
         "duration": 60,
         "max_players": 2
     },
@@ -502,7 +502,7 @@ SAMPLE_GAMES = [
         "name": "Gran Turismo 7",
         "description": "Premium racing simulation with stunning graphics and realistic physics",
         "platform": "PlayStation",
-        "image_url": "/api/assets/gran_turismo_7_cover.jpg",  # Your uploaded Gran Turismo 7 cover
+        "image_url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Racing car placeholder
         "duration": 60,
         "max_players": 2
     },
@@ -511,7 +511,7 @@ SAMPLE_GAMES = [
         "name": "Grand Theft Auto V",
         "description": "Open-world action adventure game with online multiplayer modes",
         "platform": "PlayStation",
-        "image_url": "/api/assets/gta_v_cover.jpg",  # Your uploaded GTA V cover
+        "image_url": "https://images.unsplash.com/photo-1587731121640-27683876ef68?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85&w=400&h=600",  # Urban action placeholder
         "duration": 60,
         "max_players": 4
     }
