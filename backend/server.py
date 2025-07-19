@@ -392,7 +392,7 @@ def send_customer_confirmation_email(booking_data: dict):
         logger.error(f"❌ Failed to send customer confirmation email: {str(e)}")
         return False
 
-# Sample games data with real popular games
+# Sample games data with real popular games and thematic images
 SAMPLE_GAMES = [
     # KAT VR Games
     {
@@ -400,7 +400,7 @@ SAMPLE_GAMES = [
         "name": "Half-Life: Alyx",
         "description": "Premium VR experience with stunning graphics and immersive gameplay",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/2007647/pexels-photo-2007647.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 30,
         "max_players": 1
     },
@@ -409,7 +409,7 @@ SAMPLE_GAMES = [
         "name": "Pavlov VR",
         "description": "Multiplayer shooter with realistic gun mechanics and tactical gameplay",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxnYW1pbmd8ZW58MHx8fHwxNzUyODc2MjQzfDA&ixlib=rb-4.1.0&q=85",
         "duration": 30,
         "max_players": 4
     },
@@ -418,7 +418,7 @@ SAMPLE_GAMES = [
         "name": "Beat Saber",
         "description": "Rhythm game perfect for all ages - slice beats with lightsabers",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1639174326326-6e2ef8d8ae39?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 30,
         "max_players": 1
     },
@@ -427,7 +427,7 @@ SAMPLE_GAMES = [
         "name": "Skyrim VR",
         "description": "Open-world adventure in the legendary Elder Scrolls universe",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1666892938002-9180a82b6717?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/682933/pexels-photo-682933.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 30,
         "max_players": 1
     },
@@ -436,7 +436,7 @@ SAMPLE_GAMES = [
         "name": "Boneworks",
         "description": "Physics-based VR with realistic interaction and combat systems",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwzfHxnYW1pbmd8ZW58MHx8fHwxNzUyODc2MjQzfDA&ixlib=rb-4.1.0&q=85",
         "duration": 30,
         "max_players": 1
     },
@@ -445,7 +445,7 @@ SAMPLE_GAMES = [
         "name": "The Walking Dead: Saints & Sinners",
         "description": "Survival horror VR experience in the zombie apocalypse",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1511512578047-dfb367046420?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.unsplash.com/photo-1511512578047-dfb367046420?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwyfHxnYW1pbmd8ZW58MHx8fHwxNzUyODc2MjQzfDA&ixlib=rb-4.1.0&q=85",
         "duration": 30,
         "max_players": 1
     },
@@ -454,7 +454,7 @@ SAMPLE_GAMES = [
         "name": "Superhot VR",
         "description": "Time manipulation shooter - time moves only when you move",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/4148898/pexels-photo-4148898.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 30,
         "max_players": 1
     },
@@ -463,7 +463,7 @@ SAMPLE_GAMES = [
         "name": "Arizona Sunshine",
         "description": "Zombie shooter with co-op gameplay and desert environments",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/1103563/pexels-photo-1103563.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 30,
         "max_players": 2
     },
@@ -473,7 +473,7 @@ SAMPLE_GAMES = [
         "name": "FIFA 25",
         "description": "Latest football simulation with realistic gameplay and updated rosters",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/1174746/pexels-photo-1174746.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 60,
         "max_players": 2
     },
@@ -482,7 +482,7 @@ SAMPLE_GAMES = [
         "name": "Call of Duty: Modern Warfare III",
         "description": "Latest installment in the popular FPS franchise with campaign and multiplayer",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1617864064479-f203fc7897c0?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 60,
         "max_players": 4
     },
@@ -491,7 +491,7 @@ SAMPLE_GAMES = [
         "name": "UFC 5",
         "description": "Ultimate fighting experience with realistic combat mechanics",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/139038/pexels-photo-139038.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 60,
         "max_players": 2
     },
@@ -500,7 +500,7 @@ SAMPLE_GAMES = [
         "name": "Gran Turismo 7",
         "description": "Premium racing simulation with stunning graphics and realistic physics",
         "platform": "PlayStation",
-        "image_url": "https://cdn.pixabay.com/photo/2016/11/21/15/08/playstation-1845880_1280.jpg",
+        "image_url": "https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 60,
         "max_players": 2
     },
@@ -509,7 +509,7 @@ SAMPLE_GAMES = [
         "name": "Grand Theft Auto V",
         "description": "Open-world action adventure game with online multiplayer modes",
         "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
+        "image_url": "https://images.pexels.com/photos/687811/pexels-photo-687811.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         "duration": 60,
         "max_players": 4
     }
