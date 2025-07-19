@@ -381,13 +381,13 @@ const Navigation = () => {
 
         {isOpen && (
           <div className="xl:hidden mt-4 space-y-2">
-            <Link to="/" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('home')}</Link>
-            <Link to="/about" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('about')}</Link>
-            <Link to="/services" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('services')}</Link>
-            <Link to="/games" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('games')}</Link>
-            <Link to="/pricing" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('pricing')}</Link>
-            <Link to="/booking" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('bookNow')}</Link>
-            <Link to="/contact" className="block py-2 hover:text-gray-300" onClick={() => setIsOpen(false)}>{t('contact')}</Link>
+            <Link to="/" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('home')}</Link>
+            <Link to="/about" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('about')}</Link>
+            <Link to="/services" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('services')}</Link>
+            <Link to="/games" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('games')}</Link>
+            <Link to="/pricing" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('pricing')}</Link>
+            <Link to="/booking" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('bookNow')}</Link>
+            <Link to="/contact" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('contact')}</Link>
             <button
               onClick={() => {
                 toggleLanguage();
