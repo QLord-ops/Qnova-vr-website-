@@ -106,6 +106,7 @@ class Booking(BaseModel):
     time: str
     participants: int
     message: Optional[str] = ""
+    selectedGame: Optional[str] = ""
     status: str = "pending"
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
