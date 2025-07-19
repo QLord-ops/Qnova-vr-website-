@@ -1126,9 +1126,9 @@ const Booking = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   >
                     <option value="">{t('selectService')}</option>
-                    <option value="VR Gaming Session">{t('vrGamingSession')}</option>
-                    <option value="PlayStation VR Experience">{t('psVRExperience')}</option>
-                    <option value="Group VR Party">{t('groupVRParty')}</option>
+                    <option value="KAT VR Gaming Session">{t('vrGamingSession')}</option>
+                    <option value="PlayStation 5 VR Experience">{t('psVRExperience')}</option>
+                    <option value="Group KAT VR Party">{t('groupVRParty')}</option>
                   </select>
                 </div>
               </div>
