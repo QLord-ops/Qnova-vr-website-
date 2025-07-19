@@ -479,6 +479,26 @@ const Home = () => {
               {t('katVRDescription')}
             </p>
           </AnimatedSection>
+
+          {/* Video Section */}
+          <AnimatedSection animation="fadeInUp" className="mb-12 md:mb-16">
+            <div className="max-w-4xl mx-auto">
+              <div className="relative w-full h-0 pb-[56.25%] rounded-xl overflow-hidden shadow-2xl bg-black">
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/8z6QjTrTkGY?si=szKA4CdIFE-U_usy&rel=0&showinfo=0&modestbranding=1"
+                  title="KAT VR Experience at QNOVA VR Studio"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <p className="text-center text-gray-400 mt-4 text-sm md:text-base">
+                Erleben Sie die KAT VR Technologie in Aktion
+              </p>
+            </div>
+          </AnimatedSection>
           
           <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12">
             <AnimatedSection animation="fadeInUp" delay={200}>
