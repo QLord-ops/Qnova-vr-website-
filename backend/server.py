@@ -394,7 +394,7 @@ def send_customer_confirmation_email(booking_data: dict):
         logger.error(f"❌ Failed to send customer confirmation email: {str(e)}")
         return False
 
-# Sample games data with authentic game-style images
+# Sample games data with authentic game-style images and video trailers
 SAMPLE_GAMES = [
     # KAT VR Games
     {
@@ -403,6 +403,7 @@ SAMPLE_GAMES = [
         "description": "Premium VR experience with stunning graphics and immersive gameplay",
         "platform": "VR",
         "image_url": "https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwxfHxnYW1pbmd8ZW58MHx8fHwxNzUyOTQxNTA1fDA&ixlib=rb-4.1.0&q=85",
+        "video_url": "https://www.youtube.com/embed/O2W0N3uKXmo",  # Half-Life Alyx Official Trailer
         "duration": 30,
         "max_players": 1
     },
@@ -412,6 +413,7 @@ SAMPLE_GAMES = [
         "description": "Multiplayer shooter with realistic gun mechanics and tactical gameplay",
         "platform": "VR",
         "image_url": "https://images.unsplash.com/photo-1511512578047-dfb367046420?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxnYW1pbmd8ZW58MHx8fHwxNzUyOTQxNTA1fDA&ixlib=rb-4.1.0&q=85",
+        "video_url": "https://www.youtube.com/embed/VJa1hlB5Gw8",  # Pavlov VR Gameplay
         "duration": 30,
         "max_players": 4
     },
@@ -421,6 +423,7 @@ SAMPLE_GAMES = [
         "description": "Rhythm game perfect for all ages - slice beats with lightsabers",
         "platform": "VR",
         "image_url": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwzfHxnYW1pbmd8ZW58MHx8fHwxNzUyOTQxNTA1fDA&ixlib=rb-4.1.0&q=85",
+        "video_url": "https://www.youtube.com/embed/gV1sw4lfwFw",  # Beat Saber Official Trailer
         "duration": 30,
         "max_players": 1
     },
@@ -430,6 +433,7 @@ SAMPLE_GAMES = [
         "description": "Open-world adventure in the legendary Elder Scrolls universe",
         "platform": "VR",
         "image_url": "https://images.unsplash.com/photo-1554410637-1a8267402b57?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwzfHx2aWRlbyUyMGdhbWVzfGVufDB8fHx8MTc1Mjk0MTQ5OHww&ixlib=rb-4.1.0&q=85",
+        "video_url": "https://www.youtube.com/embed/fCqfQX6U0JU",  # Skyrim VR Official Trailer
         "duration": 30,
         "max_players": 1
     },
@@ -439,6 +443,7 @@ SAMPLE_GAMES = [
         "description": "Physics-based VR with realistic interaction and combat systems",
         "platform": "VR",
         "image_url": "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwxfHx2aWRlbyUyMGdhbWVzfGVufDB8fHx8MTc1Mjk0MTQ5OHww&ixlib=rb-4.1.0&q=85",
+        "video_url": "https://www.youtube.com/embed/_I7UtjMQM0k",  # Boneworks Official Trailer
         "duration": 30,
         "max_players": 1
     },
@@ -448,6 +453,7 @@ SAMPLE_GAMES = [
         "description": "Survival horror VR experience in the zombie apocalypse",
         "platform": "VR",
         "image_url": "https://images.unsplash.com/photo-1507457379470-08b800bebc67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwyfHx2aWRlbyUyMGdhbWVzfGVufDB8fHx8MTc1Mjk0MTQ5OHww&ixlib=rb-4.1.0&q=85",
+        "video_url": "https://www.youtube.com/embed/1U9LYX8s_Yc",  # Walking Dead Saints & Sinners Trailer
         "duration": 30,
         "max_players": 1
     },
@@ -457,6 +463,7 @@ SAMPLE_GAMES = [
         "description": "Time manipulation shooter - time moves only when you move",
         "platform": "VR",
         "image_url": "https://images.unsplash.com/photo-1705623337600-0ed65024022f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxnYW1lJTIwY292ZXJzfGVufDB8fHx8MTc1Mjk0MTQ2Nnww&ixlib=rb-4.1.0&q=85",
+        "video_url": "https://www.youtube.com/embed/vrS86f_ckUU",  # Superhot VR Official Trailer
         "duration": 30,
         "max_players": 1
     },
@@ -466,16 +473,18 @@ SAMPLE_GAMES = [
         "description": "Zombie shooter with co-op gameplay and desert environments",
         "platform": "VR",
         "image_url": "https://images.unsplash.com/photo-1543622748-5ee7237e8565?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxnYW1lJTIwY292ZXJzfGVufDB8fHx8MTc1Mjk0MTQ2Nnww&ixlib=rb-4.1.0&q=85",
+        "video_url": "https://www.youtube.com/embed/YP2DL6dDU-s",  # Arizona Sunshine Official Trailer
         "duration": 30,
         "max_players": 2
     },
-    # PlayStation Games with your CORRECT game covers
+    # PlayStation Games with your CORRECT game covers and official trailers
     {
         "id": "9",
         "name": "Call of Duty: Modern Warfare III", 
         "description": "Latest installment in the popular FPS franchise with campaign and multiplayer",
         "platform": "PlayStation",
         "image_url": "https://i.imgur.com/qkrEXep.png",  # Your CORRECT COD MW3 cover
+        "video_url": "https://www.youtube.com/embed/mfRhYWkAxVQ",  # COD MW3 Official Trailer
         "duration": 60,
         "max_players": 4
     },
@@ -485,6 +494,7 @@ SAMPLE_GAMES = [
         "description": "Latest football simulation with realistic gameplay and updated rosters",
         "platform": "PlayStation",
         "image_url": "https://i.imgur.com/9ZbaSE2.jpeg",  # Your CORRECT FIFA 25 cover
+        "video_url": "https://www.youtube.com/embed/wGhXy7vKiGE",  # FIFA 25 Official Trailer
         "duration": 60,
         "max_players": 2
     },
@@ -494,6 +504,7 @@ SAMPLE_GAMES = [
         "description": "Ultimate fighting experience with realistic combat mechanics",
         "platform": "PlayStation",
         "image_url": "https://i.imgur.com/4bEFjBb.jpeg",  # Your CORRECT UFC 5 cover
+        "video_url": "https://www.youtube.com/embed/AjM0rYEVrPM",  # UFC 5 Official Trailer
         "duration": 60,
         "max_players": 2
     },
@@ -503,6 +514,7 @@ SAMPLE_GAMES = [
         "description": "Premium racing simulation with stunning graphics and realistic physics",
         "platform": "PlayStation",
         "image_url": "https://i.imgur.com/mRP0p1M.jpeg",  # Your CORRECT Gran Turismo 7 cover
+        "video_url": "https://www.youtube.com/embed/1tBUsXIkG1A",  # Gran Turismo 7 Official Trailer
         "duration": 60,
         "max_players": 2
     },
@@ -512,6 +524,7 @@ SAMPLE_GAMES = [
         "description": "Open-world action adventure game with online multiplayer modes",
         "platform": "PlayStation",
         "image_url": "https://i.imgur.com/KYvktmc.png",  # Your CORRECT GTA V cover
+        "video_url": "https://www.youtube.com/embed/QkkoHAzjnUs",  # GTA V Official Trailer
         "duration": 60,
         "max_players": 4
     }
