@@ -1016,17 +1016,13 @@ const Games = () => {
                       <span>{game.duration} min</span>
                       <span>Max {game.max_players} player{game.max_players > 1 ? 's' : ''}</span>
                     </div>
-                    <div className="flex space-x-2">
-                      <button 
-                        onClick={() => openVideoModal(game.video_url, game.name)}
-                        className="flex-1 bg-red-600 text-white px-3 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm flex items-center justify-center"
-                      >
-                        ▶️ Watch Gameplay
-                      </button>
-                      <button className="flex-1 bg-black text-white px-3 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm">
-                        Book Now
-                      </button>
-                    </div>
+                    <Link 
+                      to={`/booking?game=${encodeURIComponent(game.name)}`} 
+                      className="block w-full bg-black text-white px-3 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm text-center"
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    >
+                      Book {game.name}
+                    </Link>
                   </div>
                 </div>
               </AnimatedSection>
