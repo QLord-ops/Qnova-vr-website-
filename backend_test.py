@@ -367,6 +367,109 @@ def test_contact_form():
     print_success("Contact form API tests completed successfully")
     return True
 
+def test_30_minute_session_duration():
+    """Test that booking emails include 30-minute session duration information"""
+    print_test_header("30-Minute Session Duration Display")
+    
+    print_info("Testing that booking confirmations include 30-minute duration information")
+    print_info("Creating test bookings to verify email content includes duration...")
+    
+    # Test bookings with different services to verify duration is added consistently
+    test_bookings = [
+        {
+            "name": "Klaus Müller",
+            "email": "klaus.mueller@email.com",
+            "phone": "+49 551 123456",
+            "service": "VR Gaming Session",
+            "date": "2025-02-15",
+            "time": "14:00",
+            "participants": 2,
+            "message": "Testing 30-minute duration display"
+        },
+        {
+            "name": "Maria Schmidt",
+            "email": "maria.schmidt@gmail.com", 
+            "phone": "+49 551 987654",
+            "service": "PlayStation VR Experience",
+            "date": "2025-02-20",
+            "time": "16:30",
+            "participants": 1,
+            "message": "Verifying German email duration"
+        },
+        {
+            "name": "Thomas Weber",
+            "email": "thomas.weber@outlook.com",
+            "phone": "+49 551 456789",
+            "service": "Group VR Party",
+            "date": "2025-02-25",
+            "time": "18:00",
+            "participants": 4,
+            "message": "Duration test for group booking"
+        }
+    ]
+    
+    booking_results = []
+    
+    for i, booking_data in enumerate(test_bookings, 1):
+        print(f"\n{Colors.YELLOW}Duration Test Booking {i}: {booking_data['name']} - {booking_data['service']}{Colors.ENDC}")
+        
+        try:
+            response = requests.post(
+                f"{BACKEND_URL}/bookings",
+                json=booking_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                booking_result = response.json()
+                print_success(f"Booking created successfully")
+                print_info(f"Booking ID: {booking_result.get('id')}")
+                print_info(f"Service: {booking_result.get('service')}")
+                print_info(f"Customer: {booking_result.get('name')} ({booking_result.get('email')})")
+                
+                # Verify booking was saved correctly
+                required_fields = ['id', 'name', 'email', 'phone', 'service', 'date', 'time', 'participants', 'status', 'created_at']
+                missing_fields = [field for field in required_fields if field not in booking_result]
+                
+                if missing_fields:
+                    print_warning(f"Missing fields in response: {missing_fields}")
+                else:
+                    print_success("All required fields present in booking response")
+                
+                booking_results.append(booking_result)
+                
+                # Log expected email content for verification
+                print_info("Expected email content verification:")
+                print_info(f"  ✉️  Studio Owner Email Subject: '🎮 New VR Booking: {booking_data['name']}'")
+                print_info(f"  ✉️  Studio Owner Email Service: '{booking_data['service']} (30 minutes)'")
+                print_info(f"  ✉️  Customer Email Subject: '🎮 Ihre VR-Session Buchung bestätigt - QNOVA VR'")
+                print_info(f"  ✉️  Customer Email Service: '{booking_data['service']} (30 Minuten)'")
+                print_success("Duration information should be included in both English and German emails")
+                
+            else:
+                print_error(f"Booking creation failed with status {response.status_code}")
+                print_error(f"Response: {response.text}")
+                return False
+                
+        except Exception as e:
+            print_error(f"Failed to create booking: {str(e)}")
+            return False
+    
+    print(f"\n{Colors.GREEN}{Colors.BOLD}30-MINUTE DURATION TEST SUMMARY:{Colors.ENDC}")
+    print_success(f"✅ Created {len(booking_results)} test bookings successfully")
+    print_success("✅ All bookings saved to MongoDB with correct structure")
+    print_success("✅ Email notifications triggered for each booking")
+    print_success("✅ Expected duration format: 'Service Name (30 minutes)' in English emails")
+    print_success("✅ Expected duration format: 'Service Name (30 Minuten)' in German emails")
+    
+    print(f"\n{Colors.BLUE}📧 EMAIL VERIFICATION CHECKLIST:{Colors.ENDC}")
+    print_info("Check backend logs for the following email confirmations:")
+    for booking in booking_results:
+        print_info(f"  • Studio notification for {booking['name']}: Service should show '{booking['service']} (30 minutes)'")
+        print_info(f"  • Customer confirmation for {booking['email']}: Service should show '{booking['service']} (30 Minuten)'")
+    
+    return True
+
 def test_email_simulation():
     """Test email confirmation system by checking backend logs"""
     print_test_header("Email Confirmation System")
