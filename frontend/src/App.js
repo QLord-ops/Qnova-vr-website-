@@ -165,7 +165,7 @@ const translations = {
     exploreAllGames: "Alle Spiele entdecken", playOnKatVR: "Spielbar auf KAT VR", playOnPS5: "PlayStation 5",
     
     // Enhanced features
-    latestTechnology: "Neueste Technologie", latestTechDesc: "KAT VR Laufband, Meta Quest Pro und PlayStation 5 für das ultimative Gaming-Erlebnis.",
+    latestTechnology: "Neueste Technologie", latestTechDesc: "KAT VR Laufband, Meta Quest 3 und PlayStation 5 für das ultimative Gaming-Erlebnis.",
     expertSupport: "Expertenbetreuung", expertSupportDesc: "Professionelle Einführung und Betreuung während Ihrer gesamten VR-Session.",
     groupExperiences: "Gruppenerlebnisse", groupExpDesc: "Bis zu 8 Spieler gleichzeitig - perfekt für Partys, Firmenfeiern und Teambuilding.",
     primeLocation: "Beste Lage", primeLocationDesc: "Mitten in Göttingen gelegen mit einfachem Zugang und kostenfreien Parkplätzen.",
