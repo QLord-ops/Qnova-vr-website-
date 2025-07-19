@@ -246,7 +246,7 @@ const translations = {
     exploreAllGames: "Посмотреть все игры", playOnKatVR: "Доступно на KAT VR", playOnPS5: "PlayStation 5",
     
     // Enhanced features
-    latestTechnology: "Новейшие технологии", latestTechDesc: "Беговая дорожка KAT VR, Meta Quest Pro и PlayStation 5 для максимального игрового опыта.",
+    latestTechnology: "Новейшие технологии", latestTechDesc: "Беговая дорожка KAT VR, Meta Quest 3 и PlayStation 5 для максимального игрового опыта.",
     expertSupport: "Экспертная поддержка", expertSupportDesc: "Профессиональное введение и поддержка на протяжении всей VR-сессии.",
     groupExperiences: "Групповые мероприятия", groupExpDesc: "До 8 игроков одновременно - идеально для вечеринок, корпоративных мероприятий и тимбилдинга.",
     primeLocation: "Отличное расположение", primeLocationDesc: "Расположена в самом центре Гёттингена с легким доступом и бесплатной парковкой.",
