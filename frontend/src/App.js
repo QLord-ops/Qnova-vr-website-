@@ -108,7 +108,7 @@ const translations = {
     name: "Name", email: "Email", phone: "Phone", service: "Service", date: "Date", time: "Time", 
     participants: "Number of Participants", message: "Message", additionalMessage: "Additional Message",
     selectService: "Select a service", selectTime: "Select time", messagePlaceholder: "Any special requests or questions?",
-    vrGamingSession: "VR Gaming Session", psVRExperience: "PlayStation VR Experience", groupVRParty: "Group VR Party",
+    vrGamingSession: "VR Gaming Session (30 minutes)", psVRExperience: "PlayStation VR Experience (30 minutes)", groupVRParty: "Group VR Party (30 minutes)",
     bookSession: "Book Session", submitting: "Booking...", bookNow: "Book Now",
     bookingConfirmed: "Booking Confirmed!", bookingConfirmationText: "We've received your booking and will send you a confirmation email.",
     bookAnother: "Book Another Session", confirmationEmail: "We'll send you a confirmation email shortly.",
