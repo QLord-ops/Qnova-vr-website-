@@ -341,7 +341,11 @@ const Navigation = () => {
     <nav className="bg-black text-white fixed w-full top-0 z-50 border-b border-gray-800">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold">
+          <Link 
+            to="/" 
+            className="text-2xl font-bold"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <div className="flex flex-col items-start">
               <span className="text-3xl font-bold tracking-wider">QNOVA</span>
               <span className="text-sm font-light tracking-widest -mt-1">VIRTUAL REALITY</span>
