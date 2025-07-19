@@ -394,14 +394,42 @@ const Navigation = () => {
   );
 };
 
-// Home Component with Enhanced Mobile Responsiveness
+// Home Component with Enhanced Mobile Responsiveness and KAT VR
 const Home = () => {
   const { t } = useLanguage();
+  
+  // Featured games data
+  const featuredGames = [
+    {
+      name: "Half-Life: Alyx",
+      platform: "KAT VR",
+      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      description: "Legendary VR adventure with full-body movement on KAT VR platform"
+    },
+    {
+      name: "Beat Saber",
+      platform: "VR",
+      image: "https://images.unsplash.com/photo-1614294148960-9aa740632a1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      description: "Rhythm VR game that gets your whole body moving"
+    },
+    {
+      name: "Skyrim VR",
+      platform: "KAT VR",
+      image: "https://images.unsplash.com/photo-1538481199464-7160b8c83ca6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      description: "Explore vast fantasy worlds with natural walking on KAT VR"
+    },
+    {
+      name: "Gran Turismo 7",
+      platform: "PlayStation 5",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      description: "Ultimate racing experience with 4K graphics and VR support"
+    }
+  ];
   
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="pt-20 bg-black text-white">
+      <section className="pt-20 bg-black text-white overflow-hidden">
         <div className="container mx-auto px-4 py-12 md:py-20">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <AnimatedSection animation="slideInLeft">
@@ -412,22 +440,181 @@ const Home = () => {
                 <p className="text-lg md:text-xl mb-6 md:mb-8 text-gray-300 mobile-text">
                   {t('heroSubtitle')}
                 </p>
-                <Link 
-                  to="/booking" 
-                  className="bg-white text-black px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold hover:bg-gray-100 transition-all duration-300 inline-block rounded-lg shadow-lg hover:shadow-xl touch-target hover-lift"
-                >
-                  {t('bookYourSession')}
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                  <Link 
+                    to="/booking" 
+                    className="bg-white text-black px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold hover:bg-gray-100 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl touch-target hover-lift text-center"
+                  >
+                    {t('bookYourSession')}
+                  </Link>
+                  <Link 
+                    to="/games" 
+                    className="border-2 border-white text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold hover:bg-white hover:text-black transition-all duration-300 rounded-lg touch-target text-center"
+                  >
+                    {t('exploreAllGames')}
+                  </Link>
+                </div>
               </div>
             </AnimatedSection>
             <AnimatedSection animation="slideInRight">
               <div className="mt-8 md:mt-0">
                 <img 
-                  src="https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="VR Gaming"
+                  src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="KAT VR Gaming Experience"
                   className="w-full h-64 md:h-96 object-cover rounded-lg shadow-2xl hover-lift"
                   loading="lazy"
                 />
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* KAT VR Platform Section */}
+      <section className="py-12 md:py-20 bg-gradient-to-r from-gray-900 to-black text-white">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp" className="text-center mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 section-title">{t('katVRTitle')}</h2>
+            <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto mobile-text">
+              {t('katVRDescription')}
+            </p>
+          </AnimatedSection>
+          
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-12">
+            <AnimatedSection animation="fadeInUp" delay={200}>
+              <div className="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm hover:bg-opacity-20 transition-all duration-300 hover-lift">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                  </svg>
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('fullBodyMovement')}</h3>
+                <p className="text-gray-300 text-sm md:text-base mobile-text">{t('fullBodyMovementDesc')}</p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fadeInUp" delay={400}>
+              <div className="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm hover:bg-opacity-20 transition-all duration-300 hover-lift">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('immersiveExperience')}</h3>
+                <p className="text-gray-300 text-sm md:text-base mobile-text">{t('immersiveExperienceDesc')}</p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fadeInUp" delay={600}>
+              <div className="text-center p-6 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm hover:bg-opacity-20 transition-all duration-300 hover-lift">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-red-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('safetyFirst')}</h3>
+                <p className="text-gray-300 text-sm md:text-base mobile-text">{t('safetyFirstDesc')}</p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Games Section */}
+      <section className="py-12 md:py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp" className="text-center mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 section-title">{t('featuredGames')}</h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mobile-text">
+              {t('featuredGamesSubtitle')}
+            </p>
+          </AnimatedSection>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {featuredGames.map((game, index) => (
+              <AnimatedSection key={index} animation="fadeInUp" delay={index * 150}>
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover-lift">
+                  <div className="relative">
+                    <img 
+                      src={game.image} 
+                      alt={game.name}
+                      className="w-full h-48 object-cover"
+                      loading="lazy"
+                    />
+                    <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold ${
+                      game.platform === 'KAT VR' 
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                        : game.platform === 'PlayStation 5'
+                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white'
+                        : 'bg-gray-800 text-white'
+                    }`}>
+                      {game.platform === 'KAT VR' ? t('playOnKatVR') : 
+                       game.platform === 'PlayStation 5' ? t('playOnPS5') : game.platform}
+                    </div>
+                  </div>
+                  <div className="p-4 md:p-6">
+                    <h3 className="text-lg md:text-xl font-bold mb-2 card-title">{game.name}</h3>
+                    <p className="text-gray-600 text-sm md:text-base mobile-text">{game.description}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+          
+          <AnimatedSection animation="fadeInUp" className="text-center mt-8 md:mt-12">
+            <Link 
+              to="/games" 
+              className="bg-black text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold hover:bg-gray-800 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl touch-target hover-lift inline-block"
+            >
+              {t('exploreAllGames')}
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Technology Specs Section */}
+      <section className="py-12 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp" className="text-center mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold section-title">{t('techSpecs')}</h2>
+          </AnimatedSection>
+          
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+            <AnimatedSection animation="slideInLeft" delay={200}>
+              <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl hover:shadow-lg transition-all duration-300 hover-lift">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('katWalkC')}</h3>
+                <p className="text-gray-600 text-sm md:text-base mobile-text">{t('katWalkCDesc')}</p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fadeInUp" delay={400}>
+              <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl hover:shadow-lg transition-all duration-300 hover-lift">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('metaQuest')}</h3>
+                <p className="text-gray-600 text-sm md:text-base mobile-text">{t('metaQuestDesc')}</p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="slideInRight" delay={600}>
+              <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl hover:shadow-lg transition-all duration-300 hover-lift">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 to-violet-600 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('playstation5')}</h3>
+                <p className="text-gray-600 text-sm md:text-base mobile-text">{t('playstation5Desc')}</p>
               </div>
             </AnimatedSection>
           </div>
@@ -441,7 +628,7 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-bold section-title">{t('whyChooseUs')}</h2>
           </AnimatedSection>
           
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             <AnimatedSection animation="fadeInUp" delay={200}>
               <div className="text-center p-4 md:p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover-lift">
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
@@ -470,6 +657,18 @@ const Home = () => {
               <div className="text-center p-4 md:p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover-lift">
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
                   <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 card-title">{t('groupExperiences')}</h3>
+                <p className="text-gray-600 text-sm md:text-base mobile-text">{t('groupExpDesc')}</p>
+              </div>
+            </AnimatedSection>
+            
+            <AnimatedSection animation="fadeInUp" delay={800}>
+              <div className="text-center p-4 md:p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover-lift">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -483,19 +682,27 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-20 bg-black text-white">
+      <section className="py-12 md:py-20 bg-gradient-to-r from-black to-gray-900 text-white">
         <AnimatedSection animation="fadeInUp">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 section-title">{t('readyToStep')}</h2>
-            <p className="text-lg md:text-xl mb-6 md:mb-8 text-gray-300 max-w-2xl mx-auto mobile-text">
+            <p className="text-lg md:text-xl mb-6 md:mb-8 text-gray-300 max-w-3xl mx-auto mobile-text">
               {t('readySubtitle')}
             </p>
-            <Link 
-              to="/booking" 
-              className="bg-white text-black px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold hover:bg-gray-100 transition-all duration-300 inline-block rounded-lg shadow-lg hover:shadow-xl touch-target hover-lift"
-            >
-              {t('bookNow')}
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link 
+                to="/booking" 
+                className="bg-white text-black px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold hover:bg-gray-200 transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl touch-target hover-lift"
+              >
+                {t('bookNow')}
+              </Link>
+              <Link 
+                to="/pricing" 
+                className="border-2 border-white text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold hover:bg-white hover:text-black transition-all duration-300 rounded-lg touch-target"
+              >
+                {t('pricing')}
+              </Link>
+            </div>
           </div>
         </AnimatedSection>
       </section>
