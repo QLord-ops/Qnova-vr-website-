@@ -180,6 +180,36 @@ backend:
         agent: "testing"
         comment: "✅ PASSED - Real Gmail SMTP email system properly implemented and tested. Successfully tested booking creation with German customer data (Klaus Müller). System correctly triggers two email notifications: 1) Studio owner notification to qnovavr.de@gmail.com with subject '🎮 New VR Booking: Klaus Müller' containing customer details and German message, 2) Customer confirmation to customer email with subject '🎮 Your VR Session Booking Confirmed - QNOVA VR' with booking details and visit instructions. Both emails use HTML formatting with proper styling and QNOVA VR branding. Email system shows proper error handling - bookings still save to MongoDB even if email fails. System is production-ready but requires valid Gmail app password for actual email delivery. Core functionality verified: booking creation ✅, MongoDB storage ✅, background email tasks ✅, error resilience ✅."
 
+  - task: "Platform-specific session durations"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "needs_testing"
+        agent: "main"
+        comment: "Updated QNOVA VR booking system with platform-specific session durations: KAT VR platforms (30 minutes), PlayStation 5 platforms (1 hour). Implemented get_service_duration() function that detects service type and returns appropriate durations in both English and German. Updated email templates to dynamically include correct duration based on service type."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Comprehensive platform-specific duration testing completed successfully. Created and tested multiple booking scenarios: 1) KAT VR Gaming Session - correctly shows '30 minutes/30 Minuten', 2) PlayStation 5 VR Experience - correctly shows '1 hour/1 Stunde', 3) Group KAT VR Party - correctly shows '30 minutes/30 Minuten'. All bookings created successfully with proper UUID generation and MongoDB storage. Verified get_service_duration() function correctly identifies PlayStation services (contains 'PlayStation' or 'PS') vs KAT VR services (all others). Email notification system includes correct duration information: Studio owner emails show service name with English duration, customer confirmation emails show service name with German duration. Backend API endpoints working correctly - POST /api/bookings creates bookings with all required fields, triggers dual email notifications, and persists data to MongoDB. Tested 5 different service name variations to verify function logic. System demonstrates excellent functionality: booking creation ✅, database storage ✅, platform-specific duration detection ✅, multilingual email notifications ✅."
+
+  - task: "Restricted time slots functionality"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "needs_testing"
+        agent: "main"
+        comment: "Updated booking system to support restricted time slots: 12:00, 12:30, 13:00, 13:30. Backend accepts bookings for these specific time slots."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Restricted time slots testing completed successfully. Tested all 4 restricted time slots (12:00, 12:30, 13:00, 13:30) and confirmed backend accepts bookings for each slot. All test bookings created successfully with proper UUID generation, MongoDB storage, and email notifications. Time slots are correctly stored and returned in booking responses. System ready for production with restricted time slot functionality working as expected."
+
 frontend:
   - task: "Home page with hero section"
     implemented: true
