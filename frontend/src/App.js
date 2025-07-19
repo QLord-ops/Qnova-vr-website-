@@ -138,7 +138,7 @@ const translations = {
     playstationSession: "PlayStation Gaming", playstationSessionDesc: "Experience the latest PlayStation 5 games in comfort.",
     playstationPrice: "€9.99", playstationDuration: "1 hour", playstationFeatures: ["PlayStation 5 console", "Latest games", "Comfortable seating"],
     vrPartyPackage: "VR Party Package", vrPartyPackageDesc: "Perfect for birthdays, celebrations, and special events.",
-    vrPartyPrice: "€180", vrPartyDuration: "2 hours", vrPartyFeatures: ["Up to 8 players", "2-hour session", "Refreshments included"],
+    vrPartyPrice: "Contact for pricing", vrPartyDuration: "Custom duration", vrPartyFeatures: ["Up to 8 players", "Custom session length", "Refreshments included"],
     corporatePackage: "Corporate Package", corporatePackageDesc: "Team building and corporate entertainment experiences.",
     corporatePrice: "Contact for pricing", corporateDuration: "Custom duration", corporateFeatures: ["Custom packages", "Professional setup", "Catering options"],
     perPerson: "per person", bookThisPackage: "Book This Package", contactForDetails: "Contact for Details",
