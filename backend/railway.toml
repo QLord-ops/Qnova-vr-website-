@@ -1,0 +1,12 @@
+# Railway Deployment Configuration
+# This file tells Railway how to deploy your backend
+
+[build]
+  command = "pip install -r requirements.txt"
+
+[deploy]
+  command = "uvicorn server:app --host 0.0.0.0 --port $PORT"
+
+[health]
+  path = "/health"
+  port = 8001
