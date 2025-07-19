@@ -62,6 +62,7 @@ const translations = {
     // KAT VR Platform content  
     katVRTitle: "KAT VR Treadmill Technology", katVRSubtitle: "Experience VR gaming like never before with full-body movement freedom",
     katVRDescription: "As one of the first VR studios in Germany to offer the revolutionary KAT Walk C+ platform - an omnidirectional treadmill that enables natural movement in the virtual world.",
+    katVRVideoCaption: "Experience KAT VR Technology in Action",
     fullBodyMovement: "Full-Body Movement", fullBodyMovementDesc: "Walk, crouch, and jump in the virtual world naturally",
     immersiveExperience: "Maximum Immersion", immersiveExperienceDesc: "360° movement freedom for the ultimate VR experience",
     safetyFirst: "Safety First", safetyFirstDesc: "Safety harnesses and professional supervision for worry-free gaming",
