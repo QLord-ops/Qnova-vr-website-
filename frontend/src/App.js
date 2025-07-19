@@ -228,13 +228,34 @@ const translations = {
   },
   ru: {
     home: "Главная", about: "О нас", services: "Услуги", games: "Игры", pricing: "Цены", bookNow: "Забронировать", contact: "Контакты",
-    heroTitle: "Почувствуйте будущее игр", heroSubtitle: "Погрузитесь в передовую виртуальную реальность и PlayStation-игры в QNOVA VR Studio в Гёттингене.",
-    bookYourSession: "Забронировать сеанс", whyChooseUs: "Почему QNOVA VR?", latestTechnology: "Новейшие технологии",
-    latestTechDesc: "Современные VR-гарнитуры и PlayStation 5 для максимального игрового опыта.",
-    expertSupport: "Экспертная поддержка", expertSupportDesc: "Профессиональная помощь и поддержка во время игровой сессии.",
-    groupExperiences: "Групповые мероприятия", groupExpDesc: "Идеально для вечеринок, корпоративных мероприятий и тимбилдинга.", 
-    primeLocation: "Отличное расположение", primeLocationDesc: "Удобно расположен в центре Гёттингена с легким доступом.", 
-    readyToStep: "Готовы к виртуальной реальности?", readySubtitle: "Забронируйте сеанс сегодня и испытайте игры, как никогда раньше.", 
+    heroTitle: "Почувствуйте будущее игр", heroSubtitle: "Погрузитесь в передовую виртуальную реальность с технологией беговой дорожки KAT VR и PlayStation-играми в QNOVA VR Studio в Гёттингене.",
+    bookYourSession: "Забронировать сеанс", whyChooseUs: "Почему QNOVA VR?",
+    
+    // KAT VR Platform content
+    katVRTitle: "Технология беговой дорожки KAT VR", katVRSubtitle: "Испытайте VR-игры как никогда раньше с полной свободой движений",
+    katVRDescription: "Как одна из первых VR-студий в Германии, мы предлагаем революционную платформу KAT Walk C+ - всенаправленную беговую дорожку, которая позволяет естественные движения в виртуальном мире.",
+    fullBodyMovement: "Движения всем телом", fullBodyMovementDesc: "Ходите, приседайте и прыгайте в виртуальном мире естественно",
+    immersiveExperience: "Максимальное погружение", immersiveExperienceDesc: "360° свобода движений для максимального VR-опыта",
+    safetyFirst: "Безопасность прежде всего", safetyFirstDesc: "Страховочные ремни и профессиональный контроль для беспечной игры",
+    
+    // Featured Games section
+    featuredGames: "Популярные VR-игры", featuredGamesSubtitle: "Откройте для себя наш топ-выбор VR и PlayStation игр",
+    exploreAllGames: "Посмотреть все игры", playOnKatVR: "Доступно на KAT VR", playOnPS5: "PlayStation 5",
+    
+    // Enhanced features
+    latestTechnology: "Новейшие технологии", latestTechDesc: "Беговая дорожка KAT VR, Meta Quest Pro и PlayStation 5 для максимального игрового опыта.",
+    expertSupport: "Экспертная поддержка", expertSupportDesc: "Профессиональное введение и поддержка на протяжении всей VR-сессии.",
+    groupExperiences: "Групповые мероприятия", groupExpDesc: "До 8 игроков одновременно - идеально для вечеринок, корпоративных мероприятий и тимбилдинга.",
+    primeLocation: "Отличное расположение", primeLocationDesc: "Расположена в самом центре Гёттингена с легким доступом и бесплатной парковкой.",
+    
+    // Technology specs
+    techSpecs: "Наши технологии",
+    katWalkC: "Платформа KAT Walk C+", katWalkCDesc: "Всенаправленная беговая дорожка с тактильной обратной связью",
+    metaQuest: "VR-гарнитуры Meta Quest Pro", metaQuestDesc: "4K разрешение с отслеживанием глаз и смешанной реальностью",
+    playstation5: "Консоли PlayStation 5", playstation5Desc: "Новейшие игры в 4K с поддержкой VR",
+    
+    readyToStep: "Готовы к максимальному VR-опыту?", 
+    readySubtitle: "Забронируйте сеанс с платформой KAT VR и испытайте игры в совершенно новом измерении.", 
     aboutTitle: "О QNOVA VR Studio",
     aboutDescription: "Расположенная в сердце Гёттингена, QNOVA VR Studio - ваш путь к захватывающим VR-впечатлениям. Мы сочетаем передовые технологии с исключительным сервисом.",
     ourStory: "Наша история",
