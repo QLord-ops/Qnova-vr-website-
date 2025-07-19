@@ -1039,10 +1039,12 @@ const Booking = () => {
   const { t } = useLanguage();
   const [selectedGame, setSelectedGame] = useState('');
   
-  // Get selected game from URL parameters and set default service
+  // Get selected game or service from URL parameters and set defaults
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const gameParam = urlParams.get('game');
+    const serviceParam = urlParams.get('service');
+    
     if (gameParam) {
       const gameName = decodeURIComponent(gameParam);
       setSelectedGame(gameName);
@@ -1067,6 +1069,18 @@ const Booking = () => {
       setFormData(prev => ({
         ...prev,
         service: defaultService
+      }));
+    } else if (serviceParam) {
+      // Direct service selection from pricing page
+      const serviceName = decodeURIComponent(serviceParam);
+      
+      // Generate time slots for the selected service
+      const newTimeSlots = generateTimeSlots(serviceName);
+      setAvailableTimeSlots(newTimeSlots);
+      
+      setFormData(prev => ({
+        ...prev,
+        service: serviceName
       }));
     }
   }, []);
