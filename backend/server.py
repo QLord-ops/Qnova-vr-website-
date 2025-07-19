@@ -19,7 +19,7 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection with production fallback
-mongo_url = os.environ.get('MONGO_URL', os.environ.get('MONGODB_URL', 'mongodb://localhost:27017'))
+mongo_url = os.environ.get('MONGO_URL', os.environ.get('MONGODB_URL', 'mongodb+srv://qnovavrde:jQDX7dRPJPINVhFs@qnova.nhw7ruz.mongodb.net/?retryWrites=true&w=majority&appName=Qnova'))
 client = AsyncIOMotorClient(mongo_url)
 db_name = os.environ.get('DB_NAME', 'qnova_vr')
 db = client[db_name]
