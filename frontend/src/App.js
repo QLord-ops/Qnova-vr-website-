@@ -1291,7 +1291,14 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-2">{t('address')}</h3>
-                    <p className="text-gray-600">Stumpfebiel 4<br />37073 Göttingen</p>
+                    <a 
+                      href="https://maps.google.com/?q=Stumpfebiel+4,+37073+Göttingen,+Germany" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-black transition-colors cursor-pointer"
+                    >
+                      <p className="hover:underline">Stumpfebiel 4<br />37073 Göttingen</p>
+                    </a>
                   </div>
                 </div>
                 
