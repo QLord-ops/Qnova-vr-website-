@@ -398,6 +398,81 @@ def send_customer_confirmation_email(booking_data: dict):
         logger.error(f"❌ Failed to send customer confirmation email: {str(e)}")
         return False
 
+@run_sync
+def send_contact_notification_email(contact_data):
+    """Send email notification when someone submits contact form"""
+    try:
+        # Create email message
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = f"📧 New Contact Message from {contact_data['name']} - QNOVA VR"
+        msg['From'] = GMAIL_USER
+        msg['To'] = GMAIL_USER  # Send to studio owner
+
+        # Process message for HTML display
+        message_html = contact_data['message'].replace('\n', '<br>')
+        
+        # HTML email body
+        html_body = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>New Contact Message</title>
+        </head>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="background: #000; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                    <h1 style="margin: 0; font-size: 24px;">📧 New Contact Message</h1>
+                    <p style="margin: 5px 0 0 0; opacity: 0.9;">QNOVA Virtual Reality Studio</p>
+                </div>
+                
+                <div style="background: #f9f9f9; padding: 20px; border-radius: 0 0 8px 8px; border: 1px solid #ddd;">
+                    <h2 style="color: #000; margin-top: 0;">Contact Details:</h2>
+                    <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0;">
+                        <p><strong>Name:</strong> {contact_data['name']}</p>
+                        <p><strong>Email:</strong> <a href="mailto:{contact_data['email']}">{contact_data['email']}</a></p>
+                        <p><strong>Subject:</strong> {contact_data['subject']}</p>
+                        <p><strong>Message:</strong></p>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; border-left: 4px solid #000;">
+                            {message_html}
+                        </div>
+                    </div>
+                    
+                    <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                        <h3 style="color: #000; margin-top: 0;">Next Steps:</h3>
+                        <p style="margin: 5px 0;">• Reply to customer at: <a href="mailto:{contact_data['email']}">{contact_data['email']}</a></p>
+                        <p style="margin: 5px 0;">• Response time target: Within 24 hours</p>
+                        <p style="margin: 5px 0;">• Message received: {datetime.now().strftime('%Y-%m-%d at %H:%M')}</p>
+                    </div>
+                    
+                    <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+                    <div style="text-align: center; color: #666; font-size: 14px;">
+                        <p style="margin: 0;">QNOVA Virtual Reality Studio</p>
+                        <p style="margin: 5px 0;">Stumpfebiel 4, 37073 Göttingen</p>
+                        <p style="margin: 5px 0;">📞 +49 160 96286290 | 📧 qnovavr.de@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+
+        # Attach HTML body
+        html_part = MIMEText(html_body, 'html', 'utf-8')
+        msg.attach(html_part)
+
+        # Send email
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+            server.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+            server.send_message(msg)
+        
+        print(f"Contact notification email sent successfully for: {contact_data['name']}")
+        return True
+
+    except Exception as e:
+        print(f"Failed to send contact notification email: {str(e)}")
+        return False
+
 # Sample games data with authentic game covers and functional booking
 SAMPLE_GAMES = [
     # KAT VR Games
