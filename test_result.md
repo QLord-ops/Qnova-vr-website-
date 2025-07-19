@@ -270,15 +270,18 @@ test_plan:
 
   - task: "30-minute session duration display"
     implemented: true
-    working: "needs_retesting"
+    working: true
     file: "App.js, server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "needs_testing"
         agent: "main"
         comment: "Updated booking system to consistently display 30-minute session duration across all languages and components. Modified frontend booking descriptions, service options, and backend email confirmations to clearly state session duration."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Comprehensive 30-minute session duration testing completed successfully. Created and tested 3 different booking scenarios (VR Gaming Session, PlayStation VR Experience, Group VR Party) with realistic German customer data. All bookings created successfully with proper UUID generation and MongoDB storage. Verified email notification system includes correct duration information: Studio owner emails show 'Service Name (30 minutes)' in English, customer confirmation emails show 'Service Name (30 Minuten)' in German. Backend API endpoints working correctly - POST /api/bookings creates bookings with all required fields, triggers dual email notifications (studio owner + customer), and persists data to MongoDB. Email templates properly updated in server.py lines 169, 208, 289, and 338 to include duration. System demonstrates excellent functionality: booking creation ✅, database storage ✅, email notifications with duration ✅, multilingual support ✅."
 
 agent_communication:
   - agent: "main"
