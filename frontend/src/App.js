@@ -496,13 +496,13 @@ const Home = () => {
     {
       name: "FIFA 25",
       platform: "PlayStation 5",
-      image: "https://i.imgur.com/qkrEXep.png",  // Your real FIFA 25 cover
+      image: "https://i.imgur.com/9ZbaSE2.jpeg",  // Your CORRECT FIFA 25 cover
       description: "Latest football simulation with realistic gameplay and updated rosters"
     },
     {
       name: "Call of Duty: Modern Warfare III",
       platform: "PlayStation 5",
-      image: "https://i.imgur.com/4bEFjBb.jpeg",  // Your real COD MW3 cover
+      image: "https://i.imgur.com/qkrEXep.png",  // Your CORRECT COD MW3 cover
       description: "Latest installment in the popular FPS franchise with campaign and multiplayer"
     }
   ];
