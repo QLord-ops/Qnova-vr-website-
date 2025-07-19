@@ -219,7 +219,7 @@ const translations = {
     playstationSession: "PlayStation Gaming", playstationSessionDesc: "Erleben Sie die neuesten PlayStation 5-Spiele in Komfort.",
     playstationPrice: "€9,99", playstationDuration: "1 Stunde", 
     vrPartyPackage: "VR-Party-Paket", vrPartyPackageDesc: "Perfekt für Geburtstage, Feiern und besondere Anlässe.",
-    vrPartyPrice: "€180", vrPartyDuration: "2 Stunden", 
+    vrPartyPrice: "Preis auf Anfrage", vrPartyDuration: "Individuelle Dauer", 
     corporatePackage: "Firmenpaket", corporatePackageDesc: "Teambuilding und Firmenunterhaltung.",
     corporatePrice: "Preis auf Anfrage", corporateDuration: "Individuelle Dauer", 
     perPerson: "pro Person", bookThisPackage: "Dieses Paket buchen", contactForDetails: "Für Details kontaktieren",
