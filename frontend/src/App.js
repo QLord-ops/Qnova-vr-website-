@@ -127,13 +127,34 @@ const translations = {
   },
   de: {
     home: "Startseite", about: "Über uns", services: "Services", games: "Spiele", pricing: "Preise", bookNow: "Jetzt buchen", contact: "Kontakt",
-    heroTitle: "Erleben Sie die Zukunft des Gamings", heroSubtitle: "Tauchen Sie ein in modernste Virtual Reality und PlayStation Gaming im QNOVA VR Studio in Göttingen.",
-    bookYourSession: "Session buchen", whyChooseUs: "Warum QNOVA VR wählen?", latestTechnology: "Neueste Technologie",
-    latestTechDesc: "Modernste VR-Headsets und PlayStation 5 für das ultimative Gaming-Erlebnis.", 
-    expertSupport: "Expertenbetreuung", expertSupportDesc: "Professionelle Betreuung und Hilfe während Ihrer Gaming-Session.",
-    groupExperiences: "Gruppenerlebnisse", groupExpDesc: "Perfekt für Partys, Firmenfeiern und Teambuilding-Aktivitäten.", 
-    primeLocation: "Beste Lage", primeLocationDesc: "Günstig gelegen im Herzen von Göttingen mit einfachem Zugang.", 
-    readyToStep: "Bereit für Virtual Reality?", readySubtitle: "Buchen Sie noch heute Ihre Session und erleben Sie Gaming wie nie zuvor.", 
+    heroTitle: "Erleben Sie die Zukunft des Gamings", heroSubtitle: "Tauchen Sie ein in modernste Virtual Reality mit KAT VR Laufband-Technologie und PlayStation Gaming im QNOVA VR Studio in Göttingen.",
+    bookYourSession: "Session buchen", whyChooseUs: "Warum QNOVA VR wählen?", 
+    
+    // KAT VR Platform content
+    katVRTitle: "KAT VR Laufband-Technologie", katVRSubtitle: "Erleben Sie VR Gaming wie nie zuvor mit Ganzkörper-Bewegungsfreiheit",
+    katVRDescription: "Als eines der ersten VR-Studios in Deutschland bieten wir die revolutionäre KAT Walk C+ Plattform - ein omnidirektionales Laufband, das natürliche Bewegungen in der virtuellen Welt ermöglicht.",
+    fullBodyMovement: "Ganzkörper-Bewegung", fullBodyMovementDesc: "Laufen, ducken und springen Sie in der virtuellen Welt",
+    immersiveExperience: "Maximale Immersion", immersiveExperienceDesc: "360° Bewegungsfreiheit für das ultimative VR-Erlebnis",
+    safetyFirst: "Absolute Sicherheit", safetyFirstDesc: "Sicherheitsgurte und professionelle Betreuung für sorgenfreies Gaming",
+    
+    // Featured Games section
+    featuredGames: "Beliebte VR-Spiele", featuredGamesSubtitle: "Entdecken Sie unsere Top-Auswahl an VR- und PlayStation-Spielen",
+    exploreAllGames: "Alle Spiele entdecken", playOnKatVR: "Spielbar auf KAT VR", playOnPS5: "PlayStation 5",
+    
+    // Enhanced features
+    latestTechnology: "Neueste Technologie", latestTechDesc: "KAT VR Laufband, Meta Quest Pro und PlayStation 5 für das ultimative Gaming-Erlebnis.",
+    expertSupport: "Expertenbetreuung", expertSupportDesc: "Professionelle Einführung und Betreuung während Ihrer gesamten VR-Session.",
+    groupExperiences: "Gruppenerlebnisse", groupExpDesc: "Bis zu 8 Spieler gleichzeitig - perfekt für Partys, Firmenfeiern und Teambuilding.",
+    primeLocation: "Beste Lage", primeLocationDesc: "Mitten in Göttingen gelegen mit einfachem Zugang und kostenfreien Parkplätzen.",
+    
+    // Technology specs
+    techSpecs: "Unsere Technologie", 
+    katWalkC: "KAT Walk C+ Plattform", katWalkCDesc: "Omnidirektionales Laufband mit Haptik-Feedback",
+    metaQuest: "Meta Quest Pro VR-Headsets", metaQuestDesc: "4K-Auflösung mit Eye-Tracking und Mixed Reality",
+    playstation5: "PlayStation 5 Konsolen", playstation5Desc: "Neueste Spiele in 4K mit VR-Unterstützung",
+    
+    readyToStep: "Bereit für das ultimative VR-Erlebnis?", 
+    readySubtitle: "Buchen Sie Ihre Session mit der KAT VR Plattform und erleben Sie Gaming in einer völlig neuen Dimension.", 
     aboutTitle: "Über QNOVA VR Studio",
     aboutDescription: "Im Herzen von Göttingen gelegen, ist QNOVA VR Studio Ihr Tor zu immersiven Virtual Reality-Erlebnissen. Wir kombinieren modernste Technologie mit außergewöhnlichem Service.",
     ourStory: "Unsere Geschichte",
