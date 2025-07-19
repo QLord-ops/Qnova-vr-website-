@@ -311,25 +311,19 @@ const translations = {
   }
 };
 
-// Language Provider with first-time language selection
+// Language Provider with language selection on every visit
 const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('qnova-language') || null; // null means no language selected yet
-  });
-  const [showLanguageModal, setShowLanguageModal] = useState(() => {
-    return !localStorage.getItem('qnova-language'); // Show modal if no language selected
-  });
+  const [language, setLanguage] = useState(null); // Always start with no language
+  const [showLanguageModal, setShowLanguageModal] = useState(true); // Always show modal on visit
 
   const selectLanguage = (lang) => {
     setLanguage(lang);
-    localStorage.setItem('qnova-language', lang);
     setShowLanguageModal(false);
   };
 
   const toggleLanguage = () => {
     const newLang = language === 'de' ? 'en' : language === 'en' ? 'ru' : 'de';
     setLanguage(newLang);
-    localStorage.setItem('qnova-language', newLang);
   };
 
   const t = (key) => {
