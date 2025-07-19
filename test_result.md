@@ -286,6 +286,23 @@ frontend:
         agent: "testing"
         comment: "All navigation links (Home, About, Services, Games, Book Now, Contact) working correctly"
 
+  - task: "Platform-specific session durations and restricted time slots"
+    implemented: true
+    working: true
+    file: "App.js, server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "needs_testing"
+        agent: "main"
+        comment: "Updated booking system for platform-specific durations (KAT VR: 30 minutes, PlayStation 5: 1 hour) and restricted time slots (12:00, 12:30, 13:00, 13:30). Modified service options, time selection dropdown, and dynamic email duration system."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Platform-specific session duration testing completed successfully. Tested 3 different service types: KAT VR Gaming Session (30 min), PlayStation 5 VR Experience (1 hour), Group KAT VR Party (30 min). All bookings created successfully with proper platform detection. Backend get_service_duration() function correctly identifies PlayStation vs KAT VR services. Email notifications include correct duration: KAT VR services show '30 minutes/30 Minuten', PlayStation services show '1 hour/1 Stunde'. Restricted time slots (12:00, 12:30, 13:00, 13:30) working correctly. All backend APIs (8/8) passed testing. MongoDB storage, email notifications, and dynamic duration system all confirmed working."
+
+  - task: "30-minute session duration display"
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
