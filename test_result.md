@@ -295,23 +295,8 @@ metadata:
 test_plan:
   current_focus: []
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "completed"
-
-  - task: "30-minute session duration display"
-    implemented: true
-    working: true
-    file: "App.js, server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: "needs_testing"
-        agent: "main"
-        comment: "Updated booking system to consistently display 30-minute session duration across all languages and components. Modified frontend booking descriptions, service options, and backend email confirmations to clearly state session duration."
-      - working: true
-        agent: "testing"
-        comment: "✅ PASSED - Comprehensive 30-minute session duration testing completed successfully. Created and tested 3 different booking scenarios (VR Gaming Session, PlayStation VR Experience, Group VR Party) with realistic German customer data. All bookings created successfully with proper UUID generation and MongoDB storage. Verified email notification system includes correct duration information: Studio owner emails show 'Service Name (30 minutes)' in English, customer confirmation emails show 'Service Name (30 Minuten)' in German. Backend API endpoints working correctly - POST /api/bookings creates bookings with all required fields, triggers dual email notifications (studio owner + customer), and persists data to MongoDB. Email templates properly updated in server.py lines 169, 208, 289, and 338 to include duration. System demonstrates excellent functionality: booking creation ✅, database storage ✅, email notifications with duration ✅, multilingual support ✅."
 
 agent_communication:
   - agent: "main"
@@ -328,3 +313,7 @@ agent_communication:
     message: "Updated booking system to reflect 30-minute session duration across all languages. Modified frontend booking descriptions in English, German, and Russian to clearly state '30-minute' sessions. Updated service options in booking form to include duration. Enhanced email confirmations (both studio owner and customer) to specify '30 minutes' duration. All changes applied consistently across multiple languages and components."
   - agent: "testing"
     message: "✅ 30-MINUTE DURATION TESTING COMPLETE: Successfully tested updated QNOVA VR booking system with comprehensive verification of 30-minute session duration display. All backend APIs (7/7) passed testing including new dedicated duration test. Created 3 realistic German customer bookings (Klaus Müller, Maria Schmidt, Thomas Weber) with different services. Verified email notifications include correct duration: English studio owner emails show 'Service (30 minutes)', German customer emails show 'Service (30 Minuten)'. Backend properly handles booking creation, MongoDB storage, and dual email notifications. Email templates in server.py correctly updated on lines 169, 208, 289, 338. System ready for production with proper 30-minute duration display across all booking confirmations."
+  - agent: "main"
+    message: "Updated QNOVA VR booking system with platform-specific session durations and restricted time slots. Implemented get_service_duration() function that detects PlayStation vs KAT VR services and returns appropriate durations: KAT VR platforms (30 minutes), PlayStation 5 platforms (1 hour). Updated email confirmations to dynamically include correct duration based on service type. Added support for restricted time slots: 12:00, 12:30, 13:00, 13:30."
+  - agent: "testing"
+    message: "✅ PLATFORM-SPECIFIC DURATION TESTING COMPLETE: Successfully tested updated QNOVA VR booking system with comprehensive verification of platform-specific session durations and restricted time slots. All backend APIs (8/8) passed testing including new platform-specific duration functionality. Created multiple test bookings: 1) KAT VR Gaming Session - correctly shows '30 minutes/30 Minuten', 2) PlayStation 5 VR Experience - correctly shows '1 hour/1 Stunde', 3) Group KAT VR Party - correctly shows '30 minutes/30 Minuten'. Verified get_service_duration() function correctly identifies service types and applies appropriate durations. Tested all 4 restricted time slots (12:00, 12:30, 13:00, 13:30) - all accepted successfully. Email notification system includes correct platform-specific duration information in both English (studio owner) and German (customer) emails. Backend properly handles booking creation, MongoDB storage, platform detection, and dual email notifications. System ready for production with proper platform-specific duration display and restricted time slot functionality."
