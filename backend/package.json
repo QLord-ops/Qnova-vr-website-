@@ -1,0 +1,18 @@
+{
+  "name": "qnova-vr-backend",
+  "version": "1.0.0",
+  "description": "QNOVA VR Studio Backend API",
+  "main": "server.py",
+  "scripts": {
+    "start": "uvicorn server:app --host 0.0.0.0 --port 8001",
+    "dev": "uvicorn server:app --reload --host 0.0.0.0 --port 8001"
+  },
+  "engines": {
+    "python": "3.11.x"
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
