@@ -166,7 +166,7 @@ def send_booking_notification_email(booking_data: dict):
                 
                 <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0;">
                     <h3 style="color: #000; margin-top: 0;">Booking Details:</h3>
-                    <p><strong>Service:</strong> {booking_data['service']}</p>
+                    <p><strong>Service:</strong> {booking_data['service']} (30 minutes)</p>
                     <p><strong>Date:</strong> {booking_data['date']}</p>
                     <p><strong>Time:</strong> {booking_data['time']}</p>
                     <p><strong>Participants:</strong> {booking_data['participants']}</p>
