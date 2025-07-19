@@ -282,7 +282,7 @@ const translations = {
     contactForPricing: "Цена по запросу", gameCatalog: "Каталог игр", allGames: "Все игры", vrGames: "VR-игры",
     name: "Имя", email: "Электронная почта", phone: "Телефон", service: "Услуга", date: "Дата", time: "Время", 
     participants: "Количество участников", message: "Сообщение", additionalMessage: "Дополнительное сообщение",
-    selectService: "Выберите услугу", selectTime: "Выберите время", messagePlaceholder: "Особые пожелания или вопросы?",
+    selectService: "Выберите услугу", selectTime: "Выберите время", first: "сначала", messagePlaceholder: "Особые пожелания или вопросы?",
     vrGamingSession: "KAT VR игровая сессия (30 минут)", psVRExperience: "PlayStation 5 VR опыт (1 час)", groupVRParty: "Групповая KAT VR вечеринка (30 минут)",
     bookSession: "Забронировать сеанс", submitting: "Бронирование...", bookNow: "Забронировать сейчас",
     bookingConfirmed: "Бронирование подтверждено!", bookingConfirmationText: "Мы получили ваше бронирование и отправим подтверждение по электронной почте.",
