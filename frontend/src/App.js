@@ -344,6 +344,71 @@ const LanguageProvider = ({ children }) => {
   );
 };
 
+// Language Selection Modal Component
+const LanguageSelectionModal = () => {
+  const { selectLanguage } = useLanguage();
+
+  const languageOptions = [
+    {
+      code: 'de',
+      name: 'Deutsch',
+      flag: '🇩🇪',
+      greeting: 'Willkommen bei QNOVA VR'
+    },
+    {
+      code: 'en', 
+      name: 'English',
+      flag: '🇬🇧',
+      greeting: 'Welcome to QNOVA VR'
+    },
+    {
+      code: 'ru',
+      name: 'Русский', 
+      flag: '🇷🇺',
+      greeting: 'Добро пожаловать в QNOVA VR'
+    }
+  ];
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
+      <div className="bg-white rounded-xl p-8 max-w-md w-full mx-4 text-center shadow-2xl">
+        <div className="mb-6">
+          <div className="text-4xl font-bold mb-2">QNOVA</div>
+          <div className="text-sm font-light tracking-widest text-gray-600">VIRTUAL REALITY</div>
+        </div>
+        
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Choose Your Language</h2>
+        <p className="text-gray-600 mb-6">Wählen Sie Ihre Sprache • Выберите язык</p>
+        
+        <div className="space-y-3">
+          {languageOptions.map((option) => (
+            <button
+              key={option.code}
+              onClick={() => selectLanguage(option.code)}
+              className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-black hover:bg-gray-50 transition-all duration-300 flex items-center justify-between group"
+            >
+              <div className="flex items-center space-x-4">
+                <span className="text-2xl">{option.flag}</span>
+                <div className="text-left">
+                  <div className="font-semibold text-gray-800">{option.name}</div>
+                  <div className="text-sm text-gray-600 group-hover:text-black">{option.greeting}</div>
+                </div>
+              </div>
+              <svg className="w-5 h-5 text-gray-400 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          ))}
+        </div>
+        
+        <p className="text-xs text-gray-500 mt-6">
+          You can change the language anytime in the navigation menu
+        </p>
+      </div>
+    </div>
+  );
+};
+
 // Navigation Component
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
