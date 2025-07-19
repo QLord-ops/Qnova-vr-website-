@@ -180,6 +180,7 @@ def send_booking_notification_email(booking_data: dict):
                 
                 <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px; margin: 20px 0;">
                     <h3 style="color: #000; margin-top: 0;">Booking Details:</h3>
+                    {f'<p><strong>Selected Game:</strong> 🎮 {booking_data["selectedGame"]}</p>' if booking_data.get('selectedGame') else ''}
                     <p><strong>Service:</strong> {booking_data['service']} ({english_duration})</p>
                     <p><strong>Date:</strong> {booking_data['date']}</p>
                     <p><strong>Time:</strong> {booking_data['time']}</p>
