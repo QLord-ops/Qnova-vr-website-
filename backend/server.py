@@ -275,6 +275,9 @@ def send_booking_notification_email(booking_data: dict):
 def send_customer_confirmation_email(booking_data: dict):
     """Send confirmation email to customer in German"""
     try:
+        # Get service duration
+        english_duration, german_duration = get_service_duration(booking_data['service'])
+        
         # Create message
         msg = MIMEMultipart('alternative')
         msg['Subject'] = f"🎮 Ihre VR-Session Buchung bestätigt - QNOVA VR"
@@ -296,7 +299,7 @@ def send_customer_confirmation_email(booking_data: dict):
                 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
                     <h3 style="color: #000; margin-top: 0;">Ihre Buchungsdetails:</h3>
-                    <p><strong>Service:</strong> {booking_data['service']} (30 Minuten)</p>
+                    <p><strong>Service:</strong> {booking_data['service']} ({german_duration})</p>
                     <p><strong>Datum:</strong> {booking_data['date']}</p>
                     <p><strong>Uhrzeit:</strong> {booking_data['time']}</p>
                     <p><strong>Teilnehmer:</strong> {booking_data['participants']}</p>
