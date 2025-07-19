@@ -300,7 +300,7 @@ const translations = {
     playstationSession: "PlayStation Gaming", playstationSessionDesc: "Испытайте новейшие игры PlayStation 5 с комфортом.",
     playstationPrice: "€9,99", playstationDuration: "1 час", 
     vrPartyPackage: "VR-пакет для вечеринки", vrPartyPackageDesc: "Идеально для дней рождения, праздников и особых событий.",
-    vrPartyPrice: "€180", vrPartyDuration: "2 часа", 
+    vrPartyPrice: "Цена по запросу", vrPartyDuration: "Индивидуальная продолжительность", 
     corporatePackage: "Корпоративный пакет", corporatePackageDesc: "Тимбилдинг и корпоративные развлечения.",
     corporatePrice: "Цена по запросу", corporateDuration: "Индивидуальная продолжительность", 
     perPerson: "за человека", bookThisPackage: "Забронировать этот пакет", contactForDetails: "Связаться для уточнения",
