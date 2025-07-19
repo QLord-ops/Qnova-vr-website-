@@ -215,7 +215,7 @@ def send_booking_notification_email(booking_data: dict):
         Phone: {booking_data['phone']}
 
         BOOKING DETAILS:
-        Service: {booking_data['service']} (30 minutes)
+        Service: {booking_data['service']} ({english_duration})
         Date: {booking_data['date']}
         Time: {booking_data['time']}
         Participants: {booking_data['participants']}
