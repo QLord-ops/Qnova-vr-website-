@@ -658,7 +658,7 @@ async def health_check():
     """Health check endpoint for monitoring services"""
     try:
         # Test database connection
-        await db.admin.command('ismaster')
+        server_info = await db.admin.command("ismaster")
         
         return {
             "status": "healthy",
