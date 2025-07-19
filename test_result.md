@@ -268,6 +268,18 @@ test_plan:
   test_all: true
   test_priority: "completed"
 
+  - task: "30-minute session duration display"
+    implemented: true
+    working: "needs_retesting"
+    file: "App.js, server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "needs_testing"
+        agent: "main"
+        comment: "Updated booking system to consistently display 30-minute session duration across all languages and components. Modified frontend booking descriptions, service options, and backend email confirmations to clearly state session duration."
+
 agent_communication:
   - agent: "main"
     message: "Implemented complete QNOVA VR website with booking system, game catalog, and contact functionality. Backend uses simulated email (logs to console) ready for Outlook integration. Frontend is fully responsive with black/white design and VR-themed images. Ready for comprehensive testing."
