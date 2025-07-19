@@ -56,13 +56,34 @@ const LanguageContext = createContext();
 const translations = {
   en: {
     home: "Home", about: "About", services: "Services", games: "Games", pricing: "Pricing", bookNow: "Book Now", contact: "Contact",
-    heroTitle: "Experience the Future of Gaming", heroSubtitle: "Immerse yourself in cutting-edge virtual reality and PlayStation gaming at QNOVA VR Studio in Göttingen.",
-    bookYourSession: "Book Your Session", whyChooseUs: "Why Choose QNOVA VR?", latestTechnology: "Latest Technology",
-    latestTechDesc: "State-of-the-art VR headsets and PlayStation 5 for the ultimate gaming experience.",
-    expertSupport: "Expert Support", expertSupportDesc: "Professional guidance and assistance throughout your gaming session.",
-    groupExperiences: "Group Experiences", groupExpDesc: "Perfect for parties, corporate events, and team building activities.",
-    primeLocation: "Prime Location", primeLocationDesc: "Conveniently located in the heart of Göttingen with easy access.",
-    readyToStep: "Ready to Step Into Virtual Reality?", readySubtitle: "Book your session today and experience gaming like never before.",
+    heroTitle: "Experience the Future of Gaming", heroSubtitle: "Immerse yourself in cutting-edge virtual reality with KAT VR treadmill technology and PlayStation gaming at QNOVA VR Studio in Göttingen.",
+    bookYourSession: "Book Your Session", whyChooseUs: "Why Choose QNOVA VR?",
+    
+    // KAT VR Platform content  
+    katVRTitle: "KAT VR Treadmill Technology", katVRSubtitle: "Experience VR gaming like never before with full-body movement freedom",
+    katVRDescription: "As one of the first VR studios in Germany to offer the revolutionary KAT Walk C+ platform - an omnidirectional treadmill that enables natural movement in the virtual world.",
+    fullBodyMovement: "Full-Body Movement", fullBodyMovementDesc: "Walk, crouch, and jump in the virtual world naturally",
+    immersiveExperience: "Maximum Immersion", immersiveExperienceDesc: "360° movement freedom for the ultimate VR experience",
+    safetyFirst: "Safety First", safetyFirstDesc: "Safety harnesses and professional supervision for worry-free gaming",
+    
+    // Featured Games section
+    featuredGames: "Featured VR Games", featuredGamesSubtitle: "Discover our top selection of VR and PlayStation games",
+    exploreAllGames: "Explore All Games", playOnKatVR: "Playable on KAT VR", playOnPS5: "PlayStation 5",
+    
+    // Enhanced features
+    latestTechnology: "Latest Technology", latestTechDesc: "KAT VR treadmill, Meta Quest Pro, and PlayStation 5 for the ultimate gaming experience.",
+    expertSupport: "Expert Support", expertSupportDesc: "Professional introduction and guidance throughout your entire VR session.",
+    groupExperiences: "Group Experiences", groupExpDesc: "Up to 8 players simultaneously - perfect for parties, corporate events, and team building.",
+    primeLocation: "Prime Location", primeLocationDesc: "Located in the heart of Göttingen with easy access and free parking.",
+    
+    // Technology specs
+    techSpecs: "Our Technology",
+    katWalkC: "KAT Walk C+ Platform", katWalkCDesc: "Omnidirectional treadmill with haptic feedback",
+    metaQuest: "Meta Quest Pro VR Headsets", metaQuestDesc: "4K resolution with eye tracking and mixed reality",
+    playstation5: "PlayStation 5 Consoles", playstation5Desc: "Latest games in 4K with VR support",
+    
+    readyToStep: "Ready for the Ultimate VR Experience?", 
+    readySubtitle: "Book your session with the KAT VR platform and experience gaming in a completely new dimension.",
     aboutTitle: "About QNOVA VR Studio",
     aboutDescription: "Located in the heart of Göttingen, QNOVA VR Studio is your gateway to immersive virtual reality experiences. We combine cutting-edge technology with exceptional service.",
     ourStory: "Our Story",
