@@ -993,6 +993,12 @@ const Games = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <VideoModal 
+        isOpen={videoModal.isOpen} 
+        onClose={closeVideoModal} 
+        videoUrl={videoModal.videoUrl} 
+        gameName={videoModal.gameName} 
+      />
       <section className="pt-32 py-16">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="fadeInUp" className="text-center mb-16">
