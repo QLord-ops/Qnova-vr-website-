@@ -392,52 +392,126 @@ def send_customer_confirmation_email(booking_data: dict):
         logger.error(f"❌ Failed to send customer confirmation email: {str(e)}")
         return False
 
-# Sample games data
+# Sample games data with real popular games
 SAMPLE_GAMES = [
+    # KAT VR Games
     {
         "id": "1",
         "name": "Half-Life: Alyx",
-        "description": "Fight the Combine in this immersive VR adventure",
+        "description": "Premium VR experience with stunning graphics and immersive gameplay",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1657734240343-44afa9402985?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxWUiUyMGhlYWRzZXR8ZW58MHx8fGJsYWNrX2FuZF93aGl0ZXwxNzUyNzQ5MjQ5fDA&ixlib=rb-4.1.0&q=85",
-        "duration": 60,
-        "max_players": 1
-    },
-    {
-        "id": "2",
-        "name": "Beat Saber",
-        "description": "Rhythmic VR experience with lightsabers",
-        "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1657734240326-8f2ab858a2dd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxWUiUyMGhlYWRzZXR8ZW58MHx8fGJsYWNrX2FuZF93aGl0ZXwxNzUyNzQ5MjQ5fDA&ixlib=rb-4.1.0&q=85",
+        "image_url": "https://images.unsplash.com/photo-1588590560438-5e27fe3f6b71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
         "duration": 30,
         "max_players": 1
     },
     {
+        "id": "2",
+        "name": "Pavlov VR",
+        "description": "Multiplayer shooter with realistic gun mechanics and tactical gameplay",
+        "platform": "VR",
+        "image_url": "https://images.unsplash.com/photo-1612066473428-fb6833a0d855?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 30,
+        "max_players": 4
+    },
+    {
         "id": "3",
-        "name": "Astro Bot",
-        "description": "PlayStation VR platformer adventure",
-        "platform": "PlayStation",
-        "image_url": "https://images.pexels.com/photos/2007647/pexels-photo-2007647.jpeg",
-        "duration": 45,
+        "name": "Beat Saber",
+        "description": "Rhythm game perfect for all ages - slice beats with lightsabers",
+        "platform": "VR",
+        "image_url": "https://images.unsplash.com/photo-1612066518884-2eda70eb3100?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 30,
         "max_players": 1
     },
     {
         "id": "4",
-        "name": "Superhot VR",
-        "description": "Time moves only when you move",
+        "name": "Skyrim VR",
+        "description": "Open-world adventure in the legendary Elder Scrolls universe",
         "platform": "VR",
-        "image_url": "https://images.unsplash.com/photo-1493497029755-f49c8e9a8bbe?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHx2aXJ0dWFsJTIwcmVhbGl0eXxlbnwwfHx8YmxhY2tfYW5kX3doaXRlfDE3NTI3NDkyNTd8MA&ixlib=rb-4.1.0&q=85",
-        "duration": 45,
+        "image_url": "https://images.unsplash.com/photo-1588590560438-5e27fe3f6b71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 30,
         "max_players": 1
     },
     {
         "id": "5",
-        "name": "Horizon Call of the Mountain",
-        "description": "PlayStation VR2 exclusive adventure",
-        "platform": "PlayStation",
-        "image_url": "https://images.unsplash.com/photo-1493496553793-56c1aa2cfcea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwzfHx2aXJ0dWFsJTIwcmVhbGl0eXxlbnwwfHx8YmxhY2tfYW5kX3doaXRlfDE3NTI3NDkyNTd8MA&ixlib=rb-4.1.0&q=85",
-        "duration": 60,
+        "name": "Boneworks",
+        "description": "Physics-based VR with realistic interaction and combat systems",
+        "platform": "VR",
+        "image_url": "https://images.unsplash.com/photo-1612066473428-fb6833a0d855?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 30,
         "max_players": 1
+    },
+    {
+        "id": "6",
+        "name": "The Walking Dead: Saints & Sinners",
+        "description": "Survival horror VR experience in the zombie apocalypse",
+        "platform": "VR",
+        "image_url": "https://images.unsplash.com/photo-1612066518884-2eda70eb3100?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 30,
+        "max_players": 1
+    },
+    {
+        "id": "7",
+        "name": "Superhot VR",
+        "description": "Time manipulation shooter - time moves only when you move",
+        "platform": "VR",
+        "image_url": "https://images.unsplash.com/photo-1588590560438-5e27fe3f6b71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 30,
+        "max_players": 1
+    },
+    {
+        "id": "8",
+        "name": "Arizona Sunshine",
+        "description": "Zombie shooter with co-op gameplay and desert environments",
+        "platform": "VR",
+        "image_url": "https://images.unsplash.com/photo-1612066473428-fb6833a0d855?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 30,
+        "max_players": 2
+    },
+    # PlayStation Games  
+    {
+        "id": "9",
+        "name": "FIFA 25",
+        "description": "Latest football simulation with realistic gameplay and updated rosters",
+        "platform": "PlayStation",
+        "image_url": "https://images.unsplash.com/photo-1571025443281-281bff33aa3a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 60,
+        "max_players": 2
+    },
+    {
+        "id": "10",
+        "name": "Call of Duty: Modern Warfare III",
+        "description": "Latest installment in the popular FPS franchise with campaign and multiplayer",
+        "platform": "PlayStation",
+        "image_url": "https://images.unsplash.com/photo-1593118247619-e2d6f056869e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 60,
+        "max_players": 4
+    },
+    {
+        "id": "11",
+        "name": "UFC 5",
+        "description": "Ultimate fighting experience with realistic combat mechanics",
+        "platform": "PlayStation",
+        "image_url": "https://images.unsplash.com/photo-1585857188938-2f7ae5afb6f8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwzfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 60,
+        "max_players": 2
+    },
+    {
+        "id": "12",
+        "name": "Gran Turismo 7",
+        "description": "Premium racing simulation with stunning graphics and realistic physics",
+        "platform": "PlayStation",
+        "image_url": "https://images.unsplash.com/photo-1571025443281-281bff33aa3a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 60,
+        "max_players": 2
+    },
+    {
+        "id": "13",
+        "name": "Grand Theft Auto V",
+        "description": "Open-world action adventure game with online multiplayer modes",
+        "platform": "PlayStation",
+        "image_url": "https://images.unsplash.com/photo-1593118247619-e2d6f056869e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+        "duration": 60,
+        "max_players": 4
     }
 ]
 
