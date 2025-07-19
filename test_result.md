@@ -301,6 +301,21 @@ frontend:
         agent: "testing"
         comment: "✅ PASSED - Platform-specific session duration testing completed successfully. Tested 3 different service types: KAT VR Gaming Session (30 min), PlayStation 5 VR Experience (1 hour), Group KAT VR Party (30 min). All bookings created successfully with proper platform detection. Backend get_service_duration() function correctly identifies PlayStation vs KAT VR services. Email notifications include correct duration: KAT VR services show '30 minutes/30 Minuten', PlayStation services show '1 hour/1 Stunde'. Restricted time slots (12:00, 12:30, 13:00, 13:30) working correctly. All backend APIs (8/8) passed testing. MongoDB storage, email notifications, and dynamic duration system all confirmed working."
 
+  - task: "Dynamic time slots with expanded range (12:00-22:00)"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "needs_testing"
+        agent: "main"
+        comment: "Updated QNOVA VR booking system with dynamic time slot functionality. KAT VR platforms: 30-minute intervals from 12:00-22:00 (21 time slots total), PlayStation 5 platforms: 1-hour intervals from 12:00-22:00 (11 time slots total). Platform-specific session durations: KAT VR services (30 minutes), PlayStation services (1 hour). Enhanced get_service_duration() function works with extended time slots. MongoDB storage accepts new time format and expanded time range."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Dynamic time slots testing completed successfully. Comprehensive testing verified: 1) KAT VR services with 30-minute intervals (21 slots from 12:00-22:00) working correctly, 2) PlayStation services with 1-hour intervals (11 slots from 12:00-22:00) working correctly, 3) Platform-specific durations: KAT VR shows '30 minutes/30 Minuten', PlayStation shows '1 hour/1 Stunde', 4) Extended time range (12:00-22:00) fully supported - tested earliest slot (12:00) and latest slot (22:00), 5) get_service_duration() function correctly identifies 'PlayStation'/'PS' services vs KAT VR services, 6) MongoDB storage accepts all new time formats, 7) Email notifications include correct platform-specific durations. Created 12 test bookings covering various scenarios: KAT VR Gaming Session, PlayStation 5 VR Experience, Group KAT VR Party, PlayStation VR Adventure, KAT VR Experience, PS VR Adventure, VR Gaming Experience, Group VR Party. All bookings created successfully with proper UUID generation, MongoDB storage, and dual email notifications. System demonstrates excellent functionality: booking creation ✅, database storage ✅, platform-specific duration detection ✅, extended time range support ✅, multilingual email notifications ✅."
+
   - task: "30-minute session duration display"
 
 metadata:
