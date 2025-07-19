@@ -882,7 +882,7 @@ const Games = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="pt-20 py-16">
+      <section className="pt-32 py-16">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="fadeInUp" className="text-center mb-16">
             <h1 className="text-5xl font-bold mb-6">{t('gamesTitle')}</h1>
