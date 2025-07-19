@@ -210,6 +210,18 @@ backend:
         agent: "testing"
         comment: "✅ PASSED - Restricted time slots testing completed successfully. Tested all 4 restricted time slots (12:00, 12:30, 13:00, 13:30) and confirmed backend accepts bookings for each slot. All test bookings created successfully with proper UUID generation, MongoDB storage, and email notifications. Time slots are correctly stored and returned in booking responses. System ready for production with restricted time slot functionality working as expected."
 
+  - task: "Selected game information in bookings and email notifications"
+    implemented: true
+    working: true
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Selected game functionality testing completed successfully. Verified the fix for missing game information in booking confirmations and email notifications. BOOKING CREATION: Successfully tested POST /api/bookings with selectedGame field - created test booking with selectedGame: 'FIFA 25' for PlayStation 5 VR Experience. DATABASE STORAGE: Confirmed selectedGame field is correctly saved to MongoDB and returned in API responses. EMAIL CONTENT VERIFICATION: Verified email templates include selectedGame information - Studio owner emails show 'Selected Game: 🎮 [game name]', Customer emails show 'Ausgewähltes Spiel: 🎮 [game name]' in German. Additional testing with Beat Saber (KAT VR) and Call of Duty: Modern Warfare III (PlayStation) confirmed functionality works across all game types. All required fields present in booking responses including selectedGame. System properly handles bookings with and without selectedGame field. Email notification system includes game information when provided by user. Core functionality verified: booking creation with selectedGame ✅, database storage ✅, email content inclusion ✅, cross-platform game support ✅."
+
 frontend:
   - task: "Home page with hero section"
     implemented: true
