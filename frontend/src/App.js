@@ -80,7 +80,7 @@ const translations = {
     // Technology specs
     techSpecs: "Our Technology",
     katWalkC: "KAT Walk C+ Platform", katWalkCDesc: "Omnidirectional treadmill with haptic feedback",
-    metaQuest: "Meta Quest Pro VR Headsets", metaQuestDesc: "4K resolution with eye tracking and mixed reality",
+    metaQuest: "Meta Quest 3 VR Headsets", metaQuestDesc: "Enhanced 4K+ resolution with advanced mixed reality capabilities",
     playstation5: "PlayStation 5 Consoles", playstation5Desc: "Latest games in 4K with VR support",
     
     readyToStep: "Ready for the Ultimate VR Experience?", 
