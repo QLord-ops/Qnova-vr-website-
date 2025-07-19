@@ -1606,8 +1606,15 @@ const Footer = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <div>
-                  <p className="text-gray-300">Stumpfebiel 4</p>
-                  <p className="text-gray-300">37073 Göttingen</p>
+                  <a 
+                    href="https://maps.google.com/?q=Stumpfebiel+4,+37073+Göttingen,+Germany" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <p className="hover:underline">Stumpfebiel 4</p>
+                    <p className="hover:underline">37073 Göttingen</p>
+                  </a>
                 </div>
               </div>
 
