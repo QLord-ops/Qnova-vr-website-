@@ -1501,7 +1501,7 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="pt-20 py-8 md:py-16">
+      <section className="pt-32 py-8 md:py-16">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="fadeInUp" className="text-center mb-8 md:mb-16">
             <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 hero-text">{t('pricingTitle')}</h1>
