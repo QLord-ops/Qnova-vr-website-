@@ -477,11 +477,11 @@ const Home = () => {
       </section>
 
       {/* KAT VR Platform Section */}
-      <section className="py-12 md:py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 text-white">
+      <section className="py-12 md:py-20 bg-gradient-to-r from-gray-900 to-black text-white">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="fadeInUp" className="text-center mb-8 md:mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 section-title text-white drop-shadow-lg">{t('katVRTitle')}</h2>
-            <p className="text-lg md:text-xl text-gray-100 max-w-4xl mx-auto mobile-text drop-shadow-md">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 section-title bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg">{t('katVRTitle')}</h2>
+            <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto mobile-text">
               {t('katVRDescription')}
             </p>
           </AnimatedSection>
