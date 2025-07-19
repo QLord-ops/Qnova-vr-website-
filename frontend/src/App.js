@@ -311,22 +311,34 @@ const translations = {
   }
 };
 
-// Language Provider
+// Language Provider with first-time language selection
 const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('de');
-  
-  const toggleLanguage = () => {
-    setLanguage(prev => {
-      if (prev === 'de') return 'en';
-      if (prev === 'en') return 'ru';
-      return 'de';
-    });
+  const [language, setLanguage] = useState(() => {
+    return localStorage.getItem('qnova-language') || null; // null means no language selected yet
+  });
+  const [showLanguageModal, setShowLanguageModal] = useState(() => {
+    return !localStorage.getItem('qnova-language'); // Show modal if no language selected
+  });
+
+  const selectLanguage = (lang) => {
+    setLanguage(lang);
+    localStorage.setItem('qnova-language', lang);
+    setShowLanguageModal(false);
   };
-  
-  const t = (key) => translations[language][key] || key;
-  
+
+  const toggleLanguage = () => {
+    const newLang = language === 'de' ? 'en' : language === 'en' ? 'ru' : 'de';
+    setLanguage(newLang);
+    localStorage.setItem('qnova-language', newLang);
+  };
+
+  const t = (key) => {
+    if (!language) return key; // Return key if no language selected
+    return translations[language][key] || translations.de[key] || key;
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, t, selectLanguage, showLanguageModal }}>
       {children}
     </LanguageContext.Provider>
   );
