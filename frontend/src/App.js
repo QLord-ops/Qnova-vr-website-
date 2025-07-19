@@ -1114,14 +1114,19 @@ const Booking = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     {t('time')} *
                   </label>
-                  <input
-                    type="time"
+                  <select
                     name="time"
                     value={formData.time}
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                  />
+                  >
+                    <option value="">{t('selectTime')}</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                  </select>
                 </div>
                 
                 <div>
