@@ -413,25 +413,25 @@ const Home = () => {
     {
       name: "Half-Life: Alyx",
       platform: "KAT VR",
-      image: "https://images.unsplash.com/photo-1588590560438-5e27fe3f6b71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+      image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
       description: "Premium VR experience with stunning graphics and immersive gameplay"
     },
     {
       name: "Beat Saber",
       platform: "KAT VR",
-      image: "https://images.unsplash.com/photo-1612066518884-2eda70eb3100?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxWUiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTJ8MA&ixlib=rb-4.1.0&q=85",
+      image: "https://images.unsplash.com/photo-1639174326326-6e2ef8d8ae39?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
       description: "Rhythm game perfect for all ages - slice beats with lightsabers"
     },
     {
       name: "FIFA 25",
       platform: "PlayStation 5",
-      image: "https://images.unsplash.com/photo-1571025443281-281bff33aa3a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+      image: "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
       description: "Latest football simulation with realistic gameplay and updated rosters"
     },
     {
       name: "Call of Duty: Modern Warfare III",
       platform: "PlayStation 5",
-      image: "https://images.unsplash.com/photo-1593118247619-e2d6f056869e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHxQbGF5U3RhdGlvbiUyMGdhbWVzfGVufDB8fHxibHVlfDE3NTI5MjY2NTl8MA&ixlib=rb-4.1.0&q=85",
+      image: "https://images.unsplash.com/photo-1617864064479-f203fc7897c0?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.0.3&q=85",
       description: "Latest installment in the popular FPS franchise with campaign and multiplayer"
     }
   ];
