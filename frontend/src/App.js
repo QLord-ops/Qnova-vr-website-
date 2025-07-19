@@ -1565,7 +1565,7 @@ const Pricing = () => {
         t('expertGuidance')
       ],
       popular: false,
-      bookingUrl: '/booking'
+      bookingUrl: '/booking?service=KAT+VR+Gaming+Session'
     },
     {
       name: t('groupVR'),
@@ -1579,7 +1579,7 @@ const Pricing = () => {
         'Group discounts'
       ],
       popular: true,
-      bookingUrl: '/booking'
+      bookingUrl: '/booking?service=Group+KAT+VR+Party'
     },
     {
       name: t('playstationSession'),
@@ -1592,7 +1592,7 @@ const Pricing = () => {
         t('comfortableSeating')
       ],
       popular: false,
-      bookingUrl: '/booking'
+      bookingUrl: '/booking?service=PlayStation+5+VR+Experience'
     },
     {
       name: t('vrPartyPackage'),
@@ -1605,7 +1605,7 @@ const Pricing = () => {
         t('refreshmentsIncluded')
       ],
       popular: false,
-      bookingUrl: '/booking'
+      bookingUrl: '/booking?service=Group+KAT+VR+Party'
     },
     {
       name: t('corporatePackage'),
