@@ -1039,12 +1039,27 @@ const Booking = () => {
   const { t } = useLanguage();
   const [selectedGame, setSelectedGame] = useState('');
   
-  // Get selected game from URL parameters
+  // Get selected game from URL parameters and set default service
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const gameParam = urlParams.get('game');
     if (gameParam) {
-      setSelectedGame(decodeURIComponent(gameParam));
+      const gameName = decodeURIComponent(gameParam);
+      setSelectedGame(gameName);
+      
+      // Auto-select appropriate service based on game
+      let defaultService = '';
+      if (gameName.includes('FIFA') || gameName.includes('Call of Duty') || gameName.includes('UFC') || 
+          gameName.includes('Gran Turismo') || gameName.includes('Grand Theft Auto')) {
+        defaultService = 'PlayStation 5 VR Experience';
+      } else {
+        defaultService = 'KAT VR Gaming Session';
+      }
+      
+      setFormData(prev => ({
+        ...prev,
+        service: defaultService
+      }));
     }
   }, []);
 
