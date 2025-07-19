@@ -1134,7 +1134,13 @@ const Booking = () => {
     setIsSubmitting(true);
     
     try {
-      await axios.post(`${API}/bookings`, formData);
+      // Include selected game in the booking data
+      const bookingData = {
+        ...formData,
+        selectedGame: selectedGame || '' // Add selected game to booking data
+      };
+      
+      await axios.post(`${API}/bookings`, bookingData);
       setIsSuccess(true);
       setFormData({
         name: '',
