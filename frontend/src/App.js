@@ -948,6 +948,15 @@ const Games = () => {
   const [filteredGames, setFilteredGames] = useState([]);
   const [selectedPlatform, setSelectedPlatform] = useState('all');
   const [loading, setLoading] = useState(true);
+  const [videoModal, setVideoModal] = useState({ isOpen: false, videoUrl: '', gameName: '' });
+
+  const openVideoModal = (videoUrl, gameName) => {
+    setVideoModal({ isOpen: true, videoUrl, gameName });
+  };
+
+  const closeVideoModal = () => {
+    setVideoModal({ isOpen: false, videoUrl: '', gameName: '' });
+  };
 
   useEffect(() => {
     fetchGames();
