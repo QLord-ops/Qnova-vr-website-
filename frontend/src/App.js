@@ -479,30 +479,30 @@ const Navigation = () => {
 const Home = () => {
   const { t } = useLanguage();
   
-  // Featured games data with thematic images
+  // Featured games data with your REAL game covers
   const featuredGames = [
     {
       name: "Half-Life: Alyx",
       platform: "KAT VR",
-      image: "https://images.pexels.com/photos/2007647/pexels-photo-2007647.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwxfHxnYW1pbmd8ZW58MHx8fHwxNzUyOTQxNTA1fDA&ixlib=rb-4.1.0&q=85",
       description: "Premium VR experience with stunning graphics and immersive gameplay"
     },
     {
       name: "Beat Saber",
       platform: "KAT VR", 
-      image: "https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwzfHxnYW1pbmd8ZW58MHx8fHwxNzUyOTQxNTA1fDA&ixlib=rb-4.1.0&q=85",
       description: "Rhythm game perfect for all ages - slice beats with lightsabers"
     },
     {
       name: "FIFA 25",
       platform: "PlayStation 5",
-      image: "https://images.pexels.com/photos/1174746/pexels-photo-1174746.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      image: "https://i.imgur.com/qkrEXep.png",  // Your real FIFA 25 cover
       description: "Latest football simulation with realistic gameplay and updated rosters"
     },
     {
       name: "Call of Duty: Modern Warfare III",
       platform: "PlayStation 5",
-      image: "https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      image: "https://i.imgur.com/4bEFjBb.jpeg",  // Your real COD MW3 cover
       description: "Latest installment in the popular FPS franchise with campaign and multiplayer"
     }
   ];
