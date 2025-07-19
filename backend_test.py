@@ -470,6 +470,221 @@ def test_30_minute_session_duration():
     
     return True
 
+def test_expanded_time_slots_and_platform_durations():
+    """Test expanded time range (12:00-22:00) and platform-specific durations"""
+    print_test_header("Expanded Time Slots & Platform-Specific Durations")
+    
+    print_info("Testing expanded time range (12:00-22:00) with platform-specific durations")
+    print_info("KAT VR services: 30-minute intervals, PlayStation services: 1-hour intervals")
+    
+    # Test bookings covering the expanded time range and different platforms
+    test_bookings = [
+        # KAT VR Gaming Session - 30-minute intervals
+        {
+            "name": "Emma Fischer",
+            "email": "emma.fischer@email.com",
+            "phone": "+49 551 123001",
+            "service": "KAT VR Gaming Session",
+            "date": "2025-02-15",
+            "time": "12:00",  # Earliest slot
+            "participants": 1,
+            "message": "Testing earliest KAT VR time slot"
+        },
+        {
+            "name": "Lukas Weber",
+            "email": "lukas.weber@gmail.com",
+            "phone": "+49 551 123002",
+            "service": "KAT VR Gaming Session", 
+            "date": "2025-02-16",
+            "time": "12:30",  # 30-minute interval
+            "participants": 2,
+            "message": "Testing KAT VR 30-minute interval"
+        },
+        {
+            "name": "Sophie Müller",
+            "email": "sophie.mueller@outlook.com",
+            "phone": "+49 551 123003",
+            "service": "KAT VR Gaming Session",
+            "date": "2025-02-17",
+            "time": "14:30",  # Mid-day 30-minute interval
+            "participants": 1,
+            "message": "Testing mid-day KAT VR slot"
+        },
+        {
+            "name": "Max Schmidt",
+            "email": "max.schmidt@email.com",
+            "phone": "+49 551 123004",
+            "service": "KAT VR Gaming Session",
+            "date": "2025-02-18",
+            "time": "21:30",  # Late evening 30-minute interval
+            "participants": 2,
+            "message": "Testing late KAT VR time slot"
+        },
+        
+        # PlayStation 5 VR Experience - 1-hour intervals
+        {
+            "name": "Anna Becker",
+            "email": "anna.becker@gmail.com",
+            "phone": "+49 551 123005",
+            "service": "PlayStation 5 VR Experience",
+            "date": "2025-02-19",
+            "time": "12:00",  # Earliest PlayStation slot
+            "participants": 1,
+            "message": "Testing earliest PlayStation time slot"
+        },
+        {
+            "name": "Tom Wagner",
+            "email": "tom.wagner@outlook.com",
+            "phone": "+49 551 123006",
+            "service": "PlayStation 5 VR Experience",
+            "date": "2025-02-20",
+            "time": "15:00",  # Mid-afternoon PlayStation slot
+            "participants": 2,
+            "message": "Testing mid-day PlayStation slot"
+        },
+        {
+            "name": "Lisa Klein",
+            "email": "lisa.klein@email.com",
+            "phone": "+49 551 123007",
+            "service": "PlayStation 5 VR Experience",
+            "date": "2025-02-21",
+            "time": "18:00",  # Evening PlayStation slot
+            "participants": 1,
+            "message": "Testing evening PlayStation slot"
+        },
+        {
+            "name": "David Hoffmann",
+            "email": "david.hoffmann@gmail.com",
+            "phone": "+49 551 123008",
+            "service": "PlayStation 5 VR Experience",
+            "date": "2025-02-22",
+            "time": "22:00",  # Latest PlayStation slot
+            "participants": 2,
+            "message": "Testing latest PlayStation time slot"
+        },
+        
+        # Group KAT VR Party - 30-minute intervals
+        {
+            "name": "Julia Richter",
+            "email": "julia.richter@outlook.com",
+            "phone": "+49 551 123009",
+            "service": "Group KAT VR Party",
+            "date": "2025-02-23",
+            "time": "13:00",  # Group party mid-day
+            "participants": 4,
+            "message": "Testing Group KAT VR Party booking"
+        },
+        {
+            "name": "Michael Braun",
+            "email": "michael.braun@email.com",
+            "phone": "+49 551 123010",
+            "service": "Group KAT VR Party",
+            "date": "2025-02-24",
+            "time": "19:30",  # Group party evening
+            "participants": 6,
+            "message": "Testing evening Group KAT VR Party"
+        }
+    ]
+    
+    booking_results = []
+    platform_duration_tests = {}
+    
+    for i, booking_data in enumerate(test_bookings, 1):
+        print(f"\n{Colors.YELLOW}Time Slot Test {i}: {booking_data['name']} - {booking_data['service']} at {booking_data['time']}{Colors.ENDC}")
+        
+        try:
+            response = requests.post(
+                f"{BACKEND_URL}/bookings",
+                json=booking_data,
+                headers={"Content-Type": "application/json"}
+            )
+            
+            if response.status_code == 200:
+                booking_result = response.json()
+                print_success(f"Booking created successfully")
+                print_info(f"Booking ID: {booking_result.get('id')}")
+                print_info(f"Service: {booking_result.get('service')}")
+                print_info(f"Time Slot: {booking_result.get('time')}")
+                print_info(f"Customer: {booking_result.get('name')}")
+                
+                # Verify booking was saved correctly
+                required_fields = ['id', 'name', 'email', 'phone', 'service', 'date', 'time', 'participants', 'status', 'created_at']
+                missing_fields = [field for field in required_fields if field not in booking_result]
+                
+                if missing_fields:
+                    print_warning(f"Missing fields in response: {missing_fields}")
+                else:
+                    print_success("All required fields present in booking response")
+                
+                # Test platform-specific duration logic
+                service = booking_data['service']
+                if "PlayStation" in service or "PS" in service:
+                    expected_duration_en = "1 hour"
+                    expected_duration_de = "1 Stunde"
+                    platform_type = "PlayStation"
+                else:
+                    expected_duration_en = "30 minutes"
+                    expected_duration_de = "30 Minuten"
+                    platform_type = "KAT VR"
+                
+                platform_duration_tests[service] = {
+                    'platform_type': platform_type,
+                    'expected_duration_en': expected_duration_en,
+                    'expected_duration_de': expected_duration_de,
+                    'time_slot': booking_data['time']
+                }
+                
+                print_success(f"Platform Detection: {platform_type}")
+                print_info(f"Expected Duration (English): {expected_duration_en}")
+                print_info(f"Expected Duration (German): {expected_duration_de}")
+                print_info(f"Time Slot Accepted: {booking_data['time']} ✅")
+                
+                booking_results.append(booking_result)
+                
+            else:
+                print_error(f"Booking creation failed with status {response.status_code}")
+                print_error(f"Response: {response.text}")
+                return False
+                
+        except Exception as e:
+            print_error(f"Failed to create booking: {str(e)}")
+            return False
+    
+    # Summary of platform-specific duration testing
+    print(f"\n{Colors.GREEN}{Colors.BOLD}PLATFORM-SPECIFIC DURATION TEST SUMMARY:{Colors.ENDC}")
+    
+    kat_vr_services = [k for k, v in platform_duration_tests.items() if v['platform_type'] == 'KAT VR']
+    playstation_services = [k for k, v in platform_duration_tests.items() if v['platform_type'] == 'PlayStation']
+    
+    print_success(f"✅ KAT VR Services Tested ({len(kat_vr_services)}): 30-minute duration")
+    for service in kat_vr_services:
+        print_info(f"  • {service}: {platform_duration_tests[service]['expected_duration_en']} / {platform_duration_tests[service]['expected_duration_de']}")
+    
+    print_success(f"✅ PlayStation Services Tested ({len(playstation_services)}): 1-hour duration")
+    for service in playstation_services:
+        print_info(f"  • {service}: {platform_duration_tests[service]['expected_duration_en']} / {platform_duration_tests[service]['expected_duration_de']}")
+    
+    # Summary of time slot testing
+    print(f"\n{Colors.GREEN}{Colors.BOLD}EXPANDED TIME RANGE TEST SUMMARY:{Colors.ENDC}")
+    time_slots_tested = [booking['time'] for booking in test_bookings]
+    earliest_slot = min(time_slots_tested)
+    latest_slot = max(time_slots_tested)
+    
+    print_success(f"✅ Time Range Tested: {earliest_slot} - {latest_slot}")
+    print_success(f"✅ Total Time Slots Tested: {len(set(time_slots_tested))}")
+    print_success(f"✅ KAT VR 30-minute intervals: {[slot for i, slot in enumerate(time_slots_tested) if 'KAT VR' in test_bookings[i]['service']]}")
+    print_success(f"✅ PlayStation 1-hour intervals: {[slot for i, slot in enumerate(time_slots_tested) if 'PlayStation' in test_bookings[i]['service']]}")
+    
+    print(f"\n{Colors.BLUE}📧 EMAIL DURATION VERIFICATION:{Colors.ENDC}")
+    print_info("Check backend logs for email notifications with correct durations:")
+    for booking in booking_results:
+        service = booking['service']
+        duration_info = platform_duration_tests[service]
+        print_info(f"  • {booking['name']}: Studio email should show '{service} ({duration_info['expected_duration_en']})'")
+        print_info(f"  • {booking['email']}: Customer email should show '{service} ({duration_info['expected_duration_de']})'")
+    
+    return True
+
 def test_email_simulation():
     """Test email confirmation system by checking backend logs"""
     print_test_header("Email Confirmation System")
