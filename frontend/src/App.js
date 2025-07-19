@@ -1034,9 +1034,20 @@ const Games = () => {
   );
 };
 
-// Booking Component
+// Booking Component with Game Selection
 const Booking = () => {
   const { t } = useLanguage();
+  const [selectedGame, setSelectedGame] = useState('');
+  
+  // Get selected game from URL parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameParam = urlParams.get('game');
+    if (gameParam) {
+      setSelectedGame(decodeURIComponent(gameParam));
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
