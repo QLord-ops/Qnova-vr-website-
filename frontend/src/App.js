@@ -154,6 +154,7 @@ const translations = {
     // KAT VR Platform content
     katVRTitle: "KAT VR Laufband-Technologie", katVRSubtitle: "Erleben Sie VR Gaming wie nie zuvor mit Ganzkörper-Bewegungsfreiheit",
     katVRDescription: "Als eines der ersten VR-Studios in Deutschland bieten wir die revolutionäre KAT Walk C+ Plattform - ein omnidirektionales Laufband, das natürliche Bewegungen in der virtuellen Welt ermöglicht.",
+    katVRVideoCaption: "Erleben Sie die KAT VR Technologie in Aktion",
     fullBodyMovement: "Ganzkörper-Bewegung", fullBodyMovementDesc: "Laufen, ducken und springen Sie in der virtuellen Welt",
     immersiveExperience: "Maximale Immersion", immersiveExperienceDesc: "360° Bewegungsfreiheit für das ultimative VR-Erlebnis",
     safetyFirst: "Absolute Sicherheit", safetyFirstDesc: "Sicherheitsgurte und professionelle Betreuung für sorgenfreies Gaming",
