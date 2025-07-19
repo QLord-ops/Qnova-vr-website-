@@ -353,13 +353,13 @@ const Navigation = () => {
           </Link>
           
           <div className="hidden xl:flex space-x-8 items-center">
-            <Link to="/" className="hover:text-gray-300 transition-colors">{t('home')}</Link>
-            <Link to="/about" className="hover:text-gray-300 transition-colors">{t('about')}</Link>
-            <Link to="/services" className="hover:text-gray-300 transition-colors">{t('services')}</Link>
-            <Link to="/games" className="hover:text-gray-300 transition-colors">{t('games')}</Link>
-            <Link to="/pricing" className="hover:text-gray-300 transition-colors">{t('pricing')}</Link>
-            <Link to="/booking" className="hover:text-gray-300 transition-colors">{t('bookNow')}</Link>
-            <Link to="/contact" className="hover:text-gray-300 transition-colors">{t('contact')}</Link>
+            <Link to="/" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('home')}</Link>
+            <Link to="/about" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('about')}</Link>
+            <Link to="/services" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('services')}</Link>
+            <Link to="/games" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('games')}</Link>
+            <Link to="/pricing" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('pricing')}</Link>
+            <Link to="/booking" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('bookNow')}</Link>
+            <Link to="/contact" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('contact')}</Link>
             
             <button
               onClick={toggleLanguage}
