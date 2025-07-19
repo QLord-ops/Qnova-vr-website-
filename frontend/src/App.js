@@ -1161,6 +1161,11 @@ const Booking = () => {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t('bookingDescription')}
             </p>
+            {selectedGame && (
+              <div className="mt-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg inline-block">
+                <span className="text-lg font-semibold">🎮 Booking: {selectedGame}</span>
+              </div>
+            )}
           </AnimatedSection>
           
           <div className="max-w-2xl mx-auto">
