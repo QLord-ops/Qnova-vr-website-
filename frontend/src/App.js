@@ -1049,8 +1049,12 @@ const Booking = () => {
       
       // Auto-select appropriate service based on game
       let defaultService = '';
-      if (gameName.includes('FIFA') || gameName.includes('Call of Duty') || gameName.includes('UFC') || 
-          gameName.includes('Gran Turismo') || gameName.includes('Grand Theft Auto')) {
+      if (gameName.includes('FIFA') || 
+          gameName.includes('Call of Duty') || 
+          gameName.includes('UFC') || 
+          gameName.includes('Gran Turismo') || 
+          gameName.includes('Grand Theft Auto') ||
+          gameName.includes('Modern Warfare')) {
         defaultService = 'PlayStation 5 VR Experience';
       } else {
         defaultService = 'KAT VR Gaming Session';
