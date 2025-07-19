@@ -469,13 +469,13 @@ SAMPLE_GAMES = [
         "duration": 30,
         "max_players": 2
     },
-    # PlayStation Games with your REAL game covers
+    # PlayStation Games with your CORRECT game covers
     {
         "id": "9",
         "name": "Call of Duty: Modern Warfare III", 
         "description": "Latest installment in the popular FPS franchise with campaign and multiplayer",
         "platform": "PlayStation",
-        "image_url": "https://i.imgur.com/4bEFjBb.jpeg",  # Your real COD MW3 cover
+        "image_url": "https://i.imgur.com/qkrEXep.png",  # Your CORRECT COD MW3 cover
         "duration": 60,
         "max_players": 4
     },
@@ -484,7 +484,7 @@ SAMPLE_GAMES = [
         "name": "FIFA 25",
         "description": "Latest football simulation with realistic gameplay and updated rosters",
         "platform": "PlayStation",
-        "image_url": "https://i.imgur.com/qkrEXep.png",  # Your real FIFA 25 cover
+        "image_url": "https://i.imgur.com/9ZbaSE2.jpeg",  # Your CORRECT FIFA 25 cover
         "duration": 60,
         "max_players": 2
     },
@@ -493,7 +493,7 @@ SAMPLE_GAMES = [
         "name": "UFC 5",
         "description": "Ultimate fighting experience with realistic combat mechanics",
         "platform": "PlayStation",
-        "image_url": "https://i.imgur.com/mRP0p1M.jpeg",  # Your real UFC 5 cover
+        "image_url": "https://i.imgur.com/4bEFjBb.jpeg",  # Your CORRECT UFC 5 cover
         "duration": 60,
         "max_players": 2
     },
@@ -502,7 +502,7 @@ SAMPLE_GAMES = [
         "name": "Gran Turismo 7",
         "description": "Premium racing simulation with stunning graphics and realistic physics",
         "platform": "PlayStation",
-        "image_url": "https://i.imgur.com/KYvktmc.png",  # Your real Gran Turismo 7 cover
+        "image_url": "https://i.imgur.com/mRP0p1M.jpeg",  # Your CORRECT Gran Turismo 7 cover
         "duration": 60,
         "max_players": 2
     },
@@ -511,7 +511,7 @@ SAMPLE_GAMES = [
         "name": "Grand Theft Auto V",
         "description": "Open-world action adventure game with online multiplayer modes",
         "platform": "PlayStation",
-        "image_url": "https://i.imgur.com/9ZbaSE2.jpeg",  # Your real GTA V cover
+        "image_url": "https://i.imgur.com/KYvktmc.png",  # Your CORRECT GTA V cover
         "duration": 60,
         "max_players": 4
     }
