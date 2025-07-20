@@ -986,6 +986,41 @@ async def get_contact_messages():
     messages = await db.contact_messages.find().to_list(1000)
     return [ContactMessage(**message) for message in messages]
 
+async def generate_default_slots_for_date(date: str) -> List[TimeSlot]:
+    """Generate default time slots for a specific date"""
+    slots = []
+    
+    # Define default time slots (12:00 to 22:00, following existing pattern)
+    start_hour = 12
+    end_hour = 22
+    
+    for hour in range(start_hour, end_hour):
+        for minute in [0, 30]:
+            time_str = f"{hour:02d}:{minute:02d}"
+            
+            # Create KAT VR slot (30-minute sessions)
+            kat_slot = TimeSlot(
+                date=date,
+                time=time_str,
+                service_type="KAT VR Gaming Session",
+                status=SlotStatus.available
+            )
+            slots.append(kat_slot)
+            await db.time_slots.insert_one(kat_slot.dict())
+            
+        # Create PlayStation slot for each hour (1-hour sessions)
+        hour_time_str = f"{hour:02d}:00"
+        ps_slot = TimeSlot(
+            date=date,
+            time=hour_time_str,
+            service_type="PlayStation 5 VR Experience",
+            status=SlotStatus.available
+        )
+        slots.append(ps_slot)
+        await db.time_slots.insert_one(ps_slot.dict())
+    
+    return slots
+
 # Include the router in the main app
 app.include_router(api_router)
 
