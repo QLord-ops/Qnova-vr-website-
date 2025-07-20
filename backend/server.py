@@ -690,6 +690,43 @@ async def create_contact_message(message_data: ContactMessageCreate):
     
     return message_obj
 
+async def generate_default_slots_for_date(date: str) -> List[TimeSlot]:
+    """Generate default time slots for a specific date"""
+    slots = []
+    
+    # Define default time slots (9 AM to 9 PM, 30-minute intervals)
+    start_hour = 9
+    end_hour = 21
+    
+    for hour in range(start_hour, end_hour):
+        for minute in [0, 30]:
+            time_str = f"{hour:02d}:{minute:02d}"
+            
+            # Create KAT VR slot
+            kat_slot = TimeSlot(
+                date=date,
+                time=time_str,
+                service_type="KAT VR Gaming Session",
+                status=SlotStatus.available
+            )
+            slots.append(kat_slot)
+            
+            # Create PlayStation slot (1-hour sessions, so only on the hour)
+            if minute == 0:
+                ps_slot = TimeSlot(
+                    date=date,
+                    time=time_str,
+                    service_type="PlayStation 5 VR Experience",
+                    status=SlotStatus.available
+                )
+                slots.append(ps_slot)
+    
+    # Save slots to database
+    for slot in slots:
+        await db.time_slots.insert_one(slot.dict())
+    
+    return slots
+
 @api_router.get("/health")
 async def health_check():
     """Health check endpoint for monitoring services"""
