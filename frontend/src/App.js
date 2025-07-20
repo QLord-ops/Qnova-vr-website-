@@ -1961,6 +1961,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminPanel />} />
           </Routes>
           <Footer />
         </BrowserRouter>
