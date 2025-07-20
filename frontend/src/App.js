@@ -1034,7 +1034,9 @@ const Games = () => {
   );
 };
 
-// Booking Component with Game Selection
+import Calendar from './components/Calendar';
+
+// Booking Component (Enhanced with Calendar) with Game Selection
 const Booking = () => {
   const { t } = useLanguage();
   const [selectedGame, setSelectedGame] = useState('');
