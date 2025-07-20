@@ -1252,6 +1252,18 @@ const Booking = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-32 px-4">
       <div className="max-w-6xl mx-auto">
         
+        {/* Simple Calendar Demo */}
+        <SimpleCalendar 
+          onSlotSelect={(slot) => {
+            setFormData(prev => ({
+              ...prev,
+              service: slot.service,
+              time: slot.time,
+              date: selectedDate.toISOString().split('T')[0]
+            }));
+          }}
+        />
+
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('bookingTitle')}</h1>
