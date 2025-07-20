@@ -1299,14 +1299,63 @@ const Booking = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Calendar Section */}
+          {/* Demo Calendar Section */}
           {showCalendar && (
             <div className="order-2 lg:order-1">
-              <Calendar
-                selectedDate={selectedDate}
-                onDateChange={setSelectedDate}
-                onSlotSelect={handleCalendarSlotSelect}
-              />
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-2xl font-bold mb-4">📅 Календарь Бронирования</h2>
+                
+                <div className="mb-4">
+                  <h3 className="text-lg font-medium mb-2">
+                    📆 {selectedDate.toLocaleDateString('ru-RU', { 
+                      weekday: 'long', 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {demoSlots.map((slot, index) => (
+                    <div
+                      key={index}
+                      onClick={() => {
+                        if (slot.status === 'available') {
+                          setSelectedSlot(slot);
+                          setFormData(prev => ({
+                            ...prev,
+                            service: slot.service,
+                            time: slot.time,
+                            date: selectedDate.toISOString().split('T')[0]
+                          }));
+                          setShowCalendar(false);
+                        }
+                      }}
+                      className={`
+                        p-3 rounded-lg border-2 transition-all cursor-pointer
+                        ${slot.status === 'available' 
+                          ? 'bg-green-100 border-green-300 text-green-800 hover:bg-green-200 hover:scale-105' 
+                          : 'bg-red-100 border-red-300 text-red-800 cursor-not-allowed'
+                        }
+                      `}
+                    >
+                      <div className="font-bold text-lg">{slot.time}</div>
+                      <div className="text-xs">
+                        {slot.service.includes('PlayStation') ? '🎮 PlayStation' : '🚶‍♂️ KAT VR'}
+                      </div>
+                      <div className="text-xs mt-1">
+                        {slot.status === 'available' ? '✅ Свободно' : '❌ Занято'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-4 text-sm text-gray-600">
+                  <p>🟢 Зеленый = Свободно | 🔴 Красный = Занято</p>
+                  <p>Кликните на зеленый слот для бронирования</p>
+                </div>
+              </div>
             </div>
           )}
 
