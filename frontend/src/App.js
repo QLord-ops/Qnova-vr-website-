@@ -1053,6 +1053,7 @@ const Games = () => {
 };
 
 import Calendar from './components/Calendar';
+import AdminPanel from './components/AdminPanel';
 
 // Booking Component (Enhanced with Calendar) with Game Selection
 const Booking = () => {
