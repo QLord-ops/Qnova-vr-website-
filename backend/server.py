@@ -690,6 +690,235 @@ async def create_contact_message(message_data: ContactMessageCreate):
     
     return message_obj
 
+# =================== CALENDAR SYSTEM ENDPOINTS ===================
+
+@api_router.get("/calendar/{date}", response_model=CalendarDay)
+async def get_calendar_day(date: str):
+    """Get all time slots for a specific date (YYYY-MM-DD format)"""
+    try:
+        # Get all slots for the date
+        slots_cursor = db.time_slots.find({"date": date})
+        slots = []
+        async for slot in slots_cursor:
+            slots.append(TimeSlot(**slot))
+        
+        # Sort slots by time
+        slots.sort(key=lambda x: x.time)
+        
+        # Generate missing slots if needed
+        if not slots:
+            slots = await generate_default_slots_for_date(date)
+        
+        # Calculate statistics
+        total_slots = len(slots)
+        available_slots = len([s for s in slots if s.status == SlotStatus.available])
+        booked_slots = len([s for s in slots if s.status == SlotStatus.booked])
+        
+        return CalendarDay(
+            date=date,
+            slots=slots,
+            total_slots=total_slots,
+            available_slots=available_slots,
+            booked_slots=booked_slots
+        )
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.get("/calendar/range/{start_date}/{end_date}")
+async def get_calendar_range(start_date: str, end_date: str):
+    """Get calendar data for a date range"""
+    try:
+        # Parse dates
+        start = datetime.strptime(start_date, "%Y-%m-%d")
+        end = datetime.strptime(end_date, "%Y-%m-%d")
+        
+        days = []
+        current = start
+        while current <= end:
+            date_str = current.strftime("%Y-%m-%d")
+            day_data = await get_calendar_day(date_str)
+            days.append(day_data)
+            current += timedelta(days=1)
+        
+        return {"days": days, "start_date": start_date, "end_date": end_date}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.post("/calendar/slots", response_model=TimeSlot)
+async def create_time_slot(slot_data: TimeSlotCreate):
+    """Create a new time slot"""
+    try:
+        slot = TimeSlot(**slot_data.dict())
+        await db.time_slots.insert_one(slot.dict())
+        return slot
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.put("/calendar/slots/{slot_id}", response_model=TimeSlot)
+async def update_time_slot(slot_id: str, slot_update: TimeSlotUpdate):
+    """Update a time slot (book, cancel, maintenance, etc.)"""
+    try:
+        update_data = {k: v for k, v in slot_update.dict().items() if v is not None}
+        update_data["updated_at"] = datetime.utcnow()
+        
+        result = await db.time_slots.update_one(
+            {"id": slot_id},
+            {"$set": update_data}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Time slot not found")
+        
+        # Get updated slot
+        updated_slot = await db.time_slots.find_one({"id": slot_id})
+        return TimeSlot(**updated_slot)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.delete("/calendar/slots/{slot_id}")
+async def delete_time_slot(slot_id: str):
+    """Delete a time slot"""
+    try:
+        result = await db.time_slots.delete_one({"id": slot_id})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Time slot not found")
+        return {"message": "Time slot deleted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.post("/calendar/book-slot/{slot_id}")
+async def book_time_slot(slot_id: str, booking_info: dict):
+    """Book a specific time slot"""
+    try:
+        # Check if slot exists and is available
+        slot = await db.time_slots.find_one({"id": slot_id})
+        if not slot:
+            raise HTTPException(status_code=404, detail="Time slot not found")
+        
+        if slot["status"] != SlotStatus.available:
+            raise HTTPException(status_code=400, detail="Time slot is not available")
+        
+        # Create booking
+        booking_data = {
+            "id": str(uuid.uuid4()),
+            "name": booking_info["name"],
+            "email": booking_info["email"],
+            "phone": booking_info.get("phone", ""),
+            "service": slot["service_type"],
+            "date": slot["date"],
+            "time": slot["time"],
+            "participants": booking_info.get("participants", 1),
+            "message": booking_info.get("message", ""),
+            "selectedGame": booking_info.get("selectedGame", ""),
+            "status": "confirmed",
+            "created_at": datetime.utcnow()
+        }
+        
+        # Save booking
+        await db.bookings.insert_one(booking_data)
+        
+        # Update slot status
+        await db.time_slots.update_one(
+            {"id": slot_id},
+            {
+                "$set": {
+                    "status": SlotStatus.booked,
+                    "booking_id": booking_data["id"],
+                    "customer_info": {
+                        "name": booking_info["name"],
+                        "email": booking_info["email"],
+                        "phone": booking_info.get("phone", "")
+                    },
+                    "updated_at": datetime.utcnow()
+                }
+            }
+        )
+        
+        # Send email notifications
+        try:
+            await send_booking_notification_email(booking_data)
+            await send_customer_confirmation_email(booking_data)
+        except Exception as e:
+            print(f"Email notification failed: {str(e)}")
+        
+        return {"message": "Time slot booked successfully", "booking_id": booking_data["id"]}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.post("/calendar/generate-slots/{date}")
+async def generate_slots_for_date(date: str):
+    """Generate default time slots for a specific date"""
+    try:
+        slots = await generate_default_slots_for_date(date)
+        return {"message": f"Generated {len(slots)} slots for {date}", "slots": slots}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+# =================== ADMIN FUNCTIONS ===================
+
+@api_router.get("/admin/bookings/today")
+async def get_today_bookings():
+    """Get all bookings for today"""
+    try:
+        today = datetime.now().strftime("%Y-%m-%d")
+        bookings_cursor = db.bookings.find({"date": today})
+        bookings = []
+        async for booking in bookings_cursor:
+            bookings.append(booking)
+        return {"date": today, "bookings": bookings, "count": len(bookings)}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.post("/admin/test-mode/create-bookings")
+async def create_test_bookings():
+    """Create test bookings for demonstration"""
+    try:
+        today = datetime.now()
+        test_bookings = []
+        
+        # Create 5 test bookings over next 3 days
+        for i in range(5):
+            date = (today + timedelta(days=i % 3)).strftime("%Y-%m-%d")
+            time = f"{12 + i}:{'00' if i % 2 == 0 else '30'}"
+            
+            # Create time slot if doesn't exist
+            slot = TimeSlot(
+                date=date,
+                time=time,
+                service_type="KAT VR Gaming Session" if i % 2 == 0 else "PlayStation 5 VR Experience",
+                status=SlotStatus.booked,
+                booking_id=f"test_{i}",
+                customer_info={
+                    "name": f"Test Customer {i+1}",
+                    "email": f"test{i+1}@example.com",
+                    "phone": f"+49 123 45678{i}"
+                }
+            )
+            await db.time_slots.insert_one(slot.dict())
+            test_bookings.append(slot)
+        
+        return {"message": "Test bookings created", "bookings": len(test_bookings)}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.delete("/admin/test-mode/clear-test-data")
+async def clear_test_data():
+    """Clear all test bookings and slots"""
+    try:
+        # Remove test slots
+        result1 = await db.time_slots.delete_many({"customer_info.name": {"$regex": "^Test Customer"}})
+        
+        # Remove test bookings  
+        result2 = await db.bookings.delete_many({"name": {"$regex": "^Test Customer"}})
+        
+        return {
+            "message": "Test data cleared",
+            "deleted_slots": result1.deleted_count,
+            "deleted_bookings": result2.deleted_count
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 async def generate_default_slots_for_date(date: str) -> List[TimeSlot]:
     """Generate default time slots for a specific date"""
     slots = []
