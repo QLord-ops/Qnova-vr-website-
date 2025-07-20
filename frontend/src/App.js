@@ -299,6 +299,12 @@ const translations = {
     bookSession: "Забронировать сеанс", submitting: "Бронирование...", bookNow: "Забронировать сейчас",
     bookingConfirmed: "Бронирование подтверждено!", bookingConfirmationText: "Мы получили ваше бронирование и отправим подтверждение по электронной почте.",
     bookAnother: "Забронировать еще", confirmationEmail: "Мы отправим вам подтверждение по электронной почте.",
+    // New booking translations
+    bookingSuccess: "Бронирование успешно!", bookingSuccessMessage: "Мы получили ваше бронирование и отправим подтверждение по электронной почте.",
+    bookingFor: "Бронирование для", fullName: "Полное имя", enterName: "Введите имя", enterEmail: "Введите email",
+    selectDate: "Выберите дату", katVRService: "KAT VR игровая сессия", playstationService: "PlayStation 5 VR опыт", 
+    groupService: "Групповая KAT VR вечеринка", minutes: "минут", hour: "час", person: "человек", people: "человек",
+    additionalMessage: "Дополнительное сообщение", enterMessage: "Введите сообщение",
     redirecting: "Перенаправление на главную страницу...", contactUs: "Связаться с нами", sendMessage: "Отправить сообщение",
     address: "Адрес", openingHours: "Время работы", mondayToSaturday: "Понедельник - Суббота: 12:00 - 22:00",
     sundayTournaments: "Воскресенье: Турнирные дни", instagram: "Instagram", subject: "Тема", 
