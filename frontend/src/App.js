@@ -1038,7 +1038,7 @@ import Calendar from './components/Calendar';
 
 // Booking Component (Enhanced with Calendar) with Game Selection
 const Booking = () => {
-  const { t } = useTranslation();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
