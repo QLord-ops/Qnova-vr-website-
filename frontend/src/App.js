@@ -1038,9 +1038,30 @@ import Calendar from './components/Calendar';
 
 // Booking Component (Enhanced with Calendar) with Game Selection
 const Booking = () => {
-  const { t } = useLanguage();
+  const { t } = useTranslation();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    date: '',
+    time: '',
+    participants: '1',
+    message: '',
+  });
+  
+  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [selectedGame, setSelectedGame] = useState('');
   
+  // Calendar state
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showCalendar, setShowCalendar] = useState(true);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+
+  const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
   // Get selected game or service from URL parameters and set defaults
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -1087,62 +1108,58 @@ const Booking = () => {
     }
   }, []);
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    date: '',
-    time: '',
-    participants: '1',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-
-  // Generate time slots based on service type
   const generateTimeSlots = (serviceType) => {
     const slots = [];
-    if (serviceType.includes('PlayStation')) {
-      // PlayStation: Every hour from 12:00 to 22:00
-      for (let hour = 12; hour <= 22; hour++) {
-        const timeString = `${hour.toString().padStart(2, '0')}:00`;
-        slots.push(timeString);
+    const startHour = 12;
+    const endHour = 22;
+    
+    if (serviceType.includes('PlayStation') || serviceType.includes('PS')) {
+      // PlayStation: 1-hour intervals
+      for (let hour = startHour; hour <= endHour; hour++) {
+        slots.push(`${hour.toString().padStart(2, '0')}:00`);
       }
-    } else if (serviceType.includes('KAT VR') || serviceType.includes('Group')) {
-      // KAT VR: Every 30 minutes from 12:00 to 22:00
-      for (let hour = 12; hour <= 22; hour++) {
-        const hourString = hour.toString().padStart(2, '0');
-        slots.push(`${hourString}:00`);
-        if (hour < 22) { // Don't add 22:30
-          slots.push(`${hourString}:30`);
-        }
+    } else {
+      // KAT VR or Group: 30-minute intervals  
+      for (let hour = startHour; hour < endHour; hour++) {
+        slots.push(`${hour.toString().padStart(2, '0')}:00`);
+        slots.push(`${hour.toString().padStart(2, '0')}:30`);
       }
     }
+    
     return slots;
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e;
     
-    // Update form data
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-
-    // Update available time slots when service changes
-    if (name === 'service' && value) {
+    if (name === 'service') {
+      // Generate time slots based on selected service
       const newTimeSlots = generateTimeSlots(value);
       setAvailableTimeSlots(newTimeSlots);
-      // Reset time selection when service changes
+      
+      // Reset selected time when service changes
       setFormData(prev => ({
         ...prev,
         [name]: value,
-        time: '' // Reset time when service changes
+        time: ''
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
       }));
     }
+  };
+
+  const handleCalendarSlotSelect = (slot) => {
+    setSelectedSlot(slot);
+    setFormData(prev => ({
+      ...prev,
+      service: slot.service_type,
+      date: slot.date,
+      time: slot.time
+    }));
+    setShowCalendar(false);
   };
 
   const handleSubmit = async (e) => {
@@ -1150,13 +1167,27 @@ const Booking = () => {
     setIsSubmitting(true);
     
     try {
-      // Include selected game in the booking data
-      const bookingData = {
+      let bookingData = {
         ...formData,
         selectedGame: selectedGame || '' // Add selected game to booking data
       };
+
+      // If booking through calendar slot
+      if (selectedSlot) {
+        const response = await axios.post(`${API}/api/calendar/book-slot/${selectedSlot.id}`, {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          participants: parseInt(formData.participants),
+          message: formData.message,
+          selectedGame: selectedGame || ''
+        });
+        console.log('Slot booking response:', response.data);
+      } else {
+        // Traditional booking
+        await axios.post(`${API}/api/bookings`, bookingData);
+      }
       
-      await axios.post(`${API}/bookings`, bookingData);
       setIsSuccess(true);
       setFormData({
         name: '',
@@ -1168,6 +1199,7 @@ const Booking = () => {
         participants: '1',
         message: ''
       });
+      setSelectedSlot(null);
     } catch (error) {
       console.error('Error submitting booking:', error);
     } finally {
@@ -1177,191 +1209,229 @@ const Booking = () => {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-32 px-4">
+        <div className="max-w-md mx-auto text-center">
+          <div className="bg-white p-8 rounded-lg shadow-lg">
+            <div className="text-6xl mb-4">🎉</div>
+            <h2 className="text-2xl font-bold text-green-600 mb-2">{t('bookingSuccess')}</h2>
+            <p className="text-gray-600 mb-6">{t('bookingSuccessMessage')}</p>
+            <button 
+              onClick={() => {setIsSuccess(false); setShowCalendar(true);}} 
+              className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800"
+            >
+              {t('bookAnother')}
+            </button>
           </div>
-          <h2 className="text-3xl font-bold mb-4">{t('bookingConfirmed')}</h2>
-          <p className="text-gray-600 mb-6">{t('bookingConfirmationText')}</p>
-          <button
-            onClick={() => setIsSuccess(false)}
-            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors"
-          >
-            {t('bookAnother')}
-          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <section className="pt-32 py-16">
-        <div className="container mx-auto px-4">
-          <AnimatedSection animation="fadeInUp" className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6">{t('bookingTitle')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {t('bookingDescription')}
-            </p>
-            {selectedGame && (
-              <div className="mt-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg inline-block">
-                <span className="text-lg font-semibold">🎮 Booking: {selectedGame}</span>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-32 px-4">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('bookingTitle')}</h1>
+          {selectedGame && (
+            <div className="inline-flex items-center bg-black text-white px-4 py-2 rounded-full mb-4">
+              <span className="mr-2">🎮</span>
+              <span className="font-medium">{t('bookingFor')}: {selectedGame}</span>
+            </div>
+          )}
+          <p className="text-gray-600 max-w-2xl mx-auto">{t('bookingDescription')}</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Calendar Section */}
+          {showCalendar && (
+            <div className="order-2 lg:order-1">
+              <Calendar
+                selectedDate={selectedDate}
+                onDateChange={setSelectedDate}
+                onSlotSelect={handleCalendarSlotSelect}
+              />
+            </div>
+          )}
+
+          {/* Booking Form */}
+          <div className={`order-1 lg:order-2 ${!showCalendar ? 'lg:col-span-2' : ''}`}>
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {selectedSlot ? '📅 Подтверждение бронирования' : '📝 Форма бронирования'}
+                </h2>
+                {selectedSlot && (
+                  <button
+                    onClick={() => {setShowCalendar(true); setSelectedSlot(null);}}
+                    className="text-blue-600 hover:text-blue-800 text-sm"
+                  >
+                    Изменить слот
+                  </button>
+                )}
               </div>
-            )}
-          </AnimatedSection>
-          
-          <div className="max-w-2xl mx-auto">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('name')} *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                  />
+
+              {/* Selected Slot Display */}
+              {selectedSlot && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <h3 className="font-semibold text-green-800 mb-2">✅ Выбранное время:</h3>
+                  <div className="text-sm text-green-700">
+                    <p><strong>📅 Дата:</strong> {new Date(selectedSlot.date).toLocaleDateString('ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                    <p><strong>⏰ Время:</strong> {selectedSlot.time}</p>
+                    <p><strong>🎮 Услуга:</strong> {selectedSlot.service_type}</p>
+                    <p><strong>⏱️ Длительность:</strong> {selectedSlot.service_type.includes('PlayStation') ? '1 час' : '30 минут'}</p>
+                  </div>
                 </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('email')} *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                  />
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('fullName')}</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={(e) => handleChange(e.target)}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      placeholder={t('enterName')}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('email')}</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={(e) => handleChange(e.target)}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      placeholder={t('enterEmail')}
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('phone')} *
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('phone')}</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e.target)}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                    placeholder="+49 123 456789"
                   />
                 </div>
-                
+
+                {/* Show service selection only if not using calendar */}
+                {!selectedSlot && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('selectService')}</label>
+                    <select
+                      name="service"
+                      value={formData.service}
+                      onChange={(e) => handleChange(e.target)}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                    >
+                      <option value="">{t('selectService')}</option>
+                      <option value="KAT VR Gaming Session">{t('katVRService')} (30 {t('minutes')})</option>
+                      <option value="PlayStation 5 VR Experience">{t('playstationService')} (1 {t('hour')})</option>
+                      <option value="Group KAT VR Party">{t('groupService')} (30 {t('minutes')})</option>
+                    </select>
+                  </div>
+                )}
+
+                {/* Traditional date/time selection (only if not using calendar) */}
+                {!selectedSlot && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('selectDate')}</label>
+                      <input
+                        type="date"
+                        name="date"
+                        value={formData.date}
+                        onChange={(e) => handleChange(e.target)}
+                        required
+                        min={new Date().toISOString().split('T')[0]}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('selectTime')}</label>
+                      <select
+                        name="time"
+                        value={formData.time}
+                        onChange={(e) => handleChange(e.target)}
+                        required
+                        disabled={!formData.service}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
+                      >
+                        <option value="">{t('selectTime')}</option>
+                        {availableTimeSlots.map(time => (
+                          <option key={time} value={time}>{time}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('service')} *
-                  </label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                  >
-                    <option value="">{t('selectService')}</option>
-                    <option value="KAT VR Gaming Session">{t('vrGamingSession')}</option>
-                    <option value="PlayStation 5 VR Experience">{t('psVRExperience')}</option>
-                    <option value="Group KAT VR Party">{t('groupVRParty')}</option>
-                  </select>
-                </div>
-              </div>
-              
-              <div className="grid md:grid-cols-3 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('date')} *
-                  </label>
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('time')} *
-                  </label>
-                  <select
-                    name="time"
-                    value={formData.time}
-                    onChange={handleChange}
-                    required
-                    disabled={!formData.service}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  >
-                    <option value="">
-                      {formData.service ? t('selectTime') : t('selectService') + ' ' + t('first')}
-                    </option>
-                    {availableTimeSlots.map((timeSlot) => (
-                      <option key={timeSlot} value={timeSlot}>
-                        {timeSlot}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('participants')} *
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('participants')}</label>
                   <select
                     name="participants"
                     value={formData.participants}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    onChange={(e) => handleChange(e.target)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
                   >
-                    <option value="1">1 Person</option>
-                    <option value="2">2 Personen</option>
-                    <option value="3">3 Personen</option>
-                    <option value="4">4 Personen</option>
-                    <option value="5">5+ Personen</option>
+                    <option value="1">1 {t('person')}</option>
+                    <option value="2">2 {t('people')}</option>
+                    <option value="3">3 {t('people')}</option>
+                    <option value="4">4 {t('people')}</option>
                   </select>
                 </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('message')}
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                  placeholder={t('messagePlaceholder')}
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-black text-white px-6 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50"
-              >
-                {isSubmitting ? t('submitting') : t('bookNow')}
-              </button>
-            </form>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('additionalMessage')}</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={(e) => handleChange(e.target)}
+                    rows={4}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent"
+                    placeholder={t('enterMessage')}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {isSubmitting ? t('submitting') : (selectedSlot ? '✅ Подтвердить бронирование' : t('bookSession'))}
+                </button>
+              </form>
+
+              {/* Toggle Calendar View */}
+              {!selectedSlot && (
+                <div className="mt-6 text-center border-t pt-6">
+                  <button
+                    onClick={() => setShowCalendar(!showCalendar)}
+                    className="text-blue-600 hover:text-blue-800 font-medium"
+                  >
+                    {showCalendar ? '📝 Скрыть календарь' : '📅 Показать календарь'}
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
