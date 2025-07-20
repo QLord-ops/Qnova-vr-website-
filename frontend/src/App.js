@@ -1976,6 +1976,7 @@ function App() {
             <Route path="/booking" element={<Booking />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/test-admin" element={<TestAdmin />} />
           </Routes>
           <Footer />
         </BrowserRouter>
