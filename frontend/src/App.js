@@ -1081,6 +1081,28 @@ const Booking = () => {
   const [showCalendar, setShowCalendar] = useState(true);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
+  // Generate demo time slots
+  const generateDemoTimeSlots = () => {
+    const slots = [];
+    for (let hour = 12; hour < 22; hour++) {
+      slots.push({
+        time: `${hour}:00`,
+        status: Math.random() > 0.3 ? 'available' : 'booked',
+        service: hour % 2 === 0 ? 'KAT VR Gaming Session' : 'PlayStation 5 VR Experience'
+      });
+      if (hour < 21) {
+        slots.push({
+          time: `${hour}:30`,
+          status: Math.random() > 0.4 ? 'available' : 'booked',
+          service: 'KAT VR Gaming Session'
+        });
+      }
+    }
+    return slots;
+  };
+
+  const [demoSlots] = useState(generateDemoTimeSlots());
+
   const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
   // Get selected game or service from URL parameters and set defaults
