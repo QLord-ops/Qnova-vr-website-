@@ -134,6 +134,42 @@ class ContactMessageCreate(BaseModel):
     subject: str
     message: str
 
+# Calendar System Models
+class SlotStatus(str, Enum):
+    available = "available"
+    booked = "booked" 
+    maintenance = "maintenance"
+    blocked = "blocked"
+
+class TimeSlot(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    date: str  # YYYY-MM-DD format
+    time: str  # HH:MM format
+    service_type: str  # KAT VR Gaming Session, PlayStation 5 VR Experience, etc.
+    status: SlotStatus = SlotStatus.available
+    booking_id: Optional[str] = None
+    customer_info: Optional[dict] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class TimeSlotCreate(BaseModel):
+    date: str
+    time: str
+    service_type: str
+    status: SlotStatus = SlotStatus.available
+
+class TimeSlotUpdate(BaseModel):
+    status: Optional[SlotStatus] = None
+    booking_id: Optional[str] = None
+    customer_info: Optional[dict] = None
+
+class CalendarDay(BaseModel):
+    date: str
+    slots: List[TimeSlot]
+    total_slots: int
+    available_slots: int
+    booked_slots: int
+
 def run_sync(func):
     """Decorator to run sync function in thread pool"""
     @wraps(func)
