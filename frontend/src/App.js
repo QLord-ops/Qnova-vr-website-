@@ -1278,19 +1278,29 @@ const Booking = () => {
     return slots;
   };
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e;
     
     if (name === 'service') {
-      // Generate time slots based on selected service
-      const newTimeSlots = generateTimeSlots(value);
-      setAvailableTimeSlots(newTimeSlots);
+      // Load real time slots based on selected service
+      await loadTimeSlots(value, formData.date);
       
       // Reset selected time when service changes
       setFormData(prev => ({
         ...prev,
         [name]: value,
         time: ''
+      }));
+    } else if (name === 'date') {
+      // Load time slots for new date
+      if (formData.service) {
+        await loadTimeSlots(formData.service, value);
+      }
+      
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+        time: '' // Reset time when date changes
       }));
     } else {
       setFormData(prev => ({
