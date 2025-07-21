@@ -501,15 +501,37 @@ const Navigation = () => {
             <Link to="/pricing" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('pricing')}</Link>
             <Link to="/booking" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('bookNow')}</Link>
             <Link to="/contact" className="block py-2 hover:text-gray-300" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>{t('contact')}</Link>
-            <button
-              onClick={() => {
-                toggleLanguage();
-                setIsOpen(false);
-              }}
-              className="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded text-sm transition-colors"
-            >
-              {language === 'de' ? '🇬🇧 EN' : language === 'en' ? '🇷🇺 RU' : '🇩🇪 DE'}
-            </button>
+            {/* Mobile Flag Language Selector */}
+            <div className="flex space-x-3 items-center py-2">
+              <span className="text-sm text-gray-300">Language:</span>
+              <button
+                onClick={() => { selectLanguage('de'); setIsOpen(false); }}
+                className={`w-8 h-6 rounded overflow-hidden hover:ring-2 hover:ring-white/50 transition-all duration-300 ${
+                  language === 'de' ? 'ring-2 ring-white scale-110' : 'opacity-70 hover:opacity-100'
+                }`}
+                title="Deutsch"
+              >
+                <span className="text-lg">🇩🇪</span>
+              </button>
+              <button
+                onClick={() => { selectLanguage('en'); setIsOpen(false); }}
+                className={`w-8 h-6 rounded overflow-hidden hover:ring-2 hover:ring-white/50 transition-all duration-300 ${
+                  language === 'en' ? 'ring-2 ring-white scale-110' : 'opacity-70 hover:opacity-100'
+                }`}
+                title="English"
+              >
+                <span className="text-lg">🇬🇧</span>
+              </button>
+              <button
+                onClick={() => { selectLanguage('ru'); setIsOpen(false); }}
+                className={`w-8 h-6 rounded overflow-hidden hover:ring-2 hover:ring-white/50 transition-all duration-300 ${
+                  language === 'ru' ? 'ring-2 ring-white scale-110' : 'opacity-70 hover:opacity-100'
+                }`}
+                title="Русский"
+              >
+                <span className="text-lg">🇷🇺</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
