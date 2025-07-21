@@ -223,6 +223,66 @@ backend:
         comment: "✅ PASSED - Selected game functionality testing completed successfully. Verified the fix for missing game information in booking confirmations and email notifications. BOOKING CREATION: Successfully tested POST /api/bookings with selectedGame field - created test booking with selectedGame: 'FIFA 25' for PlayStation 5 VR Experience. DATABASE STORAGE: Confirmed selectedGame field is correctly saved to MongoDB and returned in API responses. EMAIL CONTENT VERIFICATION: Verified email templates include selectedGame information - Studio owner emails show 'Selected Game: 🎮 [game name]', Customer emails show 'Ausgewähltes Spiel: 🎮 [game name]' in German. Additional testing with Beat Saber (KAT VR) and Call of Duty: Modern Warfare III (PlayStation) confirmed functionality works across all game types. All required fields present in booking responses including selectedGame. System properly handles bookings with and without selectedGame field. Email notification system includes game information when provided by user. Core functionality verified: booking creation with selectedGame ✅, database storage ✅, email content inclusion ✅, cross-platform game support ✅."
 
 frontend:
+  - task: "Flag language selector functionality"
+    implemented: true
+    working: "NA"
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "New calendar feature - testing flag-based language selector (🇩🇪 🇬🇧 🇷🇺) in navigation header"
+
+  - task: "Real availability calendar integration"
+    implemented: true
+    working: "NA"
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "New calendar feature - testing real availability data from /api/availability/{date} instead of demo data"
+
+  - task: "Service-specific time slots"
+    implemented: true
+    working: "NA"
+    file: "App.js, server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "New calendar feature - testing PlayStation hourly slots (12:00-22:00) vs KAT VR 30-minute slots (12:00-21:30)"
+
+  - task: "Availability indicators display"
+    implemented: true
+    working: "NA"
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "New calendar feature - testing ✅ for available and ❌ Занято for booked slots display"
+
+  - task: "Date selection impact on time slots"
+    implemented: true
+    working: "NA"
+    file: "App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "New calendar feature - testing that changing dates updates available time slots dynamically"
+
   - task: "Home page with hero section"
     implemented: true
     working: true
