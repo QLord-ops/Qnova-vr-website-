@@ -1593,8 +1593,18 @@ const Booking = () => {
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
                       >
                         <option value="">{t('selectTime')}</option>
-                        {availableTimeSlots.map(time => (
-                          <option key={time} value={time}>{time}</option>
+                        {availableTimeSlots.map(slot => (
+                          <option 
+                            key={slot.time} 
+                            value={slot.time}
+                            disabled={!slot.available}
+                            style={{
+                              color: slot.available ? 'black' : '#999',
+                              backgroundColor: slot.available ? 'white' : '#f5f5f5'
+                            }}
+                          >
+                            {slot.time} {slot.available ? '✅' : '❌ Занято'}
+                          </option>
                         ))}
                       </select>
                     </div>
