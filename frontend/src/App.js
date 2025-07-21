@@ -1223,7 +1223,24 @@ const Booking = () => {
     }
   }, []);
 
-  const generateTimeSlots = (serviceType) => {
+  // Load real time slots when service or date changes
+  const loadTimeSlots = async (serviceType, selectedDate = formData.date) => {
+    if (!serviceType) return;
+    
+    try {
+      const dateToUse = selectedDate || new Date().toISOString().split('T')[0];
+      const slots = await fetchAvailabilityForDate(dateToUse, serviceType);
+      setAvailableTimeSlots(slots);
+    } catch (error) {
+      console.error('Error loading time slots:', error);
+      // Fallback to static generation
+      const fallbackSlots = generateStaticTimeSlots(serviceType);
+      setAvailableTimeSlots(fallbackSlots);
+    }
+  };
+
+  // Static time slots generation (fallback)
+  const generateStaticTimeSlots = (serviceType) => {
     const slots = [];
     const startHour = 12;
     const endHour = 22;
@@ -1231,13 +1248,28 @@ const Booking = () => {
     if (serviceType.includes('PlayStation') || serviceType.includes('PS')) {
       // PlayStation: 1-hour intervals
       for (let hour = startHour; hour <= endHour; hour++) {
-        slots.push(`${hour.toString().padStart(2, '0')}:00`);
+        slots.push({
+          time: `${hour.toString().padStart(2, '0')}:00`,
+          status: 'available',
+          available: true,
+          service: serviceType
+        });
       }
     } else {
       // KAT VR or Group: 30-minute intervals  
       for (let hour = startHour; hour < endHour; hour++) {
-        slots.push(`${hour.toString().padStart(2, '0')}:00`);
-        slots.push(`${hour.toString().padStart(2, '0')}:30`);
+        slots.push({
+          time: `${hour.toString().padStart(2, '0')}:00`,
+          status: 'available',
+          available: true,
+          service: serviceType
+        });
+        slots.push({
+          time: `${hour.toString().padStart(2, '0')}:30`,
+          status: 'available',
+          available: true,
+          service: serviceType
+        });
       }
     }
     
