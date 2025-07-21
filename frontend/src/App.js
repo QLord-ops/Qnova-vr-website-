@@ -450,12 +450,36 @@ const Navigation = () => {
             <Link to="/booking" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('bookNow')}</Link>
             <Link to="/contact" className="hover:text-gray-300 transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{t('contact')}</Link>
             
-            <button
-              onClick={toggleLanguage}
-              className="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded text-sm transition-colors"
-            >
-              {language === 'de' ? '🇬🇧 EN' : language === 'en' ? '🇷🇺 RU' : '🇩🇪 DE'}
-            </button>
+            {/* Flag Language Selector */}
+            <div className="flex space-x-2 items-center">
+              <button
+                onClick={() => selectLanguage('de')}
+                className={`w-8 h-6 rounded overflow-hidden hover:ring-2 hover:ring-white/50 transition-all duration-300 ${
+                  language === 'de' ? 'ring-2 ring-white scale-110' : 'opacity-70 hover:opacity-100'
+                }`}
+                title="Deutsch"
+              >
+                <span className="text-lg">🇩🇪</span>
+              </button>
+              <button
+                onClick={() => selectLanguage('en')}
+                className={`w-8 h-6 rounded overflow-hidden hover:ring-2 hover:ring-white/50 transition-all duration-300 ${
+                  language === 'en' ? 'ring-2 ring-white scale-110' : 'opacity-70 hover:opacity-100'
+                }`}
+                title="English"
+              >
+                <span className="text-lg">🇬🇧</span>
+              </button>
+              <button
+                onClick={() => selectLanguage('ru')}
+                className={`w-8 h-6 rounded overflow-hidden hover:ring-2 hover:ring-white/50 transition-all duration-300 ${
+                  language === 'ru' ? 'ring-2 ring-white scale-110' : 'opacity-70 hover:opacity-100'
+                }`}
+                title="Русский"
+              >
+                <span className="text-lg">🇷🇺</span>
+              </button>
+            </div>
           </div>
 
           <button 
