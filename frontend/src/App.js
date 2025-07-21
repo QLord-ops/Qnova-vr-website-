@@ -1201,8 +1201,7 @@ const Booking = () => {
       }
       
       // Generate time slots for the selected service
-      const newTimeSlots = generateTimeSlots(defaultService);
-      setAvailableTimeSlots(newTimeSlots);
+      await loadTimeSlots(defaultService);
       
       setFormData(prev => ({
         ...prev,
@@ -1213,8 +1212,7 @@ const Booking = () => {
       const serviceName = decodeURIComponent(serviceParam);
       
       // Generate time slots for the selected service
-      const newTimeSlots = generateTimeSlots(serviceName);
-      setAvailableTimeSlots(newTimeSlots);
+      await loadTimeSlots(serviceName);
       
       setFormData(prev => ({
         ...prev,
