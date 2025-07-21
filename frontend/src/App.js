@@ -1127,19 +1127,45 @@ const Booking = () => {
   const [showCalendar, setShowCalendar] = useState(true);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
-  // Generate demo time slots
+  // Fetch real availability data from API
+  const fetchAvailabilityForDate = async (date, service = null) => {
+    try {
+      const dateStr = date instanceof Date ? date.toISOString().split('T')[0] : date;
+      const serviceParam = service ? `?service=${encodeURIComponent(service)}` : '';
+      
+      const response = await axios.get(`${API}/api/availability/${dateStr}${serviceParam}`);
+      
+      // Convert API response to slots format
+      const slots = response.data.slots.map(slot => ({
+        time: slot.time,
+        status: slot.status,
+        available: slot.available,
+        service: service || 'General'
+      }));
+      
+      return slots;
+    } catch (error) {
+      console.error('Error fetching availability:', error);
+      // Fallback to demo slots if API fails
+      return generateDemoTimeSlots();
+    }
+  };
+
+  // Generate demo time slots (fallback only)
   const generateDemoTimeSlots = () => {
     const slots = [];
     for (let hour = 12; hour < 22; hour++) {
       slots.push({
         time: `${hour}:00`,
         status: Math.random() > 0.3 ? 'available' : 'booked',
+        available: Math.random() > 0.3,
         service: hour % 2 === 0 ? 'KAT VR Gaming Session' : 'PlayStation 5 VR Experience'
       });
       if (hour < 21) {
         slots.push({
           time: `${hour}:30`,
           status: Math.random() > 0.4 ? 'available' : 'booked',
+          available: Math.random() > 0.4,
           service: 'KAT VR Gaming Session'
         });
       }
