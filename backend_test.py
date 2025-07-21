@@ -1344,10 +1344,11 @@ def run_all_tests():
     
     test_results = {}
     
-    # Run all tests with focus on pricing package functionality
+    # Run all tests with focus on availability API functionality
     tests = [
         ("API Root Endpoint", test_api_root),
-        ("Pricing Package Booking System", test_pricing_package_booking),  # NEW: Focus test
+        ("Availability API Endpoint", test_availability_api),  # NEW: Focus test for availability API
+        ("Pricing Package Booking System", test_pricing_package_booking),
         ("Selected Game Functionality", test_selected_game_functionality),
         ("Expanded Time Slots & Platform Durations", test_expanded_time_slots_and_platform_durations),
         ("Booking Creation", test_booking_creation),
