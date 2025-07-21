@@ -1179,46 +1179,50 @@ const Booking = () => {
 
   // Get selected game or service from URL parameters and set defaults
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const gameParam = urlParams.get('game');
-    const serviceParam = urlParams.get('service');
-    
-    if (gameParam) {
-      const gameName = decodeURIComponent(gameParam);
-      setSelectedGame(gameName);
+    const initializeService = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const gameParam = urlParams.get('game');
+      const serviceParam = urlParams.get('service');
       
-      // Auto-select appropriate service based on game
-      let defaultService = '';
-      if (gameName.includes('FIFA') || 
-          gameName.includes('Call of Duty') || 
-          gameName.includes('UFC') || 
-          gameName.includes('Gran Turismo') || 
-          gameName.includes('Grand Theft Auto') ||
-          gameName.includes('Modern Warfare')) {
-        defaultService = 'PlayStation 5 VR Experience';
-      } else {
-        defaultService = 'KAT VR Gaming Session';
+      if (gameParam) {
+        const gameName = decodeURIComponent(gameParam);
+        setSelectedGame(gameName);
+        
+        // Auto-select appropriate service based on game
+        let defaultService = '';
+        if (gameName.includes('FIFA') || 
+            gameName.includes('Call of Duty') || 
+            gameName.includes('UFC') || 
+            gameName.includes('Gran Turismo') || 
+            gameName.includes('Grand Theft Auto') ||
+            gameName.includes('Modern Warfare')) {
+          defaultService = 'PlayStation 5 VR Experience';
+        } else {
+          defaultService = 'KAT VR Gaming Session';
+        }
+        
+        // Generate time slots for the selected service
+        await loadTimeSlots(defaultService);
+        
+        setFormData(prev => ({
+          ...prev,
+          service: defaultService
+        }));
+      } else if (serviceParam) {
+        // Direct service selection from pricing page
+        const serviceName = decodeURIComponent(serviceParam);
+        
+        // Generate time slots for the selected service
+        await loadTimeSlots(serviceName);
+        
+        setFormData(prev => ({
+          ...prev,
+          service: serviceName
+        }));
       }
-      
-      // Generate time slots for the selected service
-      await loadTimeSlots(defaultService);
-      
-      setFormData(prev => ({
-        ...prev,
-        service: defaultService
-      }));
-    } else if (serviceParam) {
-      // Direct service selection from pricing page
-      const serviceName = decodeURIComponent(serviceParam);
-      
-      // Generate time slots for the selected service
-      await loadTimeSlots(serviceName);
-      
-      setFormData(prev => ({
-        ...prev,
-        service: serviceName
-      }));
-    }
+    };
+
+    initializeService();
   }, []);
 
   // Load real time slots when service or date changes
