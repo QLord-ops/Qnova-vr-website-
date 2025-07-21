@@ -424,7 +424,7 @@ const LanguageSelectionModal = () => {
 // Navigation Component
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { language, toggleLanguage, t } = useLanguage();
+  const { language, toggleLanguage, t, selectLanguage } = useLanguage();
 
   return (
     <nav className="bg-black text-white fixed w-full top-0 z-50 border-b border-gray-800">
