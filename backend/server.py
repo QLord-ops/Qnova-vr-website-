@@ -919,6 +919,51 @@ async def clear_test_data():
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+@api_router.get("/availability/{date}")
+async def check_availability(date: str, service: Optional[str] = None):
+    """Check availability for a specific date and optionally filter by service type"""
+    try:
+        # Generate time slots based on service type
+        if service and service.lower().find('playstation') != -1:
+            # PlayStation sessions: 1-hour intervals from 12:00-22:00
+            time_slots = []
+            for hour in range(12, 22):
+                time_slots.append(f"{hour:02d}:00")
+        else:
+            # KAT VR sessions: 30-minute intervals from 12:00-21:30
+            time_slots = []
+            for hour in range(12, 22):
+                time_slots.append(f"{hour:02d}:00")
+                if hour < 21:
+                    time_slots.append(f"{hour:02d}:30")
+        
+        # Check existing bookings for this date
+        bookings_cursor = db.bookings.find({"date": date})
+        booked_times = []
+        async for booking in bookings_cursor:
+            booked_times.append(booking.get("time", ""))
+        
+        # Create availability response
+        available_slots = []
+        for time_slot in time_slots:
+            is_available = time_slot not in booked_times
+            available_slots.append({
+                "time": time_slot,
+                "available": is_available,
+                "status": "available" if is_available else "booked"
+            })
+        
+        return {
+            "date": date,
+            "service": service or "all",
+            "slots": available_slots,
+            "total_slots": len(available_slots),
+            "available_count": len([s for s in available_slots if s["available"]]),
+            "booked_count": len([s for s in available_slots if not s["available"]])
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 async def generate_default_slots_for_date(date: str) -> List[TimeSlot]:
     """Generate default time slots for a specific date"""
     slots = []
