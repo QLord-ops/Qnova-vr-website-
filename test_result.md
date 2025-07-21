@@ -368,7 +368,12 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Flag language selector functionality"
+    - "Real availability calendar integration"
+    - "Service-specific time slots"
+    - "Availability indicators display"
+    - "Date selection impact on time slots"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
