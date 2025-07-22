@@ -1631,30 +1631,41 @@ const Booking = () => {
                       <label className="block text-sm font-medium text-gray-700 mb-3">{t('selectTime')}</label>
                       {/* Time Slots Grid */}
                       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
-                        {availableTimeSlots.map(slot => (
-                          <button
-                            key={slot.time}
-                            type="button"
-                            disabled={!slot.available}
-                            onClick={() => handleTimeSlotClick(slot.time)}
-                            className={`
-                              px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200
-                              ${slot.available 
-                                ? formData.time === slot.time
-                                  ? 'bg-black text-white ring-2 ring-black' 
-                                  : 'bg-green-100 text-green-800 hover:bg-green-200 border border-green-300'
-                                : 'bg-red-100 text-red-600 cursor-not-allowed border border-red-300'
-                              }
-                            `}
-                          >
-                            <div className="text-center">
-                              <div className="font-semibold">{slot.time}</div>
-                              <div className="text-xs mt-1">
-                                {slot.available ? '✅ Свободно' : '❌ Занято'}
+                        {availableTimeSlots.map(slot => {
+                          const canQuickBook = formData.name && formData.email && formData.phone && formData.service && formData.date;
+                          
+                          return (
+                            <button
+                              key={slot.time}
+                              type="button"
+                              disabled={!slot.available}
+                              onClick={() => handleTimeSlotClick(slot.time)}
+                              className={`
+                                px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105
+                                ${slot.available 
+                                  ? formData.time === slot.time
+                                    ? 'bg-black text-white ring-2 ring-black' 
+                                    : canQuickBook 
+                                      ? 'bg-blue-100 text-blue-800 hover:bg-blue-200 border-2 border-blue-400 shadow-lg' 
+                                      : 'bg-green-100 text-green-800 hover:bg-green-200 border border-green-300'
+                                  : 'bg-red-100 text-red-600 cursor-not-allowed border border-red-300 opacity-50'
+                                }
+                              `}
+                            >
+                              <div className="text-center">
+                                <div className="font-semibold">{slot.time}</div>
+                                <div className="text-xs mt-1">
+                                  {!slot.available 
+                                    ? '❌ Занято' 
+                                    : canQuickBook 
+                                      ? '🚀 Забронировать!' 
+                                      : '✅ Доступно'
+                                  }
+                                </div>
                               </div>
-                            </div>
-                          </button>
-                        ))}
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
