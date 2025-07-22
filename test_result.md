@@ -527,13 +527,7 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus:
-    - "Stripe payment integration - VR session packages"
-    - "Stripe payment session creation"
-    - "Stripe payment status checking"
-    - "Stripe webhook handler"
-    - "Payment transactions storage and retrieval"
-    - "Complete payment integration flow"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
