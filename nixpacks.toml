@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["python39", "pip"]
+
+[phases.install]
+cmds = [
+  "pip install --upgrade pip",
+  "pip install --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/ -r backend/requirements.txt"
+]
+
+[phases.build]
+cmds = ["echo 'Build complete'"]
+
+[start]
+cmd = "cd backend && python server.py"
