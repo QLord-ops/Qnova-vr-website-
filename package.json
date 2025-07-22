@@ -1,0 +1,13 @@
+{
+  "name": "qnova-vr-backend",
+  "version": "1.0.0",
+  "description": "QNOVA VR Backend API",
+  "main": "backend/server.py",
+  "scripts": {
+    "start": "cd backend && python server.py",
+    "dev": "cd backend && python server.py"
+  },
+  "engines": {
+    "python": ">=3.8"
+  }
+}
