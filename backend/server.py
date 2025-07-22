@@ -173,6 +173,82 @@ class CalendarDay(BaseModel):
     available_slots: int
     booked_slots: int
 
+# Payment models
+class PaymentPackage(BaseModel):
+    id: str
+    name: str
+    price: float  # in EUR
+    currency: str = "EUR"  
+    description: str
+    service_type: str
+    duration_minutes: int
+
+class PaymentTransaction(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    session_id: str
+    package_id: str
+    amount: float
+    currency: str
+    payment_status: str  # pending, paid, failed, expired
+    metadata: Optional[Dict] = None
+    user_email: Optional[str] = None
+    booking_id: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class PaymentRequest(BaseModel):
+    package_id: str
+    origin_url: str
+    booking_data: Optional[Dict] = None  # For linking payment to booking
+
+class PaymentStatus(BaseModel):
+    session_id: str
+    status: str
+    payment_status: str
+    amount_total: float
+    currency: str
+    metadata: Dict
+
+# Define VR session pricing packages
+VR_PACKAGES = {
+    "kat_vr_30min": PaymentPackage(
+        id="kat_vr_30min",
+        name="KAT VR Gaming Session",
+        price=25.0,
+        currency="EUR",
+        description="30-minute VR gaming session with KAT VR treadmill technology",
+        service_type="KAT VR Gaming Session",
+        duration_minutes=30
+    ),
+    "kat_vr_group": PaymentPackage(
+        id="kat_vr_group", 
+        name="Group KAT VR Party",
+        price=80.0,
+        currency="EUR",
+        description="Group VR party with KAT VR technology (up to 4 people)",
+        service_type="Group KAT VR Party",
+        duration_minutes=30
+    ),
+    "playstation_1hr": PaymentPackage(
+        id="playstation_1hr",
+        name="PlayStation VR Experience", 
+        price=35.0,
+        currency="EUR",
+        description="1-hour PlayStation VR gaming session",
+        service_type="PlayStation 5 VR Experience", 
+        duration_minutes=60
+    ),
+    "playstation_premium": PaymentPackage(
+        id="playstation_premium",
+        name="Premium PlayStation Experience",
+        price=120.0, 
+        currency="EUR",
+        description="Premium PlayStation VR session with latest games",
+        service_type="Premium PlayStation VR Experience",
+        duration_minutes=60
+    )
+}
+
 def run_sync(func):
     """Decorator to run sync function in thread pool"""
     @wraps(func)
