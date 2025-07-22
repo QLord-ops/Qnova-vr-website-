@@ -215,6 +215,7 @@ const translations = {
     bookAnother: "Weitere Session buchen", confirmationEmail: "Wir senden Ihnen in Kürze eine Bestätigungs-E-Mail.",
     // New booking translations
     bookingSuccess: "Buchung erfolgreich!", bookingSuccessMessage: "Wir haben Ihre Buchung erhalten und senden Ihnen eine Bestätigung per E-Mail.",
+    payNowSecure: "💳 Jetzt bezahlen & Buchung sichern",
     bookingFor: "Buchung für", fullName: "Vollständiger Name", enterName: "Namen eingeben", enterEmail: "E-Mail eingeben",
     selectDate: "Datum auswählen", katVRService: "KAT VR Gaming Session", playstationService: "PlayStation 5 VR Erlebnis", 
     groupService: "Gruppen KAT VR Party", minutes: "Minuten", hour: "Stunde", person: "Person", people: "Personen",
