@@ -1321,6 +1321,57 @@ const Booking = () => {
     setShowCalendar(false);
   };
 
+  // Handle time slot click with instant booking capability
+  const handleTimeSlotClick = async (time) => {
+    const canQuickBook = formData.name && formData.email && formData.phone && formData.service && formData.date;
+    
+    // If all data is filled, instantly book the slot
+    if (canQuickBook) {
+      try {
+        setIsSubmitting(true);
+        
+        const bookingData = {
+          ...formData,
+          time: time,
+          selectedGame: selectedGame || ''
+        };
+
+        const response = await axios.post(`${REACT_APP_BACKEND_URL}/api/bookings`, bookingData);
+        
+        setIsSuccess(true);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          date: '',
+          time: '',
+          participants: '1',
+          message: '',
+        });
+        
+        // Reload time slots to show updated availability
+        if (formData.service && formData.date) {
+          await loadTimeSlots(formData.service, formData.date);
+        }
+        
+      } catch (error) {
+        console.error('Quick booking error:', error);
+        alert('Ошибка при бронировании. Попробуйте ещё раз.');
+      } finally {
+        setIsSubmitting(false);
+      }
+    } else {
+      // Just select the time if form is not complete
+      setFormData(prev => ({
+        ...prev,
+        time: time
+      }));
+    }
+  };
+
   const handleTimeSlotClick = async (time) => {
     // Если все данные заполнены, сразу бронируем
     if (formData.name && formData.email && formData.phone && formData.service && formData.date) {
