@@ -9,7 +9,7 @@ GMAIL_USER="qnovavr.de@gmail.com"
 GMAIL_APP_PASSWORD="noeycxknfpcmpjir"
 
 # Frontend (.env)
-REACT_APP_BACKEND_URL=https://f8ca9060-67c5-4e93-bfa8-7fc364bb67ec.preview.emergentagent.com
+REACT_APP_BACKEND_URL=https://24607d59-36e2-4bb0-b229-c4ef7359ba00.preview.emergentagent.com
 WDS_SOCKET_PORT=443
 ```
 
