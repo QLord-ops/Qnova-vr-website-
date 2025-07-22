@@ -1583,30 +1583,34 @@ const Booking = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">{t('selectTime')}</label>
-                      <select
-                        name="time"
-                        value={formData.time}
-                        onChange={(e) => handleChange(e.target)}
-                        required
-                        disabled={!formData.service}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent disabled:bg-gray-100"
-                      >
-                        <option value="">{t('selectTime')}</option>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">{t('selectTime')}</label>
+                      {/* Time Slots Grid */}
+                      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
                         {availableTimeSlots.map(slot => (
-                          <option 
-                            key={slot.time} 
-                            value={slot.time}
+                          <button
+                            key={slot.time}
+                            type="button"
                             disabled={!slot.available}
-                            style={{
-                              color: slot.available ? 'black' : '#999',
-                              backgroundColor: slot.available ? 'white' : '#f5f5f5'
-                            }}
+                            onClick={() => handleTimeSlotClick(slot.time)}
+                            className={`
+                              px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                              ${slot.available 
+                                ? formData.time === slot.time
+                                  ? 'bg-black text-white ring-2 ring-black' 
+                                  : 'bg-green-100 text-green-800 hover:bg-green-200 border border-green-300'
+                                : 'bg-red-100 text-red-600 cursor-not-allowed border border-red-300'
+                              }
+                            `}
                           >
-                            {slot.time} {slot.available ? '✅' : '❌ Занято'}
-                          </option>
+                            <div className="text-center">
+                              <div className="font-semibold">{slot.time}</div>
+                              <div className="text-xs mt-1">
+                                {slot.available ? '✅ Свободно' : '❌ Занято'}
+                              </div>
+                            </div>
+                          </button>
                         ))}
-                      </select>
+                      </div>
                     </div>
                   </div>
                 )}
