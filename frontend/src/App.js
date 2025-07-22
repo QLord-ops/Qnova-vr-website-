@@ -2086,14 +2086,15 @@ const Pricing = () => {
                       {pkg.bookingUrl === '/contact' ? t('contactForDetails') : t('bookThisPackage')}
                     </Link>
                     
-                    {pkg.bookingUrl !== '/contact' && (
+                    {/* Payment buttons temporarily disabled for Railway deployment */}
+                    {/* {pkg.bookingUrl !== '/contact' && (
                       <Link
                         to="/payment"
                         className="block w-full text-center py-2 md:py-3 px-4 rounded-lg font-semibold transition-all duration-300 text-sm md:text-base border-2 border-black text-black hover:bg-black hover:text-white"
                       >
                         💳 Pay Online Now
                       </Link>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </AnimatedSection>
