@@ -1092,8 +1092,8 @@ async def shutdown_db_client():
 
 if __name__ == "__main__":
     import uvicorn
-    # Railway automatically provides PORT, but we need specific port for API routing
-    # Use Railway's PORT but ensure API routes work correctly
-    port = int(os.environ.get("PORT", 3000))  # Accept Railway's port
-    print(f"🚀 Starting QNOVA VR Backend API on port {port}")
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    # Railway needs explicit port configuration
+    port = int(os.environ.get("PORT", 3000))
+    print(f"🚀 QNOVA Backend starting on port {port}")
+    print(f"📡 Railway will map this to public URL")
+    uvicorn.run(app, host="0.0.0.0", port=port, reload=False)
