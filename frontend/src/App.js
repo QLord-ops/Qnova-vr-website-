@@ -332,7 +332,7 @@ const translations = {
 // Language Provider with language selection on every visit
 const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState('de'); // Default to German
-  const [showLanguageModal, setShowLanguageModal] = useState(false); // Don't show modal automatically
+  const [showLanguageModal, setShowLanguageModal] = useState(false); // Don't auto-show modal
 
   const selectLanguage = (lang) => {
     setLanguage(lang);
