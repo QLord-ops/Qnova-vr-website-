@@ -2592,8 +2592,9 @@ function App() {
             <Route path="/games" element={<Games />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/booking" element={<Booking />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/payment-success" element={<PaymentSuccess />} />
+            {/* Payment routes temporarily disabled for Railway deployment */}
+            {/* <Route path="/payment" element={<Payment />} /> */}
+            {/* <Route path="/payment-success" element={<PaymentSuccess />} /> */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/test-admin" element={<TestAdmin />} />
