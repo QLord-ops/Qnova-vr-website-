@@ -444,11 +444,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Flag language selector functionality"
-    - "Real availability calendar integration"
-    - "Service-specific time slots"
-    - "Availability indicators display"
-    - "Date selection impact on time slots"
+    - "Stripe payment integration - VR session packages"
+    - "Stripe payment session creation"
+    - "Stripe payment status checking"
+    - "Stripe webhook handler"
+    - "Payment transactions storage and retrieval"
+    - "Complete payment integration flow"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
