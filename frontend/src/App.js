@@ -1629,6 +1629,16 @@ const Booking = () => {
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-3">{t('selectTime')}</label>
+                      
+                      {/* Instructions */}
+                      <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-sm text-blue-800">
+                          {formData.name && formData.email && formData.phone && formData.service && formData.date
+                            ? '🚀 Все данные заполнены! Нажмите на время для мгновенного бронирования.'
+                            : '💡 Заполните все данные выше, затем нажмите на время для быстрого бронирования.'
+                          }
+                        </p>
+                      </div>
                       {/* Time Slots Grid */}
                       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
                         {availableTimeSlots.map(slot => {
