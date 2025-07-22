@@ -1430,16 +1430,17 @@ const Booking = () => {
             <p className="text-gray-600 mb-6">{t('bookingSuccessMessage')}</p>
             
             <div className="space-y-3">
-              <Link 
+              {/* Payment button temporarily disabled for Railway deployment */}
+              {/* <Link 
                 to="/payment"
                 className="block w-full bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition-colors"
               >
                 {t('payNowSecure')}
-              </Link>
+              </Link> */}
               
               <button 
                 onClick={() => {setIsSuccess(false); setShowCalendar(true);}} 
-                className="block w-full bg-gray-200 text-black px-6 py-2 rounded hover:bg-gray-300 transition-colors"
+                className="block w-full bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition-colors"
               >
                 {t('bookAnother')}
               </button>
