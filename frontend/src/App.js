@@ -332,7 +332,7 @@ const translations = {
 // Language Provider with language selection on every visit
 const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(null); // Always start with no language
-  const [showLanguageModal, setShowLanguageModal] = useState(true); // Always show modal on visit
+  const [showLanguageModal, setShowLanguageModal] = useState(false); // Don't show modal automatically
 
   const selectLanguage = (lang) => {
     setLanguage(lang);
