@@ -1321,11 +1321,49 @@ const Booking = () => {
     setShowCalendar(false);
   };
 
-  const handleTimeSlotClick = (time) => {
-    setFormData(prev => ({
-      ...prev,
-      time: time
-    }));
+  const handleTimeSlotClick = async (time) => {
+    // Если все данные заполнены, сразу бронируем
+    if (formData.name && formData.email && formData.phone && formData.service && formData.date) {
+      try {
+        setIsSubmitting(true);
+        
+        const bookingData = {
+          ...formData,
+          time: time,
+          selectedGame: selectedGame || ''
+        };
+
+        await axios.post(`${API}/api/bookings`, bookingData);
+        setIsSuccess(true);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          date: '',
+          time: '',
+          participants: '1',
+          message: '',
+        });
+        
+        // Reload time slots to show updated availability
+        await loadTimeSlots(formData.service, formData.date);
+        
+      } catch (error) {
+        console.error('Booking error:', error);
+        alert('Ошибка при бронировании. Попробуйте ещё раз.');
+      } finally {
+        setIsSubmitting(false);
+      }
+    } else {
+      // Просто выбираем время если данные не полные
+      setFormData(prev => ({
+        ...prev,
+        time: time
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
