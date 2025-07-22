@@ -1367,8 +1367,8 @@ async def shutdown_db_client():
 
 if __name__ == "__main__":
     import uvicorn
-    # Railway needs explicit port configuration
-    port = int(os.environ.get("PORT", 3000))
+    # Railway provides PORT env var, fallback to 8001 for local development
+    port = int(os.environ.get("PORT", os.environ.get("RAILWAY_PORT", 8001)))
     print(f"🚀 QNOVA Backend starting on port {port}")
     print(f"📡 Railway will map this to public URL")
     uvicorn.run(app, host="0.0.0.0", port=port, reload=False)
