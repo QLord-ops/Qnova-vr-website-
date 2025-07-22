@@ -1336,7 +1336,7 @@ const Booking = () => {
           selectedGame: selectedGame || ''
         };
 
-        const response = await axios.post(`${REACT_APP_BACKEND_URL}/api/bookings`, bookingData);
+        const response = await axios.post(`${API}/api/bookings`, bookingData);
         
         setIsSuccess(true);
         
