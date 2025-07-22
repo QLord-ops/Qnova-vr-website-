@@ -1175,7 +1175,7 @@ const Booking = () => {
 
   const [demoSlots] = useState(generateDemoTimeSlots());
 
-  const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+  // Use the same API constant defined at the top of file
 
   // Get selected game or service from URL parameters and set defaults
   useEffect(() => {
