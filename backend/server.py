@@ -1329,7 +1329,13 @@ async def stripe_webhook(request: Request):
 async def get_payment_transactions(limit: int = 50):
     """Get recent payment transactions (admin endpoint)"""
     try:
-        transactions = await db.payment_transactions.find().sort("created_at", -1).limit(limit).to_list(limit)
+        transactions_cursor = db.payment_transactions.find().sort("created_at", -1).limit(limit)
+        transactions = []
+        async for transaction in transactions_cursor:
+            # Remove MongoDB ObjectId field and convert to dict
+            if '_id' in transaction:
+                del transaction['_id']
+            transactions.append(transaction)
         return {"transactions": transactions}
     except Exception as e:
         logger.error(f"Error fetching transactions: {str(e)}")
