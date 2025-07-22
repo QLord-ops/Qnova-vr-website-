@@ -1,1 +1,1 @@
-web: cd backend && PORT=8001 python server.py
+web: cd backend && python server.py
