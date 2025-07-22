@@ -1145,6 +1145,196 @@ async def generate_default_slots_for_date(date: str) -> List[TimeSlot]:
     
     return slots
 
+# =================== PAYMENT ENDPOINTS ===================
+
+# Initialize Stripe Checkout (will be initialized in endpoints)
+stripe_checkout = None
+
+def init_stripe_checkout(request: Request):
+    """Initialize Stripe checkout with webhook URL"""
+    global stripe_checkout
+    if not stripe_checkout:
+        api_key = os.environ.get('STRIPE_API_KEY')
+        if not api_key:
+            raise HTTPException(status_code=500, detail="Stripe API key not configured")
+        
+        host_url = str(request.base_url)
+        webhook_url = f"{host_url}api/webhook/stripe"
+        stripe_checkout = StripeCheckout(api_key=api_key, webhook_url=webhook_url)
+    return stripe_checkout
+
+@api_router.get("/packages")
+async def get_payment_packages():
+    """Get all available VR session packages"""
+    return {"packages": list(VR_PACKAGES.values())}
+
+@api_router.post("/payments/create-session")
+async def create_payment_session(payment_request: PaymentRequest, request: Request):
+    """Create a Stripe checkout session for VR booking payment"""
+    try:
+        # Validate package exists
+        if payment_request.package_id not in VR_PACKAGES:
+            raise HTTPException(status_code=400, detail="Invalid package ID")
+        
+        package = VR_PACKAGES[payment_request.package_id]
+        
+        # Initialize Stripe checkout
+        checkout = init_stripe_checkout(request)
+        
+        # Build success and cancel URLs from origin
+        success_url = f"{payment_request.origin_url}/payment-success?session_id={{CHECKOUT_SESSION_ID}}"
+        cancel_url = f"{payment_request.origin_url}/booking"
+        
+        # Create metadata with package and booking info
+        metadata = {
+            "package_id": payment_request.package_id,
+            "package_name": package.name,
+            "service_type": package.service_type,
+            "duration_minutes": str(package.duration_minutes)
+        }
+        
+        # Add booking data if provided
+        if payment_request.booking_data:
+            metadata.update({
+                "customer_email": payment_request.booking_data.get("email", ""),
+                "customer_name": payment_request.booking_data.get("name", ""),
+                "booking_date": payment_request.booking_data.get("date", ""),
+                "booking_time": payment_request.booking_data.get("time", "")
+            })
+        
+        # Create checkout session request
+        checkout_request = CheckoutSessionRequest(
+            amount=package.price,
+            currency=package.currency.lower(),
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata=metadata
+        )
+        
+        # Create session with Stripe
+        session = await checkout.create_checkout_session(checkout_request)
+        
+        # Store payment transaction in database
+        transaction = PaymentTransaction(
+            session_id=session.session_id,
+            package_id=payment_request.package_id,
+            amount=package.price,
+            currency=package.currency,
+            payment_status="pending",
+            metadata=metadata,
+            user_email=payment_request.booking_data.get("email") if payment_request.booking_data else None,
+            booking_id=payment_request.booking_data.get("booking_id") if payment_request.booking_data else None
+        )
+        
+        # Save to MongoDB
+        await db.payment_transactions.insert_one(transaction.dict())
+        
+        return {
+            "url": session.url,
+            "session_id": session.session_id,
+            "package": package.dict(),
+            "amount": package.price,
+            "currency": package.currency
+        }
+        
+    except Exception as e:
+        logger.error(f"Error creating payment session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to create payment session: {str(e)}")
+
+@api_router.get("/payments/status/{session_id}")
+async def get_payment_status(session_id: str, request: Request):
+    """Get the status of a payment session"""
+    try:
+        # Initialize Stripe checkout
+        checkout = init_stripe_checkout(request)
+        
+        # Get status from Stripe
+        status_response = await checkout.get_checkout_status(session_id)
+        
+        # Find transaction in database
+        transaction = await db.payment_transactions.find_one({"session_id": session_id})
+        if not transaction:
+            raise HTTPException(status_code=404, detail="Payment transaction not found")
+        
+        # Update transaction status if payment is complete and not already processed
+        if status_response.payment_status == "paid" and transaction.get("payment_status") != "paid":
+            # Update transaction
+            await db.payment_transactions.update_one(
+                {"session_id": session_id},
+                {
+                    "$set": {
+                        "payment_status": "paid",
+                        "updated_at": datetime.utcnow()
+                    }
+                }
+            )
+            
+            # Here we would typically create the actual booking or update booking status
+            # For now, we'll just log the successful payment
+            logger.info(f"Payment completed for session {session_id}, amount: {status_response.amount_total/100} {status_response.currency}")
+        
+        return PaymentStatus(
+            session_id=session_id,
+            status=status_response.status,
+            payment_status=status_response.payment_status,
+            amount_total=status_response.amount_total / 100,  # Convert from cents
+            currency=status_response.currency.upper(),
+            metadata=status_response.metadata
+        )
+        
+    except Exception as e:
+        logger.error(f"Error getting payment status: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to get payment status: {str(e)}")
+
+@api_router.post("/webhook/stripe")
+async def stripe_webhook(request: Request):
+    """Handle Stripe webhook events"""
+    try:
+        # Get request body and signature
+        body = await request.body()
+        signature = request.headers.get("Stripe-Signature")
+        
+        if not signature:
+            raise HTTPException(status_code=400, detail="Missing Stripe signature")
+        
+        # Initialize Stripe checkout
+        checkout = init_stripe_checkout(request)
+        
+        # Handle webhook
+        webhook_response = await checkout.handle_webhook(body, signature)
+        
+        # Process successful payment
+        if webhook_response.event_type == "checkout.session.completed" and webhook_response.payment_status == "paid":
+            # Update transaction status
+            await db.payment_transactions.update_one(
+                {"session_id": webhook_response.session_id},
+                {
+                    "$set": {
+                        "payment_status": "paid",
+                        "updated_at": datetime.utcnow()
+                    }
+                }
+            )
+            
+            # Log successful payment
+            logger.info(f"Webhook processed: Payment completed for session {webhook_response.session_id}")
+        
+        return {"status": "success", "event_id": webhook_response.event_id}
+        
+    except Exception as e:
+        logger.error(f"Error processing webhook: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Webhook error: {str(e)}")
+
+@api_router.get("/payments/transactions")
+async def get_payment_transactions(limit: int = 50):
+    """Get recent payment transactions (admin endpoint)"""
+    try:
+        transactions = await db.payment_transactions.find().sort("created_at", -1).limit(limit).to_list(limit)
+        return {"transactions": transactions}
+    except Exception as e:
+        logger.error(f"Error fetching transactions: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to fetch transactions: {str(e)}")
+
 # Include the router in the main app
 app.include_router(api_router)
 
