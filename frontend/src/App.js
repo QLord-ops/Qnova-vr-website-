@@ -2232,7 +2232,6 @@ function App() {
     <div className="App">
       <LanguageProvider>
         <BrowserRouter>
-          <LanguageSelector />
           <Navigation />
           <Routes>
             <Route path="/" element={<Home />} />
