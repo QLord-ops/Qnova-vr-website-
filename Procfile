@@ -1,1 +1,1 @@
-web: cd backend && python server.py
+web: cd backend && pip install emergentintegrations --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/ && python server.py
