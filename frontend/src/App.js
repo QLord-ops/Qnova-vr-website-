@@ -1321,6 +1321,13 @@ const Booking = () => {
     setShowCalendar(false);
   };
 
+  const handleTimeSlotClick = (time) => {
+    setFormData(prev => ({
+      ...prev,
+      time: time
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
