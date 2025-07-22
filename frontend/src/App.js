@@ -2097,6 +2097,328 @@ const Pricing = () => {
   );
 };
 
+// Payment Component
+const Payment = () => {
+  const { t } = useLanguage();
+  const [packages, setPackages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [error, setError] = useState("");
+  
+  useEffect(() => {
+    fetchPackages();
+  }, []);
+  
+  const fetchPackages = async () => {
+    try {
+      const response = await axios.get(`${API}/packages`);
+      setPackages(response.data.packages);
+    } catch (error) {
+      console.error('Error fetching packages:', error);
+      setError('Failed to load payment packages');
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const handlePayment = async (packageId) => {
+    try {
+      setLoading(true);
+      setError("");
+      
+      const originUrl = window.location.origin;
+      
+      const response = await axios.post(`${API}/payments/create-session`, {
+        package_id: packageId,
+        origin_url: originUrl,
+        booking_data: {
+          // You can add booking-related data here if needed
+        }
+      });
+      
+      // Redirect to Stripe Checkout
+      window.location.href = response.data.url;
+      
+    } catch (error) {
+      console.error('Payment error:', error);
+      setError('Failed to initialize payment. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-black"></div>
+          <p className="mt-4 text-xl">{t('loading')}</p>
+        </div>
+      </div>
+    );
+  }
+  
+  return (
+    <div className="min-h-screen bg-white">
+      <section className="pt-32 py-16">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="fadeInUp" className="text-center mb-16">
+            <h1 className="text-5xl font-bold mb-6 hero-text">Payment & Booking</h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Choose your VR experience package and complete your booking with secure online payment.
+            </p>
+          </AnimatedSection>
+          
+          {error && (
+            <div className="max-w-2xl mx-auto mb-8 bg-red-50 border border-red-200 rounded-lg p-4">
+              <p className="text-red-600">{error}</p>
+            </div>
+          )}
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {packages.map((pkg, index) => (
+              <AnimatedSection key={pkg.id} animation="fadeInUp" delay={index * 100}>
+                <div className="pricing-card hover-lift bg-white rounded-xl shadow-lg border-2 border-gray-200 p-8 relative">
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold mb-2 card-title">{pkg.name}</h3>
+                    <p className="text-gray-600 mb-4">{pkg.description}</p>
+                    <div className="mb-2">
+                      <span className="text-4xl font-bold">€{pkg.price}</span>
+                    </div>
+                    <p className="text-gray-500">{pkg.duration_minutes} minutes</p>
+                  </div>
+                  
+                  <div className="mb-8">
+                    <div className="flex items-center mb-3">
+                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Professional VR Equipment</span>
+                    </div>
+                    <div className="flex items-center mb-3">
+                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Expert Guidance & Support</span>
+                    </div>
+                    <div className="flex items-center mb-3">
+                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Latest VR Games & Experiences</span>
+                    </div>
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Secure Online Payment</span>
+                    </div>
+                  </div>
+                  
+                  <button
+                    onClick={() => handlePayment(pkg.id)}
+                    disabled={loading}
+                    className="block w-full text-center py-4 px-4 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 disabled:opacity-50"
+                  >
+                    {loading ? 'Processing...' : `Pay €${pkg.price} - Book Now`}
+                  </button>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+          
+          <AnimatedSection animation="fadeInUp" className="text-center mt-16">
+            <div className="bg-gray-50 rounded-xl p-8">
+              <h3 className="text-2xl font-bold mb-4">Secure Payment</h3>
+              <p className="text-gray-600 mb-6">
+                Your payment is processed securely through Stripe. We accept all major credit cards and payment methods.
+              </p>
+              <div className="flex justify-center items-center space-x-6">
+                <svg className="h-8 w-12" viewBox="0 0 24 24" fill="#1a1a1a">
+                  <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-.635 4.005c-.026.163-.144.295-.32.295z"/>
+                  <path d="M23.048 7.272c-.028.4-.057.8-.091 1.179-.968 4.78-4.05 6.403-7.885 6.403h-1.97c-.615 0-1.108.429-1.204 1.029L10.78 20.36c-.059.370-.03.724.21.977.24.253.616.388 1.066.388h4.45c.524 0 .968-.382 1.05-.9l.635-4.005c.026-.163.144-.295.32-.295z" fill="#164c7a"/>
+                </svg>
+                <span className="text-xl font-bold">Stripe</span>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+// Payment Success Component  
+const PaymentSuccess = () => {
+  const { t } = useLanguage();
+  const [paymentStatus, setPaymentStatus] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [pollCount, setPollCount] = useState(0);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+    
+    if (sessionId) {
+      pollPaymentStatus(sessionId);
+    } else {
+      setLoading(false);
+    }
+  }, []);
+  
+  const pollPaymentStatus = async (sessionId, attempts = 0) => {
+    const maxAttempts = 10;
+    const pollInterval = 2000; // 2 seconds
+    
+    if (attempts >= maxAttempts) {
+      setPaymentStatus({
+        status: 'timeout',
+        message: 'Payment verification timed out. Please check your email for confirmation or contact us.'
+      });
+      setLoading(false);
+      return;
+    }
+    
+    try {
+      const response = await axios.get(`${API}/payments/status/${sessionId}`);
+      const data = response.data;
+      
+      if (data.payment_status === 'paid') {
+        setPaymentStatus({
+          status: 'success',
+          message: 'Payment successful! Your VR session has been booked.',
+          amount: data.amount_total,
+          currency: data.currency,
+          sessionId: sessionId
+        });
+        setLoading(false);
+        return;
+      } else if (data.status === 'expired') {
+        setPaymentStatus({
+          status: 'expired',
+          message: 'Payment session expired. Please try booking again.'
+        });
+        setLoading(false);
+        return;
+      }
+      
+      // Continue polling if payment is still pending
+      setPollCount(attempts + 1);
+      setTimeout(() => pollPaymentStatus(sessionId, attempts + 1), pollInterval);
+      
+    } catch (error) {
+      console.error('Error checking payment status:', error);
+      setPaymentStatus({
+        status: 'error',
+        message: 'Error verifying payment. Please contact us if you were charged.'
+      });
+      setLoading(false);
+    }
+  };
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-black mx-auto"></div>
+          <p className="mt-4 text-xl">Verifying your payment...</p>
+          <p className="text-gray-600">Please wait, this may take a moment.</p>
+        </div>
+      </div>
+    );
+  }
+  
+  return (
+    <div className="min-h-screen bg-white">
+      <section className="pt-32 py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            {paymentStatus?.status === 'success' && (
+              <AnimatedSection animation="fadeInUp">
+                <div className="bg-green-50 border border-green-200 rounded-xl p-8 mb-8">
+                  <svg className="mx-auto h-16 w-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <h1 className="text-3xl font-bold text-green-800 mb-4">Payment Successful!</h1>
+                  <p className="text-green-700 mb-4">{paymentStatus.message}</p>
+                  <div className="bg-white rounded-lg p-4 inline-block">
+                    <p className="text-sm text-gray-600">Amount Paid:</p>
+                    <p className="text-2xl font-bold text-green-800">
+                      €{paymentStatus.amount} {paymentStatus.currency}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <button
+                    onClick={() => navigate('/booking')}
+                    className="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors mr-4"
+                  >
+                    Book Another Session
+                  </button>
+                  <button
+                    onClick={() => navigate('/')}
+                    className="bg-gray-200 text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                  >
+                    Back to Home
+                  </button>
+                </div>
+              </AnimatedSection>
+            )}
+            
+            {paymentStatus?.status === 'expired' && (
+              <AnimatedSection animation="fadeInUp">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-8 mb-8">
+                  <svg className="mx-auto h-16 w-16 text-yellow-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.268 18.5c-.77.833.192 2.5 1.732 2.5z" />
+                  </svg>
+                  <h1 className="text-3xl font-bold text-yellow-800 mb-4">Payment Expired</h1>
+                  <p className="text-yellow-700 mb-4">{paymentStatus.message}</p>
+                </div>
+                
+                <button
+                  onClick={() => navigate('/payment')}
+                  className="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+                >
+                  Try Again
+                </button>
+              </AnimatedSection>
+            )}
+            
+            {(paymentStatus?.status === 'error' || paymentStatus?.status === 'timeout') && (
+              <AnimatedSection animation="fadeInUp">
+                <div className="bg-red-50 border border-red-200 rounded-xl p-8 mb-8">
+                  <svg className="mx-auto h-16 w-16 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <h1 className="text-3xl font-bold text-red-800 mb-4">Payment Verification Issue</h1>
+                  <p className="text-red-700 mb-4">{paymentStatus.message}</p>
+                </div>
+                
+                <div className="space-y-4">
+                  <button
+                    onClick={() => navigate('/contact')}
+                    className="bg-black text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors mr-4"
+                  >
+                    Contact Support
+                  </button>
+                  <button
+                    onClick={() => navigate('/payment')}
+                    className="bg-gray-200 text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                  >
+                    Try Again
+                  </button>
+                </div>
+              </AnimatedSection>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 // Footer Component
 const Footer = () => {
   const { language, t } = useLanguage();
