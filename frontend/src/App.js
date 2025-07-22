@@ -1434,7 +1434,7 @@ const Booking = () => {
                 to="/payment"
                 className="block w-full bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition-colors"
               >
-                💳 Pay Now & Secure Your Booking
+                {t('payNowSecure')}
               </Link>
               
               <button 
