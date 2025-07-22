@@ -1092,6 +1092,8 @@ async def shutdown_db_client():
 
 if __name__ == "__main__":
     import uvicorn
-    # Railway uses PORT environment variable, fallback to 8001
-    port = int(os.environ.get("PORT", os.environ.get("RAILWAY_PORT", 8001)))
+    # Railway automatically provides PORT, but we need specific port for API routing
+    # Use Railway's PORT but ensure API routes work correctly
+    port = int(os.environ.get("PORT", 3000))  # Accept Railway's port
+    print(f"🚀 Starting QNOVA VR Backend API on port {port}")
     uvicorn.run(app, host="0.0.0.0", port=port)
